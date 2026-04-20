@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-03-review-surface-PLAN.md
-last_updated: "2026-04-20T16:22:53.496Z"
-last_activity: 2026-04-20
+stopped_at: Completed 02-04-weeks-detail-PLAN.md
+last_updated: "2026-04-19T00:00:00.000Z"
+last_activity: 2026-04-19
 progress:
   total_phases: 4
   completed_phases: 2
@@ -78,6 +78,8 @@ Recent decisions affecting current work:
 - [Phase 02]: WeekRow is server component; WeeksList holds client state for wave 2 confirmation strip
 - [Phase 02-all-weeks-and-review]: note param accepted by upsertReview but not persisted in v1 — progressSchema has no note field; schema-first constraint
 - [Phase 02-all-weeks-and-review]: key={item.concept.id} on ReviewCard resets note/status state via React remount on advance, no manual reset needed
+- [Phase 02-04]: WeekSwitchConfirm callbacks made optional; standalone detail-page usage falls back to router.push("/weeks") for both cancel and success
+- [Phase 02-04]: WeekRow is now a plain Link (server component); WeeksList has no "use client" needed, all confirmation state removed
 
 ### Pending Todos
 
