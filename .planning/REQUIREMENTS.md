@@ -28,8 +28,8 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 ### Concept detail and notes
 - [x] **CONCEPT-01**: `/concepts/[slug]` renders concept title, one-liner, linked artifacts (chips with type + read status), related concepts sidebar.
 - [x] **CONCEPT-02**: `/concepts` renders concept index grouped by module, with search by title.
-- [ ] **NOTE-01**: Each concept has a note editor (plain textarea in v1) that saves markdown to `notes/<slug>.md` with frontmatter (`conceptId`, `updatedAt`).
-- [ ] **NOTE-02**: Saving is a Next.js server action; writes go through `src/lib/notes.ts` (new file).
+- [x] **NOTE-01**: Each concept has a note editor (plain textarea in v1) that saves markdown to `notes/<slug>.md` with frontmatter (`conceptId`, `updatedAt`).
+- [x] **NOTE-02**: Saving is a Next.js server action; writes go through `src/lib/notes.ts` (new file).
 - [ ] **QUESTION-01**: Concept detail has an "open question" capture box that writes to `progress.json.openQuestions`.
 
 ### All weeks and review
@@ -75,8 +75,8 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 |-------------|-------|--------|
 | CONCEPT-01 | Phase 1 | Complete |
 | CONCEPT-02 | Phase 1 | Complete |
-| NOTE-01 | Phase 1 | Pending |
-| NOTE-02 | Phase 1 | Pending |
+| NOTE-01 | Phase 1 | Complete |
+| NOTE-02 | Phase 1 | Complete |
 | QUESTION-01 | Phase 1 | Pending |
 | WEEKS-01 | Phase 2 | Pending |
 | WEEKS-02 | Phase 2 | Pending |

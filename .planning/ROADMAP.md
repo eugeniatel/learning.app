@@ -26,7 +26,7 @@ Session 1 shipped the foundation (This Week view, data layer, content files). Se
 Plans:
 - [x] 01-01-PLAN.md — Concept index at /concepts with client-side title filter
 - [x] 01-02-PLAN.md — Concept detail scaffold at /concepts/[slug] with two-column layout
-- [ ] 01-03-PLAN.md — Note editor with server action (writes to notes/<slug>.md)
+- [x] 01-03-PLAN.md — Note editor with server action (writes to notes/<slug>.md)
 - [ ] 01-04-PLAN.md — Open question capture with server action (writes to progress.json)
 **UI hint**: yes
 
@@ -71,7 +71,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Concept Detail and Notes | 2/4 | In Progress|  |
+| 1. Concept Detail and Notes | 3/4 | In Progress|  |
 | 2. All Weeks and Review | 0/TBD | Not started | - |
 | 3. Writeback Actions | 0/TBD | Not started | - |
 | 4. Flexible Track Map | 0/TBD | Blocked | - |
