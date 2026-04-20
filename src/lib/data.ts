@@ -131,3 +131,8 @@ export async function getConceptsGroupedByModule(): Promise<{ module: Module; co
     }))
     .filter((group) => group.concepts.length > 0);
 }
+
+export async function getConceptBySlug(slug: string): Promise<Concept | undefined> {
+  const concepts = await getConcepts();
+  return concepts.find((c) => c.slug === slug);
+}
