@@ -69,6 +69,21 @@ export async function cycleSessionStatus(
 }
 
 /**
+ * Updates the status of a question in progress.json openQuestions.
+ * Throws if questionId is not found.
+ */
+export async function updateQuestionStatus(
+  questionId: string,
+  newStatus: "open" | "parked" | "answered"
+): Promise<void> {
+  const progress = await readProgress();
+  const question = progress.openQuestions.find((q) => q.id === questionId);
+  if (!question) throw new Error(`Question ${questionId} not found in openQuestions`);
+  question.status = newStatus;
+  await writeProgress(progress);
+}
+
+/**
  * Creates or updates the review entry for a concept.
  * Sets lastReviewed to now, nextSuggested to now + 24h, status as provided.
  * Note: _note is accepted for API symmetry but not persisted in v1;
