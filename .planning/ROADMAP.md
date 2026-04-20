@@ -42,8 +42,8 @@ Plans:
 **Plans**: 3 plans
 Plans:
 - [x] 02-01-PLAN.md — /weeks index with module-grouped WeekRow list and WeeksList client island
-- [ ] 02-02-PLAN.md — Week-switch confirmation strip and switchWeekAction server action
-- [ ] 02-03-PLAN.md — /review surface with ReviewCard, ReviewQueue, and submitReviewAction server action
+- [x] 02-02-PLAN.md — Week-switch confirmation strip and switchWeekAction server action
+- [x] 02-03-PLAN.md — /review surface with ReviewCard, ReviewQueue, and submitReviewAction server action
 **UI hint**: yes
 
 ### Phase 3: Writeback Actions

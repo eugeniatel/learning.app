@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-weeks-index-PLAN.md
-last_updated: "2026-04-20T16:17:08.720Z"
+stopped_at: Completed 02-03-review-surface-PLAN.md
+last_updated: "2026-04-20T16:22:53.496Z"
 last_activity: 2026-04-20
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 7
-  completed_plans: 5
-  percent: 71
+  completed_plans: 7
+  percent: 100
 ---
 
 # Project State
@@ -26,7 +26,7 @@ Current focus: Phase 1 - Concept Detail and Notes
 ## Current Position
 
 Phase: 2 (All Weeks and Review) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-04-20
 
@@ -57,6 +57,7 @@ Recent Trend:
 | Phase 01 P03 | 15 | 2 tasks | 4 files |
 | Phase 01-concept-detail-and-notes P04 | 10 | 2 tasks | 4 files |
 | Phase 02 P01 | 10 | 2 tasks | 4 files |
+| Phase 02-all-weeks-and-review P03 | 25 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,8 @@ Recent decisions affecting current work:
 - [Phase 01-concept-detail-and-notes]: Optimistic append with fire-and-forget server action for questions (no error handling in phase 1)
 - [Phase 02]: getAllWeeksWithModules returns grouped array only; currentWeekId sourced separately from getProgress() in page
 - [Phase 02]: WeekRow is server component; WeeksList holds client state for wave 2 confirmation strip
+- [Phase 02-all-weeks-and-review]: note param accepted by upsertReview but not persisted in v1 — progressSchema has no note field; schema-first constraint
+- [Phase 02-all-weeks-and-review]: key={item.concept.id} on ReviewCard resets note/status state via React remount on advance, no manual reset needed
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20T16:17:08.717Z
-Stopped at: Completed 02-01-weeks-index-PLAN.md
+Last session: 2026-04-20T16:22:53.493Z
+Stopped at: Completed 02-03-review-surface-PLAN.md
 Resume file: None

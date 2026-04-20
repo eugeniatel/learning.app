@@ -33,11 +33,11 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 - [x] **QUESTION-01**: Concept detail has an "open question" capture box that writes to `progress.json.openQuestions`.
 
 ### All weeks and review
-- [ ] **WEEKS-01**: `/weeks` renders every week from `progress.json.weeks`, grouped by module, most-recent first. Each row links to a detail route.
+- [x] **WEEKS-01**: `/weeks` renders every week from `progress.json.weeks`, grouped by module, most-recent first. Each row links to a detail route.
 - [ ] **WEEKS-02**: Selecting a week on `/weeks` updates `progress.json.currentWeek` if the user confirms.
-- [ ] **REVIEW-01**: `/review` presents one concept card at a time, with yes / not-quite buttons and a free-text field.
-- [ ] **REVIEW-02**: Review answers update `progress.json.reviews[]` with `lastReviewed`, `nextSuggested`, and `status`.
-- [ ] **REVIEW-03**: Review surface picks the next due concept based on simple recency ordering (no spaced repetition in v1).
+- [x] **REVIEW-01**: `/review` presents one concept card at a time, with yes / not-quite buttons and a free-text field.
+- [x] **REVIEW-02**: Review answers update `progress.json.reviews[]` with `lastReviewed`, `nextSuggested`, and `status`.
+- [x] **REVIEW-03**: Review surface picks the next due concept based on simple recency ordering (no spaced repetition in v1).
 
 ### Questions queue
 - [ ] **QUESTION-02**: `/questions` renders all open questions grouped by concept, with status badges.
@@ -78,11 +78,11 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 | NOTE-01 | Phase 1 | Complete |
 | NOTE-02 | Phase 1 | Complete |
 | QUESTION-01 | Phase 1 | Complete |
-| WEEKS-01 | Phase 2 | Pending |
+| WEEKS-01 | Phase 2 | Complete |
 | WEEKS-02 | Phase 2 | Pending |
-| REVIEW-01 | Phase 2 | Pending |
-| REVIEW-02 | Phase 2 | Pending |
-| REVIEW-03 | Phase 2 | Pending |
+| REVIEW-01 | Phase 2 | Complete |
+| REVIEW-02 | Phase 2 | Complete |
+| REVIEW-03 | Phase 2 | Complete |
 | QUESTION-02 | Phase 3 | Pending |
 | QUESTION-03 | Phase 3 | Pending |
 | SESSION-01 | Phase 3 | Pending |
