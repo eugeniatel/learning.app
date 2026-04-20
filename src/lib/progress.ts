@@ -30,3 +30,15 @@ export async function appendQuestion(question: Question): Promise<void> {
   progress.openQuestions.push(question);
   await writeProgress(progress);
 }
+
+/**
+ * Updates progress.json.currentWeek to the given week.
+ * Throws if weekId is not found in progress.weeks.
+ */
+export async function switchCurrentWeek(weekId: string): Promise<void> {
+  const progress = await readProgress();
+  const week = progress.weeks.find((w) => w.id === weekId);
+  if (!week) throw new Error(`Week ${weekId} not found in progress.weeks`);
+  progress.currentWeek = { id: week.id, moduleId: week.moduleId, number: week.number };
+  await writeProgress(progress);
+}
