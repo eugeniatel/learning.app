@@ -2,18 +2,21 @@ import { notFound } from "next/navigation";
 import { Shell } from "@/components/shell";
 import { ConceptHeader } from "@/components/concept-header";
 import { ArtifactList } from "@/components/artifact-list";
+import { NoteEditor } from "@/components/note-editor";
 import { RelatedConceptsList } from "@/components/related-concepts-list";
 import { ReviewStub } from "@/components/review-stub";
 import { getConceptBySlug, getArtifacts, getConcepts, getProgress } from "@/lib/data";
+import { readNote } from "@/lib/notes";
 
 export default async function ConceptDetailPage(props: PageProps<"/concepts/[slug]">) {
   const { slug } = await props.params;
 
-  const [concept, allArtifacts, allConcepts, progress] = await Promise.all([
+  const [concept, allArtifacts, allConcepts, progress, noteBody] = await Promise.all([
     getConceptBySlug(slug),
     getArtifacts(),
     getConcepts(),
     getProgress(),
+    readNote(slug),
   ]);
 
   if (!concept) notFound();
@@ -36,7 +39,7 @@ export default async function ConceptDetailPage(props: PageProps<"/concepts/[slu
       <div className="flex gap-8">
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <ArtifactList artifacts={conceptArtifacts} />
-          {/* NoteEditor mounts here in Plan 03 */}
+          <NoteEditor slug={concept.slug} conceptId={concept.id} initialBody={noteBody} />
           {/* OpenQuestionCapture mounts here in Plan 04 */}
         </div>
         <div className="flex w-56 shrink-0 flex-col gap-6">
