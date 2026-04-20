@@ -27,7 +27,7 @@ Plans:
 - [x] 01-01-PLAN.md — Concept index at /concepts with client-side title filter
 - [x] 01-02-PLAN.md — Concept detail scaffold at /concepts/[slug] with two-column layout
 - [x] 01-03-PLAN.md — Note editor with server action (writes to notes/<slug>.md)
-- [ ] 01-04-PLAN.md — Open question capture with server action (writes to progress.json)
+- [x] 01-04-PLAN.md — Open question capture with server action (writes to progress.json)
 **UI hint**: yes
 
 ### Phase 2: All Weeks and Review

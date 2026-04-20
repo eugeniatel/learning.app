@@ -30,7 +30,7 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 - [x] **CONCEPT-02**: `/concepts` renders concept index grouped by module, with search by title.
 - [x] **NOTE-01**: Each concept has a note editor (plain textarea in v1) that saves markdown to `notes/<slug>.md` with frontmatter (`conceptId`, `updatedAt`).
 - [x] **NOTE-02**: Saving is a Next.js server action; writes go through `src/lib/notes.ts` (new file).
-- [ ] **QUESTION-01**: Concept detail has an "open question" capture box that writes to `progress.json.openQuestions`.
+- [x] **QUESTION-01**: Concept detail has an "open question" capture box that writes to `progress.json.openQuestions`.
 
 ### All weeks and review
 - [ ] **WEEKS-01**: `/weeks` renders every week from `progress.json.weeks`, grouped by module, most-recent first. Each row links to a detail route.
@@ -77,7 +77,7 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 | CONCEPT-02 | Phase 1 | Complete |
 | NOTE-01 | Phase 1 | Complete |
 | NOTE-02 | Phase 1 | Complete |
-| QUESTION-01 | Phase 1 | Pending |
+| QUESTION-01 | Phase 1 | Complete |
 | WEEKS-01 | Phase 2 | Pending |
 | WEEKS-02 | Phase 2 | Pending |
 | REVIEW-01 | Phase 2 | Pending |
