@@ -44,6 +44,31 @@ export async function switchCurrentWeek(weekId: string): Promise<void> {
 }
 
 /**
+ * Updates the status of a session within a week in progress.json.
+ * Sets completedAt to current ISO timestamp when newStatus is "done".
+ * Removes completedAt when newStatus is not "done".
+ * Throws if weekId or sessionId is not found.
+ */
+export async function cycleSessionStatus(
+  weekId: string,
+  sessionId: string,
+  newStatus: "todo" | "in_progress" | "done"
+): Promise<void> {
+  const progress = await readProgress();
+  const week = progress.weeks.find((w) => w.id === weekId);
+  if (!week) throw new Error(`Week ${weekId} not found in progress.weeks`);
+  const session = week.sessions.find((s) => s.id === sessionId);
+  if (!session) throw new Error(`Session ${sessionId} not found in week ${weekId}`);
+  session.status = newStatus;
+  if (newStatus === "done") {
+    session.completedAt = new Date().toISOString();
+  } else {
+    delete session.completedAt;
+  }
+  await writeProgress(progress);
+}
+
+/**
  * Creates or updates the review entry for a concept.
  * Sets lastReviewed to now, nextSuggested to now + 24h, status as provided.
  * Note: _note is accepted for API symmetry but not persisted in v1;
