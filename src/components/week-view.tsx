@@ -32,6 +32,7 @@ export async function WeekView({
               session={session}
               artifacts={sessionArtifacts}
               upNext={upNext}
+              weekId={week.id}
             />
           );
         })}

@@ -1,8 +1,11 @@
+"use client";
+import { useState } from "react";
 import { Check, Circle, CircleDot } from "lucide-react";
 import { ArtifactChip } from "./artifact-chip";
-import type { Artifact, Session } from "@/lib/types";
+import { cycleSessionStatusAction } from "@/lib/actions/cycle-session-status";
+import type { Artifact, Session, SessionStatus } from "@/lib/types";
 
-function StatusIcon({ status }: { status: Session["status"] }) {
+function StatusIcon({ status }: { status: SessionStatus }) {
   if (status === "done") {
     return (
       <span className="inline-flex size-5 items-center justify-center rounded-full bg-foreground text-background">
@@ -16,17 +19,45 @@ function StatusIcon({ status }: { status: Session["status"] }) {
   return <Circle className="size-5 text-muted-foreground/60" strokeWidth={1} strokeDasharray="2 2" />;
 }
 
+function cycleNext(s: SessionStatus): SessionStatus {
+  if (s === "todo") return "in_progress";
+  if (s === "in_progress") return "done";
+  return "todo";
+}
+
+const ariaLabel: Record<SessionStatus, string> = {
+  todo: "Session status: todo. Click to cycle.",
+  in_progress: "Session status: in progress. Click to cycle.",
+  done: "Session status: done. Click to cycle.",
+};
+
 export function SessionCard({
   session,
   artifacts,
   upNext,
+  weekId,
 }: {
   session: Session;
   artifacts: Artifact[];
   upNext: boolean;
+  weekId: string;
 }) {
-  const dim = session.status === "done";
-  const stronger = session.status === "in_progress" || upNext;
+  const [status, setStatus] = useState<SessionStatus>(session.status);
+
+  const dim = status === "done";
+  const stronger = status === "in_progress" || upNext;
+
+  async function handleStatusClick() {
+    const prev = status;
+    const next = cycleNext(status);
+    setStatus(next);
+    try {
+      await cycleSessionStatusAction(weekId, session.id, next);
+    } catch {
+      setStatus(prev);
+    }
+  }
+
   return (
     <article
       className={[
@@ -37,7 +68,14 @@ export function SessionCard({
     >
       <div className="flex items-start gap-3">
         <div className="mt-0.5">
-          <StatusIcon status={session.status} />
+          <button
+            type="button"
+            aria-label={ariaLabel[status]}
+            onClick={handleStatusClick}
+            className="cursor-pointer"
+          >
+            <StatusIcon status={status} />
+          </button>
         </div>
         <div className="flex-1">
           <div className="flex items-baseline justify-between gap-3">

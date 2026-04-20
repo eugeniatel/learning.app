@@ -30,6 +30,7 @@ export default async function WeekDetailPage(props: {
               session={session}
               artifacts={sessionArtifacts}
               upNext={false}
+              weekId={id}
             />
           );
         })}
