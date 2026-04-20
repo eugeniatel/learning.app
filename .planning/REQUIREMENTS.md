@@ -44,8 +44,8 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 - [ ] **QUESTION-03**: Actions park (open to parked) or answer (open to answered) a question; writes back to `progress.json`.
 
 ### Session and reflection writebacks
-- [ ] **SESSION-01**: Clicking a session card on This Week cycles status (todo to in-progress to done).
-- [ ] **SESSION-02**: `progress.json` updates persist across reloads.
+- [x] **SESSION-01**: Clicking a session card on This Week cycles status (todo to in-progress to done).
+- [x] **SESSION-02**: `progress.json` updates persist across reloads.
 - [x] **REFLECT-01**: Reflection textarea on This Week saves to `notes/reflections/week-<id>.md`; linked from the week header.
 - [x] **ARTIFACT-01**: Artifact chips expose a read-status toggle that writes back to `artifacts.json`.
 
@@ -85,8 +85,8 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 | REVIEW-03 | Phase 2 | Complete |
 | QUESTION-02 | Phase 3 | Pending |
 | QUESTION-03 | Phase 3 | Pending |
-| SESSION-01 | Phase 3 | Pending |
-| SESSION-02 | Phase 3 | Pending |
+| SESSION-01 | Phase 3 | Complete |
+| SESSION-02 | Phase 3 | Complete |
 | REFLECT-01 | Phase 3 | Complete |
 | ARTIFACT-01 | Phase 3 | Complete |
 | FLEX-01 | Phase 4 | Blocked |

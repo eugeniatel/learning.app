@@ -59,7 +59,7 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — Reflection save: reflections.ts, save-reflection server action, ReflectionPrompt client island
 - [x] 03-02-PLAN.md — Artifact toggle: artifacts.ts write helper, toggle-artifact-status server action, ArtifactChip client component
-- [ ] 03-03-PLAN.md — Session cycle: cycleSessionStatus in progress.ts, cycle-session-status server action, SessionCard client component
+- [x] 03-03-PLAN.md — Session cycle: cycleSessionStatus in progress.ts, cycle-session-status server action, SessionCard client component
 - [ ] 03-04-PLAN.md — Questions queue: updateQuestionStatus in progress.ts, update-question-status server action, /questions page with ConceptQuestionGroup
 **UI hint**: yes
 
@@ -82,5 +82,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Concept Detail and Notes | 4/4 | Complete |  |
 | 2. All Weeks and Review | 1/3 | In Progress|  |
-| 3. Writeback Actions | 2/4 | In Progress|  |
+| 3. Writeback Actions | 3/4 | In Progress|  |
 | 4. Flexible Track Map | 0/TBD | Blocked | - |
