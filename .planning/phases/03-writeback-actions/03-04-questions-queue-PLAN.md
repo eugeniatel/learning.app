@@ -24,6 +24,7 @@ must_haves:
     - "Each concept heading is a link to /concepts/[slug]"
     - "An empty state message appears when there are no questions at all"
     - "Parked and answered items appear below the open list at reduced opacity"
+    - "An error message appears below the groups list when a status action fails"
   artifacts:
     - path: "src/lib/progress.ts"
       provides: "updateQuestionStatus(questionId, newStatus) added"
@@ -38,7 +39,7 @@ must_haves:
       provides: "concept heading + open list + parked/answered secondary list"
       min_lines: 40
     - path: "src/components/questions-queue.tsx"
-      provides: "client island managing optimistic state for all questions"
+      provides: "client island managing optimistic state for all questions with error display"
       min_lines: 40
     - path: "src/app/questions/page.tsx"
       provides: "server page component loading grouped questions data"
@@ -151,17 +152,22 @@ ConceptQuestionGroup component spec (from 03-UI-SPEC.md):
 //   Parked count label: "{N} parked" (text-[12px] text-muted-foreground)
 //   Answered count label: "{N} answered" (text-[12px] text-muted-foreground)
 //   QuestionItems at opacity-70
-//   Only render secondary block if parked.length > 0 or answered.length > 0
+//   Only render secondary block if parked.length > 0 || answered.length > 0
 ```
 
-QuestionsQueue client island spec:
+QuestionsQueue client island spec (from 03-UI-SPEC.md):
 ```tsx
 // "use client"
 // Props: { groups: ConceptGroup[] }
 // Manages question statuses in local useState for all questions (optimistic)
 // Initializes from groups prop
-// onStatusChange handler: update local state immediately, fire void updateQuestionStatusAction(id, newStatus)
-// On failure: revert to previous status
+// Tracks error: string | null in local useState, initialized to null
+// onStatusChange handler:
+//   - update local status state immediately (optimistic)
+//   - fire updateQuestionStatusAction(id, newStatus) with await
+//   - on success: setError(null)
+//   - on failure: revert to previous status, setError("Could not update question. Try again.")
+// Renders error below the groups list: <p className="text-[13px] text-destructive">{error}</p> when error is non-null
 // Passes onStatusChange down to ConceptQuestionGroup -> QuestionItem
 // Empty state: "No open questions yet. Add one from any concept page."
 ```
@@ -407,6 +413,8 @@ export function QuestionsQueue({ groups }: { groups: ConceptGroup[] }) {
     return map;
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   const groupsWithStatus = groups.map((g) => ({
     ...g,
     questions: g.questions.map((q) => ({ ...q, status: statuses[q.id] ?? q.status })),
@@ -417,8 +425,10 @@ export function QuestionsQueue({ groups }: { groups: ConceptGroup[] }) {
     setStatuses((s) => ({ ...s, [questionId]: newStatus }));
     try {
       await updateQuestionStatusAction(questionId, newStatus);
+      setError(null);
     } catch {
       setStatuses((s) => ({ ...s, [questionId]: prev }));
+      setError("Could not update question. Try again.");
     }
   }
 
@@ -437,6 +447,9 @@ export function QuestionsQueue({ groups }: { groups: ConceptGroup[] }) {
       {groupsWithStatus.map((g) => (
         <ConceptQuestionGroup key={g.conceptId} group={g} onStatusChange={handleStatusChange} />
       ))}
+      {error && (
+        <p className="text-[13px] text-destructive">{error}</p>
+      )}
     </div>
   );
 }
@@ -501,9 +514,10 @@ Keep all component files under 200 lines. The above implementations are all unde
   <done>
 All four files created/replaced. tsc exits 0.
 Grep checks:
-- grep -q "updateQuestionStatusAction" src/components/questions-queue.tsx
-- grep -q "ConceptQuestionGroup" src/components/questions-queue.tsx
-- grep -q "QuestionsQueue" src/app/questions/page.tsx
+- grep -n "updateQuestionStatusAction" src/components/questions-queue.tsx must match
+- grep -n "ConceptQuestionGroup" src/components/questions-queue.tsx must match
+- grep -n "QuestionsQueue" src/app/questions/page.tsx must match
+- grep -n "Could not update question" src/components/questions-queue.tsx must match
 - grep -q "ComingSoon" src/app/questions/page.tsx returns no match (stub replaced)
   </done>
 </task>
@@ -536,6 +550,7 @@ Grep checks:
 7. Reload and confirm status changes persisted in progress.json
 8. Confirm concept headings link to /concepts/[slug] (hover to see href)
 9. Remove all questions from progress.json temporarily and confirm empty state message appears (then restore)
+10. Simulate a server action failure (throw in updateQuestionStatus temporarily) and confirm "Could not update question. Try again." appears below the groups list
 </verification>
 
 <success_criteria>
@@ -544,6 +559,7 @@ Grep checks:
 - Park, Answer, Reopen actions work with optimistic updates and persist to progress.json
 - Parked and answered items visible below open items at reduced opacity
 - Empty state message shown when no questions exist
+- Error message "Could not update question. Try again." renders below groups list on action failure and clears on next success
 </success_criteria>
 
 <output>

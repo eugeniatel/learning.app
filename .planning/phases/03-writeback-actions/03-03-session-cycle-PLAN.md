@@ -3,12 +3,13 @@ phase: 03-writeback-actions
 plan: 03
 type: execute
 wave: 2
-depends_on: []
+depends_on: ["03-01"]
 files_modified:
   - src/lib/progress.ts
   - src/lib/actions/cycle-session-status.ts
   - src/components/session-card.tsx
   - src/components/week-view.tsx
+  - src/app/weeks/[id]/page.tsx
 autonomous: true
 requirements:
   - SESSION-01
@@ -44,13 +45,17 @@ must_haves:
       to: "src/components/session-card.tsx"
       via: "weekId prop passed from week.id"
       pattern: "weekId={week.id}"
+    - from: "src/app/weeks/[id]/page.tsx"
+      to: "src/components/session-card.tsx"
+      via: "weekId prop passed from week.id"
+      pattern: "weekId={week.id}"
 ---
 
 <objective>
 Make session status interactive: the StatusIcon on each SessionCard becomes a button that cycles status and writes back to progress.json.
 
 Purpose: Closes SESSION-01 and SESSION-02. The This Week view becomes a live tracker, not a read-only display.
-Output: cycleSessionStatus added to progress.ts, new cycle-session-status server action, SessionCard refactored to client component, WeekView passes weekId.
+Output: cycleSessionStatus added to progress.ts, new cycle-session-status server action, SessionCard refactored to client component, WeekView and /weeks/[id] page both pass weekId.
 </objective>
 
 <execution_context>
@@ -135,8 +140,17 @@ From src/components/week-view.tsx (needs weekId prop threading):
 ```typescript
 // WeekView renders SessionCard; add weekId={week.id} to each <SessionCard> call
 // No other changes needed to WeekView
-// If WeekView was made async in plan 03-01 (readReflection), keep it async
+// Plan 03-01 made WeekView async; keep it async
 // The weekId is already available as week.id from the week prop
+```
+
+From src/app/weeks/[id]/page.tsx (also renders SessionCard — must receive weekId):
+```typescript
+// Current SessionCard call (missing weekId — TypeScript will error without this fix):
+//   <SessionCard key={session.id} session={session} artifacts={sessionArtifacts} upNext={false} />
+// Updated call (add weekId={id} where id = await props.params.id):
+//   <SessionCard key={session.id} session={session} artifacts={sessionArtifacts} upNext={false} weekId={id} />
+// The variable `id` is already destructured from await props.params at the top of this page component
 ```
 
 From src/lib/actions pattern (thin wrapper):
@@ -217,8 +231,8 @@ export async function cycleSessionStatusAction(
 </task>
 
 <task type="auto" tdd="false">
-  <name>Task 2: Refactor SessionCard to client component with StatusIcon button and thread weekId through WeekView</name>
-  <files>src/components/session-card.tsx, src/components/week-view.tsx</files>
+  <name>Task 2: Refactor SessionCard to client component with StatusIcon button and thread weekId through WeekView and /weeks/[id] page</name>
+  <files>src/components/session-card.tsx, src/components/week-view.tsx, src/app/weeks/[id]/page.tsx</files>
   <action>
 Rewrite src/components/session-card.tsx as a "use client" component.
 
@@ -290,12 +304,31 @@ The rest of the article JSX is unchanged. ArtifactChip renders are unchanged.
 
 The StatusIcon sub-component function is unchanged (still uses the passed `status` prop).
 
-Update src/components/week-view.tsx: add `weekId={week.id}` to each `<SessionCard>` invocation. This is the only change needed to WeekView in this task (plan 03-01 already made it async if it modified WeekView; if not, no async change needed here).
+Update src/components/week-view.tsx: add `weekId={week.id}` to each `<SessionCard>` invocation. Plan 03-01 made WeekView async; keep that. No other changes needed.
+
+Update src/app/weeks/[id]/page.tsx: add `weekId={id}` to the `<SessionCard>` call inside the `week.sessions.map(...)`. The variable `id` is already destructured from `await props.params` at the top of the component. The existing SessionCard call becomes:
+```tsx
+<SessionCard
+  key={session.id}
+  session={session}
+  artifacts={sessionArtifacts}
+  upNext={false}
+  weekId={id}
+/>
+```
   </action>
   <verify>
     <automated>cd /Users/euge/Desktop/curriculum-app && pnpm tsc --noEmit 2>&1 | head -20</automated>
   </verify>
-  <done>session-card.tsx has "use client" directive, weekId in props, StatusIcon wrapped in button element; week-view.tsx passes weekId={week.id} to each SessionCard; tsc exits 0</done>
+  <done>
+session-card.tsx has "use client" directive, weekId in props, StatusIcon wrapped in button element.
+week-view.tsx passes weekId={week.id} to each SessionCard.
+/weeks/[id]/page.tsx passes weekId={id} to SessionCard.
+All three verified:
+- grep -n "weekId" src/components/week-view.tsx must match
+- grep -n "weekId" src/app/weeks/[id]/page.tsx must match
+- tsc exits 0
+  </done>
 </task>
 
 </tasks>
@@ -324,6 +357,7 @@ Update src/components/week-view.tsx: add `weekId={week.id}` to each `<SessionCar
 5. Reload and confirm status persists in the displayed icon
 6. Inspect progress.json and confirm status and completedAt fields updated correctly
 7. Confirm clicking the session title text does nothing (not a button)
+8. Open /weeks/[id] for any week; confirm StatusIcon is clickable and cycles correctly there too
 </verification>
 
 <success_criteria>
@@ -332,6 +366,7 @@ Update src/components/week-view.tsx: add `weekId={week.id}` to each `<SessionCar
 - completedAt written when cycling to done, removed when cycling away from done
 - Persisted status visible after page reload
 - Artifact chips and session title remain non-interactive (layout unchanged)
+- /weeks/[id]/page.tsx passes weekId so TypeScript compiles without error
 </success_criteria>
 
 <output>
