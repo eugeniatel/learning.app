@@ -26,8 +26,8 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 ## Active (v1 targets for sessions 2 to 5)
 
 ### Concept detail and notes
-- [ ] **CONCEPT-01**: `/concepts/[slug]` renders concept title, one-liner, linked artifacts (chips with type + read status), related concepts sidebar.
-- [ ] **CONCEPT-02**: `/concepts` renders concept index grouped by module, with search by title.
+- [x] **CONCEPT-01**: `/concepts/[slug]` renders concept title, one-liner, linked artifacts (chips with type + read status), related concepts sidebar.
+- [x] **CONCEPT-02**: `/concepts` renders concept index grouped by module, with search by title.
 - [ ] **NOTE-01**: Each concept has a note editor (plain textarea in v1) that saves markdown to `notes/<slug>.md` with frontmatter (`conceptId`, `updatedAt`).
 - [ ] **NOTE-02**: Saving is a Next.js server action; writes go through `src/lib/notes.ts` (new file).
 - [ ] **QUESTION-01**: Concept detail has an "open question" capture box that writes to `progress.json.openQuestions`.
@@ -73,8 +73,8 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CONCEPT-01 | Phase 1 | Pending |
-| CONCEPT-02 | Phase 1 | Pending |
+| CONCEPT-01 | Phase 1 | Complete |
+| CONCEPT-02 | Phase 1 | Complete |
 | NOTE-01 | Phase 1 | Pending |
 | NOTE-02 | Phase 1 | Pending |
 | QUESTION-01 | Phase 1 | Pending |
