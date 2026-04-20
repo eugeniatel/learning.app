@@ -1,12 +1,15 @@
 import { Shell } from "@/components/shell";
-import { ComingSoon } from "@/components/coming-soon";
-import { getProgress } from "@/lib/data";
+import { ConceptIndex } from "@/components/concept-index";
+import { getProgress, getConceptsGroupedByModule } from "@/lib/data";
 
 export default async function ConceptsPage() {
-  const progress = await getProgress();
+  const [progress, groups] = await Promise.all([
+    getProgress(),
+    getConceptsGroupedByModule(),
+  ]);
   return (
     <Shell phase={progress.phase}>
-      <ComingSoon title="Concepts" note="Index of concepts across modules. Ships in session 2." />
+      <ConceptIndex groups={groups} />
     </Shell>
   );
 }
