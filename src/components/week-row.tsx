@@ -1,10 +1,10 @@
+import Link from "next/link";
 import type { Module, Week } from "@/lib/types";
 
 interface WeekRowProps {
   week: Week;
   module: Module;
   isCurrent: boolean;
-  onClick?: () => void;
 }
 
 function formatRange(startDate: string): string {
@@ -16,13 +16,13 @@ function formatRange(startDate: string): string {
   return `${fmt(start)} to ${fmt(end)}`;
 }
 
-export function WeekRow({ week, module, isCurrent, onClick }: WeekRowProps) {
+export function WeekRow({ week, module, isCurrent }: WeekRowProps) {
   const done = week.sessions.filter((s) => s.status === "done").length;
   const total = week.sessions.length;
   return (
-    <div
-      className={`flex flex-col rounded-xl bg-card border border-border px-5 py-4 transition-colors duration-[180ms] ease-out hover:bg-muted/40 ${onClick ? "cursor-pointer" : "cursor-default"}`}
-      onClick={onClick}
+    <Link
+      href={`/weeks/${week.id}`}
+      className="flex flex-col rounded-xl bg-card border border-border px-5 py-4 transition-colors duration-[180ms] ease-out hover:bg-muted/40 cursor-pointer"
     >
       <div className="flex items-center gap-3">
         <div className="flex-1">
@@ -40,6 +40,6 @@ export function WeekRow({ week, module, isCurrent, onClick }: WeekRowProps) {
           {done}/{total} sessions done
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
