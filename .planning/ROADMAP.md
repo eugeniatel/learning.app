@@ -39,7 +39,11 @@ Plans:
   2. Eugenia can select a week and confirm the switch; `progress.json.currentWeek` updates and the home view reflects the new week
   3. Eugenia can open `/review` and see one concept card at a time with yes / not-quite buttons and a free-text field
   4. Submitting a review updates `progress.json.reviews[]` with `lastReviewed`, `nextSuggested`, and `status`, and the next card is based on recency ordering
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [x] 02-01-PLAN.md — /weeks index with module-grouped WeekRow list and WeeksList client island
+- [ ] 02-02-PLAN.md — Week-switch confirmation strip and switchWeekAction server action
+- [ ] 02-03-PLAN.md — /review surface with ReviewCard, ReviewQueue, and submitReviewAction server action
 **UI hint**: yes
 
 ### Phase 3: Writeback Actions
@@ -71,7 +75,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Concept Detail and Notes | 3/4 | In Progress|  |
-| 2. All Weeks and Review | 0/TBD | Not started | - |
+| 1. Concept Detail and Notes | 4/4 | Complete |  |
+| 2. All Weeks and Review | 1/3 | In Progress|  |
 | 3. Writeback Actions | 0/TBD | Not started | - |
 | 4. Flexible Track Map | 0/TBD | Blocked | - |
