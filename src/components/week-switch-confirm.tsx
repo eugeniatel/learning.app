@@ -1,25 +1,41 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { switchWeekAction } from "@/lib/actions/switch-week";
 
 interface WeekSwitchConfirmProps {
   weekId: string;
-  onCancel: () => void;
-  onSuccess: () => void;
+  moduleTitle?: string;
+  onCancel?: () => void;
+  onSuccess?: () => void;
 }
 
 export function WeekSwitchConfirm({ weekId, onCancel, onSuccess }: WeekSwitchConfirmProps) {
   const [status, setStatus] = useState<"idle" | "saving" | "error">("idle");
+  const router = useRouter();
 
   async function handleConfirm() {
     setStatus("saving");
     try {
       await switchWeekAction(weekId);
-      onSuccess();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push("/weeks");
+        router.refresh();
+      }
     } catch {
       setStatus("error");
+    }
+  }
+
+  function handleCancel() {
+    if (onCancel) {
+      onCancel();
+    } else {
+      router.push("/weeks");
     }
   }
 
@@ -28,7 +44,7 @@ export function WeekSwitchConfirm({ weekId, onCancel, onSuccess }: WeekSwitchCon
       <div className="flex items-center justify-between">
         <span className="text-[13px] text-foreground">Switch to this week?</span>
         <div className="flex gap-2">
-          <Button variant="ghost" size="sm" className="text-[13px] text-muted-foreground" onClick={onCancel}>
+          <Button variant="ghost" size="sm" className="text-[13px] text-muted-foreground" onClick={handleCancel}>
             Keep current
           </Button>
           <Button
