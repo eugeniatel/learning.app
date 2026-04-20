@@ -58,7 +58,7 @@ Inherited from Phase 1 and Phase 2 UI-SPECs. No new sizes or weights.
 | Body | 15px | 400 | 1.7 | Question text, reflection textarea content, session title |
 | Label | 13px | 400 | 1.5 | Action button labels, status badge text, error text |
 | Heading | 22px | 500 | 1.3 | /questions page heading "Open questions" |
-| Section heading | 13px | 500 | 1.5 | Concept group labels on /questions; uppercase, letter-spacing: 0.04em |
+| Section heading | 13px | 500 | 1.5 | Concept group labels on /questions; ReflectionPrompt heading "End-of-week reflection"; uppercase, letter-spacing: 0.04em |
 | Module label | 12px | 400 | 1.4 | Module name under concept section heading, status chips, read-status indicator |
 
 Letter-spacing: -0.01em on headings (h1-h6), per globals.css.
@@ -81,7 +81,9 @@ Source: globals.css :root tokens (session 1, unchanged).
 | Muted text | --muted-foreground | #6B675E | Module labels, action button secondary state, status badge text, artifact type labels |
 | Border | --border | #E6E2D8 | 0.5px borders on cards, sections, dividers |
 | Accent (10%) | --ring / coral | #D97757 | RESERVED (see below) |
-| Destructive | --destructive | #B4432E | Not used in this phase |
+| Destructive | --destructive | #B4432E | ReflectionPrompt error text ("Could not save. Try again."); /questions action failure error text ("Could not update question. Try again.") |
+
+Primary visual anchor on /questions: page heading "Open questions" (22px weight-500).
 
 Coral (#D97757) extended in this phase with two new reservations:
 
@@ -194,9 +196,9 @@ Changes: becomes a client component with enabled textarea + "Save reflection" bu
 
 Layout:
 - Section container: existing `mt-10 rounded-xl bg-secondary/60 p-6` (unchanged)
-- Heading: "End-of-week reflection" (14px weight-500, unchanged)
+- Heading: "End-of-week reflection" (13px weight-500, section-heading tier)
 - Sub-copy: existing helper copy (unchanged) — remove the "Saving is enabled in a later session." line
-- Textarea: remove `disabled` attribute; add dirty-state tracking; min-h-[128px] resize-y bg-background text-[14px] leading-7 (existing styles, enabling removes disabled)
+- Textarea: remove `disabled` attribute; add dirty-state tracking; min-h-[128px] resize-y bg-background text-[15px] leading-7 (body tier, enabling removes disabled)
 - Save button: right-aligned below textarea, gap-2 layout
   - Dirty state (has unsaved changes): `bg-[var(--ring)] text-white hover:bg-[var(--ring)]/90` (coral fill, matches NoteEditor dirty pattern)
   - Clean state (saved or no changes yet): variant outline, text-muted-foreground
