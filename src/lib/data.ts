@@ -136,3 +136,16 @@ export async function getConceptBySlug(slug: string): Promise<Concept | undefine
   const concepts = await getConcepts();
   return concepts.find((c) => c.slug === slug);
 }
+
+export async function getAllWeeksWithModules(): Promise<{ module: Module; weeks: Week[] }[]> {
+  const [progress, modules] = await Promise.all([getProgress(), getModules()]);
+  return modules
+    .map((mod) => ({
+      module: mod,
+      weeks: progress.weeks
+        .filter((w) => w.moduleId === mod.id)
+        .sort((a, b) => b.startDate.localeCompare(a.startDate)),
+    }))
+    .filter((group) => group.weeks.length > 0)
+    .sort((a, b) => b.weeks[0].startDate.localeCompare(a.weeks[0].startDate));
+}
