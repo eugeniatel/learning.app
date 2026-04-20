@@ -22,7 +22,12 @@ Session 1 shipped the foundation (This Week view, data layer, content files). Se
   2. Eugenia can open any concept and see its one-liner, linked artifact chips with type and read status, related concepts, and open questions
   3. Eugenia can type a note in the concept detail editor and save it; the note persists to `notes/<slug>.md` across reloads
   4. Eugenia can type a question in the concept detail capture box and it appears in `progress.json.openQuestions`
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [x] 01-01-PLAN.md — Concept index at /concepts with client-side title filter
+- [ ] 01-02-PLAN.md — Concept detail scaffold at /concepts/[slug] with two-column layout
+- [ ] 01-03-PLAN.md — Note editor with server action (writes to notes/<slug>.md)
+- [ ] 01-04-PLAN.md — Open question capture with server action (writes to progress.json)
 **UI hint**: yes
 
 ### Phase 2: All Weeks and Review
@@ -66,7 +71,7 @@ Session 1 shipped the foundation (This Week view, data layer, content files). Se
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Concept Detail and Notes | 0/TBD | Not started | - |
+| 1. Concept Detail and Notes | 1/4 | In Progress|  |
 | 2. All Weeks and Review | 0/TBD | Not started | - |
 | 3. Writeback Actions | 0/TBD | Not started | - |
 | 4. Flexible Track Map | 0/TBD | Blocked | - |

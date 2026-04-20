@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: executing
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-04-20T03:41:44.050Z"
+last_activity: 2026-04-20
+progress:
+  total_phases: 4
+  completed_phases: 0
+  total_plans: 4
+  completed_plans: 1
+  percent: 25
+---
+
 # Project State
 
 ## Project Reference
@@ -9,16 +25,17 @@ Current focus: Phase 1 - Concept Detail and Notes
 
 ## Current Position
 
-Phase: 1 of 4 (Concept Detail and Notes)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-04-20 - Roadmap and state initialized. Session 1 shipped (This Week view, data layer, content files).
+Phase: 1 (Concept Detail and Notes) — EXECUTING
+Plan: 2 of 4
+Status: Ready to execute
+Last activity: 2026-04-20
 
 Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
 Velocity:
+
 - Total plans completed: 0
 - Average duration: -
 - Total execution time: 0 hours
@@ -30,10 +47,12 @@ By Phase:
 | - | - | - | - |
 
 Recent Trend:
+
 - Last 5 plans: n/a
 - Trend: n/a
 
 *Updated after each plan completion*
+| Phase 01-concept-detail-and-notes P01 | 5 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -45,6 +64,7 @@ Recent decisions affecting current work:
 - Session 1: Next.js 16 App Router + shadcn (base-nova preset) confirmed good
 - Session 1: progress.json as single mutable state source, no DB
 - Roadmap: Phase 4 (flexible track map) blocked until checkpoint 3 trigger is decided after week 1 of real use
+- [Phase 01-concept-detail-and-notes]: ConceptIndex is the sole client component; ConceptCard stays a Server Component
 
 ### Pending Todos
 
@@ -63,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20
-Stopped at: Roadmap initialized. All 11 active requirements mapped to 4 phases. Ready to plan Phase 1.
+Last session: 2026-04-20T03:41:44.048Z
+Stopped at: Completed 01-01-PLAN.md
 Resume file: None
