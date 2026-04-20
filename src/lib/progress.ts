@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { z } from "zod";
 import { paths } from "./paths";
 import { progressSchema } from "./schemas";
-import type { Question } from "./types";
+import type { Question, Review } from "./types";
 
 type ProgressData = z.infer<typeof progressSchema>;
 
@@ -40,5 +40,34 @@ export async function switchCurrentWeek(weekId: string): Promise<void> {
   const week = progress.weeks.find((w) => w.id === weekId);
   if (!week) throw new Error(`Week ${weekId} not found in progress.weeks`);
   progress.currentWeek = { id: week.id, moduleId: week.moduleId, number: week.number };
+  await writeProgress(progress);
+}
+
+/**
+ * Creates or updates the review entry for a concept.
+ * Sets lastReviewed to now, nextSuggested to now + 24h, status as provided.
+ * Note: _note is accepted for API symmetry but not persisted in v1;
+ * the progressSchema reviews array does not include a note field.
+ */
+export async function upsertReview(
+  conceptId: string,
+  status: "ready" | "not_yet",
+  _note?: string
+): Promise<void> {
+  const progress = await readProgress();
+  const now = new Date();
+  const next = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  const entry: Review = {
+    conceptId,
+    lastReviewed: now.toISOString(),
+    nextSuggested: next.toISOString(),
+    status,
+  };
+  const existing = progress.reviews.findIndex((r) => r.conceptId === conceptId);
+  if (existing >= 0) {
+    progress.reviews[existing] = entry;
+  } else {
+    progress.reviews.push(entry);
+  }
   await writeProgress(progress);
 }
