@@ -2,8 +2,9 @@ import { WeekHeader } from "./week-header";
 import { SessionCard } from "./session-card";
 import { ReflectionPrompt } from "./reflection-prompt";
 import type { Artifact, Module, Session, Week } from "@/lib/types";
+import { readReflection } from "@/lib/reflections";
 
-export function WeekView({
+export async function WeekView({
   week,
   module,
   artifacts,
@@ -15,6 +16,7 @@ export function WeekView({
   const byId = new Map(artifacts.map((a) => [a.id, a]));
   const firstTodoIdx = week.sessions.findIndex((s) => s.status === "todo");
   const hasInProgress = week.sessions.some((s) => s.status === "in_progress");
+  const initialReflection = await readReflection(week.id);
   return (
     <div>
       <WeekHeader week={week} module={module} />
@@ -34,7 +36,7 @@ export function WeekView({
           );
         })}
       </div>
-      <ReflectionPrompt weekId={week.id} />
+      <ReflectionPrompt weekId={week.id} initialValue={initialReflection} />
     </div>
   );
 }
