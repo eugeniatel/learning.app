@@ -21,7 +21,7 @@ export function WeekRow({ week, module, isCurrent, onClick }: WeekRowProps) {
   const total = week.sessions.length;
   return (
     <div
-      className="flex flex-col rounded-xl bg-card border border-border px-5 py-4 transition-colors duration-[180ms] ease-out hover:bg-muted/40 cursor-pointer"
+      className={`flex flex-col rounded-xl bg-card border border-border px-5 py-4 transition-colors duration-[180ms] ease-out hover:bg-muted/40 ${onClick ? "cursor-pointer" : "cursor-default"}`}
       onClick={onClick}
     >
       <div className="flex items-center gap-3">

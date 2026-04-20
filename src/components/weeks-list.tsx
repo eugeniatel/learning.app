@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { WeekRow } from "./week-row";
+import { WeekSwitchConfirm } from "./week-switch-confirm";
 import type { Module, Week } from "@/lib/types";
 
 interface WeeksListProps {
@@ -11,6 +13,15 @@ interface WeeksListProps {
 
 export function WeeksList({ groups, currentWeekId }: WeeksListProps) {
   const [confirmingWeekId, setConfirmingWeekId] = useState<string | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setConfirmingWeekId(null);
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div>
@@ -26,13 +37,28 @@ export function WeeksList({ groups, currentWeekId }: WeeksListProps) {
               </p>
               <div className="flex flex-col gap-2">
                 {weeks.map((week) => (
-                  <WeekRow
-                    key={week.id}
-                    week={week}
-                    module={module}
-                    isCurrent={week.id === currentWeekId}
-                    onClick={() => setConfirmingWeekId(week.id)}
-                  />
+                  <div key={week.id} className="flex flex-col">
+                    <WeekRow
+                      week={week}
+                      module={module}
+                      isCurrent={week.id === currentWeekId}
+                      onClick={
+                        week.id === currentWeekId
+                          ? undefined
+                          : () => setConfirmingWeekId(week.id)
+                      }
+                    />
+                    {confirmingWeekId === week.id && (
+                      <WeekSwitchConfirm
+                        weekId={week.id}
+                        onCancel={() => setConfirmingWeekId(null)}
+                        onSuccess={() => {
+                          setConfirmingWeekId(null);
+                          router.refresh();
+                        }}
+                      />
+                    )}
+                  </div>
                 ))}
               </div>
             </section>
