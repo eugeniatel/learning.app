@@ -121,3 +121,13 @@ export async function getCurrentWeek(): Promise<{
   if (!module) throw new Error(`Module ${week.moduleId} not found for current week`);
   return { progress, week, module };
 }
+
+export async function getConceptsGroupedByModule(): Promise<{ module: Module; concepts: Concept[] }[]> {
+  const [concepts, modules] = await Promise.all([getConcepts(), getModules()]);
+  return modules
+    .map((mod) => ({
+      module: mod,
+      concepts: concepts.filter((c) => c.moduleIds.includes(mod.id)),
+    }))
+    .filter((group) => group.concepts.length > 0);
+}
