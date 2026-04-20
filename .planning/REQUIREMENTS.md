@@ -47,7 +47,7 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 - [ ] **SESSION-01**: Clicking a session card on This Week cycles status (todo to in-progress to done).
 - [ ] **SESSION-02**: `progress.json` updates persist across reloads.
 - [x] **REFLECT-01**: Reflection textarea on This Week saves to `notes/reflections/week-<id>.md`; linked from the week header.
-- [ ] **ARTIFACT-01**: Artifact chips expose a read-status toggle that writes back to `artifacts.json`.
+- [x] **ARTIFACT-01**: Artifact chips expose a read-status toggle that writes back to `artifacts.json`.
 
 ### Flexible phase (blocked on checkpoint 3)
 - [ ] **FLEX-01**: `/flexible-map` renders the horizontal spine: main modules top rail, interpretability modules bottom rail, branches above with dashed connectors. Current node emphasized.
@@ -88,7 +88,7 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 | SESSION-01 | Phase 3 | Pending |
 | SESSION-02 | Phase 3 | Pending |
 | REFLECT-01 | Phase 3 | Complete |
-| ARTIFACT-01 | Phase 3 | Pending |
+| ARTIFACT-01 | Phase 3 | Complete |
 | FLEX-01 | Phase 4 | Blocked |
 | FLEX-02 | Phase 4 | Blocked |
 | FLEX-03 | Phase 4 | Blocked |
