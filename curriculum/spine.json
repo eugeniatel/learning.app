@@ -1,0 +1,13 @@
+{
+  "phases": {
+    "foundational": {
+      "moduleIds": ["mod-0", "mod-1", "mod-2", "mod-3"],
+      "interpretabilityIds": ["int-1"]
+    },
+    "flexible": {
+      "spine": ["mod-4", "mod-5", "mod-6", "mod-7", "mod-8", "mod-9", "mod-10"],
+      "interpretability": ["int-2", "int-3", "int-4"],
+      "branches": []
+    }
+  }
+}

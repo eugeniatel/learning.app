@@ -1,0 +1,49 @@
+{
+  "phase": "foundational",
+  "currentWeek": { "id": "w1", "moduleId": "mod-0", "number": 1 },
+  "weeks": [
+    {
+      "id": "w1",
+      "moduleId": "mod-0",
+      "number": 1,
+      "startDate": "2026-04-20",
+      "sessions": [
+        {
+          "id": "s1-1",
+          "title": "Keshav's three-pass method",
+          "conceptIds": ["three-pass-paper-reading"],
+          "artifactIds": ["keshav-how-to-read"],
+          "estimatedMinutes": 45,
+          "status": "done",
+          "completedAt": "2026-04-20T10:00:00Z"
+        },
+        {
+          "id": "s1-2",
+          "title": "Karpathy deep dive, sections 1 and 2",
+          "conceptIds": ["scholarly-practice"],
+          "artifactIds": ["karpathy-deep-dive"],
+          "estimatedMinutes": 90,
+          "status": "in_progress"
+        },
+        {
+          "id": "s1-3",
+          "title": "First read of Attention Is All You Need",
+          "conceptIds": ["attention"],
+          "artifactIds": ["attention-is-all-you-need"],
+          "estimatedMinutes": 60,
+          "status": "todo"
+        },
+        {
+          "id": "s1-4",
+          "title": "Nanda, concrete steps, how to build a practice",
+          "conceptIds": ["scholarly-practice"],
+          "artifactIds": ["nanda-concrete-steps"],
+          "estimatedMinutes": 45,
+          "status": "todo"
+        }
+      ]
+    }
+  ],
+  "openQuestions": [],
+  "reviews": []
+}
