@@ -1,12 +1,15 @@
 import { Shell } from "@/components/shell";
-import { ComingSoon } from "@/components/coming-soon";
-import { getProgress } from "@/lib/data";
+import { WeeksList } from "@/components/weeks-list";
+import { getAllWeeksWithModules, getProgress } from "@/lib/data";
 
 export default async function WeeksPage() {
-  const progress = await getProgress();
+  const [groups, progress] = await Promise.all([
+    getAllWeeksWithModules(),
+    getProgress(),
+  ]);
   return (
     <Shell phase={progress.phase}>
-      <ComingSoon title="All weeks" note="Grouped by module. Ships in session 3." />
+      <WeeksList groups={groups} currentWeekId={progress.currentWeek.id} />
     </Shell>
   );
 }
