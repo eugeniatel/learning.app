@@ -36,14 +36,16 @@ Inherited from Phase 1 UI-SPEC. No changes.
 |-------|-------|-------|
 | xs | 4px (1) | Icon-to-label gaps, inline chip padding |
 | sm | 8px (2) | Compact element spacing, tight gaps |
+| md-tight | 12px (3) | Tight gap between row content and confirmation strip, inline metadata clusters (WeekRow left content, WeekSwitchConfirm strip, ReviewCard action row) |
 | md | 16px (4) | Default element spacing, card padding |
 | lg | 24px (6) | Section padding, between content blocks |
 | xl | 32px (8) | Layout gaps, between major sections |
 | 2xl | 48px (12) | Major section breaks |
 | 3xl | 64px (16) | Page-level top/bottom padding |
 | shell-x | 40px (10) | Shell horizontal padding, inherited from session 1 |
+| badge-pad | px-1.5 py-0.5 | Badge micro-padding, inherited shadcn convention |
 
-Exceptions: shell-x (40px) is an inherited shell token. All other spacing uses the 8-point scale.
+Exceptions: shell-x (40px) and md-tight (12px) are named exceptions to the 8-point scale. md-tight documents the 12px gaps used in WeekRow, WeekSwitchConfirm, and ReviewCard rather than leaving them undocumented. badge-pad (px-1.5 py-0.5) is the shadcn badge micro-padding convention, used on the "Current" badge and module tag. All other spacing uses the 8-point scale.
 
 ---
 
@@ -57,7 +59,9 @@ Inherited from Phase 1 UI-SPEC. No new sizes or weights introduced.
 | Label | 13px | 400 | 1.5 | Module tag, date range, "last reviewed" metadata, button labels |
 | Heading | 22px | 500 | 1.3 | Page headings: "All weeks", "Review" |
 | Section heading | 13px | 500 | 1.5 | "Module group" labels on /weeks; uppercase, letter-spacing: 0.04em |
-| Module label | 12px | 400 | 1.4 | Week row metadata (week number, date range) |
+| Module label | 12px | 400 | 1.4 | Week row metadata (week number, date range), "last reviewed" line, progress counter, module tag |
+
+The "Current" badge uses `text-[12px]`, absorbed into the module-label size tier. No additional size token needed.
 
 Letter-spacing: -0.01em on headings (h1-h6), per globals.css.
 Sentence case everywhere. No title case. No all-caps except section label tokens.
@@ -69,6 +73,9 @@ Sentence case everywhere. No title case. No all-caps except section label tokens
 Inherited from Phase 1 UI-SPEC tokens. Extended coral usage documented below.
 
 Source: globals.css :root tokens (session 1, unchanged).
+
+Primary visual anchor on /review: concept title (22px weight-500) at the top of ReviewCard.
+Primary visual anchor on /weeks: page heading (22px weight-500) at the top of the content column.
 
 | Role | Token | Hex | Usage |
 |------|-------|-----|-------|
@@ -117,7 +124,7 @@ Coral is NOT used for: "Not yet" button, week row items, module group labels, bo
 - Week label format: "Week {number}, {date range}" — uses same formatRange() logic as WeekHeader
 - Module title: 15px weight-500 text-foreground
 - Session count: 13px text-muted-foreground, format: "{done}/{total} sessions done", right-aligned
-- "Current" badge: if this week matches progress.currentWeek, show a small muted badge "Current" (bg-muted text-muted-foreground text-[11px] rounded-sm px-1.5 py-0.5) inline after the week label
+- "Current" badge: if this week matches progress.currentWeek, show a small muted badge "Current" (bg-muted text-muted-foreground text-[12px] rounded-sm px-1.5 py-0.5) inline after the week label
 - Hover: entire row bg transitions bg-card to bg-muted/40 (180ms ease-out). No shadow.
 - The row is NOT a link. Clicking the row triggers the inline confirmation (see Interaction Contracts).
 
@@ -134,7 +141,7 @@ Rationale: switching weeks is a low-stakes operation — it updates progress.jso
 - Confirmation strip: bg-muted/60 rounded-b-xl px-5 py-3, flex items-center justify-between
 - Confirmation text: "Switch to this week?" text-[13px] text-foreground
 - "Yes, switch" button: variant default (bg-primary text-primary-foreground), size sm, text-[13px]
-- "Cancel" button: variant ghost, size sm, text-[13px], text-muted-foreground
+- "Keep current" button: variant ghost, size sm, text-[13px], text-muted-foreground
 - On confirm: calls switch-week server action (src/lib/actions/switch-week.ts), updates progress.json.currentWeek, refreshes the page or revalidates the route via router.refresh()
 - On cancel: row returns to idle state immediately
 - Only one row can be in confirming state at a time (clicking a different row returns previous to idle)
@@ -147,7 +154,7 @@ Rationale: switching weeks is a low-stakes operation — it updates progress.jso
 - Layout: single column, max-w-3xl (same as Shell default)
 - Grouping: weeks grouped by moduleId, sorted most-recent first within each group
 - Module group label: module title, 13px weight-500 text-muted-foreground uppercase tracking-wide, mb-2
-- Gap between week rows: gap-1.5
+- Gap between week rows: gap-2
 - Gap between module groups: gap-8
 - Empty state (no weeks): "No weeks recorded yet." text-[15px] text-muted-foreground mt-8 (extremely unlikely but must be handled)
 
@@ -162,7 +169,7 @@ Rationale: switching weeks is a low-stakes operation — it updates progress.jso
 - Action row: mt-6, flex gap-3
   - "Got it" button: variant default using coral fill — bg-[var(--ring)] text-white, hover:bg-[var(--ring)]/90, size default, flex-1 max-w-[160px]
   - "Not yet" button: variant outline, size default, flex-1 max-w-[160px]
-- Free-text field: mt-4, full-width textarea, min-h-[80px], bg-muted/40 border border-border rounded-lg px-3 py-2 text-[14px] text-foreground, placeholder "Add a note about this concept..." resize-none. Saved with the review entry on submit (either button).
+- Free-text field: mt-4, full-width textarea, min-h-[80px], bg-muted/40 border border-border rounded-lg px-3 py-2 text-[15px] text-foreground, placeholder "Add a note about this concept..." resize-none. Saved with the review entry on submit (either button).
 - Transition: card content fades out and new card fades in on submit (150ms ease-out opacity transition, replace content in-place — no page navigation between cards)
 - Progress counter: above the card, text-[12px] text-muted-foreground, "{N} concepts in queue" — shown when queue has 2 or more. When only 1 remains, shows "Last one."
 
@@ -200,7 +207,7 @@ Shell
     h1 "All weeks"  (22px weight-500, mb-6)
     [for each module group, most-recent module first]
       module label  (13px uppercase tracking-wide, mb-2)
-      [WeekRow list, gap-1.5]
+      [WeekRow list, gap-2]
         WeekRow (idle | confirming)
       [gap-8 between groups]
 ```
@@ -281,8 +288,9 @@ The server derives which empty state applies before passing props to the client 
 | "Current" week badge | "Current" |
 | Week row confirmation prompt | "Switch to this week?" |
 | Week confirm button | "Yes, switch" |
-| Week cancel button | "Cancel" |
+| Week cancel button | "Keep current" |
 | /weeks empty state | "No weeks recorded yet." |
+| Week switch failure (server action error) | "Could not switch week. Try again." |
 | /review nav label | "Review" |
 | /review page heading | "Review" |
 | Queue counter (plural) | "{N} concepts in queue" |
@@ -292,10 +300,11 @@ The server derives which empty state applies before passing props to the client 
 | Free-text placeholder | "Add a note about this concept..." |
 | Last reviewed (with date) | "Last reviewed {Mon D}" |
 | Last reviewed (never) | "Not yet reviewed" |
+| Review submit failure (server action error) | "Could not save review. Try again." |
 | Review empty state (all done) | "You've reviewed everything for now. Check back tomorrow." |
 | Review empty state (no concepts) | "No concepts to review." |
 
-Rules: sentence case throughout. No em dashes. No exclamation marks. "Got it" and "Not yet" are intentionally short and conversational — matches the low-stakes nature of the action. "You've reviewed everything for now." uses a contraction deliberately; this is the one place where a small moment of warmth is appropriate without crossing into gamification.
+Rules: sentence case throughout. No em dashes. No exclamation marks. "Got it" and "Not yet" are intentionally short and conversational — matches the low-stakes nature of the action. "You've reviewed everything for now." uses a contraction deliberately; this is the one place where a small moment of warmth is appropriate without crossing into gamification. "Keep current" replaces "Cancel" as the dismiss label on the week-switch confirmation: it names the outcome rather than the action, which is clearer and avoids the generic-label pattern. Error copy mirrors the Phase 1 precedent ("Could not save. Try again.") — problem description + what to do next, no jargon.
 
 ---
 
