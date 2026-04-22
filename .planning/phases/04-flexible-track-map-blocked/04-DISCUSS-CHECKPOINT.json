@@ -1,0 +1,29 @@
+{
+  "phase": "4",
+  "phase_name": "Flexible Track Map (BLOCKED)",
+  "timestamp": "2026-04-22T00:00:00Z",
+  "areas_completed": ["Checkpoint 3 trigger", "Branch data source"],
+  "areas_remaining": ["Spine diagram rendering", "Node state + Ready-to-pull prereqs"],
+  "decisions": {
+    "Checkpoint 3 trigger": [
+      {"question": "What triggers the flip from foundational to flexible phase?", "answer": "Manual toggle", "options_presented": ["Manual toggle", "Milestone-based", "Time-based", "Hybrid"]},
+      {"question": "Where does the manual toggle live in the UI?", "answer": "On This Week view", "options_presented": ["On /flexible-map itself", "In phase-indicator (shell)", "On This Week view", "On /weeks or /concepts header"]},
+      {"question": "Does switching require confirmation?", "answer": "No, one click", "options_presented": ["Yes with preview", "Yes simple confirm", "No one click"]},
+      {"question": "Can you flip back from flexible to foundational?", "answer": "Yes, same toggle (bidirectional)", "options_presented": ["Yes same toggle", "No one-way", "Yes but hidden"]}
+    ],
+    "Branch data source": [
+      {"question": "What is a branch, conceptually?", "answer": "Optional deep-dive module (same shape as mod-* with track: branch and branchOf: mod-X). Claude's recommendation accepted by user after 'not sure' response.", "options_presented": ["Optional deep-dive module", "Curated paper + artifact bundle", "User-generated detour"]},
+      {"question": "Where are branches defined?", "answer": "Markdown files in curriculum/ (e.g., branch-agents.md) with the same zod schema as modules plus track: branch and branchOf. spine.json.flexible.branches holds an array of branch IDs, mirroring how spine and interpretability already work.", "options_presented": ["New markdown files in curriculum/", "Inline in spine.json", "Both: spine.json for position, markdown for content"]},
+      {"question": "How many branches do you want seeded in v1?", "answer": "3 placeholder branches: branch-agents (attaches to mod-4), branch-evals (mod-7), branch-efficiency (mod-5 or mod-6)", "options_presented": ["Zero empty branches array", "2-3 placeholder branches", "Let me list them now"]}
+    ]
+  },
+  "deferred_ideas": [],
+  "canonical_refs": [
+    "/Users/euge/Desktop/PROJECT_BRIEF.md §Flexible phase Track map (line 200)",
+    "/Users/euge/Desktop/PROJECT_BRIEF.md §Checkpoint 3 (line 206)",
+    "src/lib/phase.ts",
+    "curriculum/spine.json",
+    "src/lib/schemas.ts"
+  ],
+  "pause_note": "Discussion paused mid-flow after area 2. Areas 3 (Spine diagram rendering) and 4 (Node state + Ready-to-pull prereqs) still need discussion. On resume, /gsd-discuss-phase 4 will detect this checkpoint and offer to continue from here."
+}
