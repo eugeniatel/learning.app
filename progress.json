@@ -1163,7 +1163,7 @@
           ],
           "estimatedMinutes": 40,
           "status": "todo",
-          "notes": "Map the primitive, market unit, collateral asset, loan asset, LLTV, oracle, IRM, who lends, who borrows, and what is immutable."
+          "notes": "Use the design essay as the teaching layer. Map the primitive, market unit, collateral asset, loan asset, LLTV, oracle, IRM, who lends, who borrows, and what is immutable."
         },
         {
           "id": "defi-s1-2",
@@ -1178,7 +1178,7 @@
           ],
           "estimatedMinutes": 50,
           "status": "todo",
-          "notes": "Trace how a price move becomes unhealthy LTV, what the liquidator repays/seizes, and where bad debt could appear if price, liquidity, or keeper execution fails."
+          "notes": "Use the whitepaper and OEV forum discussion as enrichers. Trace how a price move becomes unhealthy LTV, what the liquidator repays/seizes, and where bad debt could appear if price, liquidity, oracle timing, or keeper execution fails."
         },
         {
           "id": "defi-s1-3",

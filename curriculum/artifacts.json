@@ -509,7 +509,7 @@
       "type": "post",
       "title": "Demystifying Evals for AI Agents",
       "author": "Anthropic",
-      "url": "https://www.anthropic.com/engineering/demystifying-evals",
+      "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
       "readStatus": "unread"
     },
     {
@@ -693,7 +693,7 @@
       "type": "post",
       "title": "Effective Context Engineering for AI Agents",
       "author": "Anthropic",
-      "url": "https://www.anthropic.com/engineering/effective-context-engineering",
+      "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
       "readStatus": "unread"
     },
     {
@@ -1061,7 +1061,7 @@
       "type": "repo",
       "title": "Gemma Scope",
       "author": "DeepMind",
-      "url": "https://deepmind.google/research/publications/gemma-scope/",
+      "url": "https://deepmind.google/models/gemma/gemma-scope/",
       "readStatus": "unread"
     },
     {
@@ -1181,27 +1181,27 @@
       "id": "morpho-overview",
       "subjectId": "protocol-risk",
       "type": "post",
-      "title": "Morpho overview",
+      "title": "Morpho Blue design thesis",
       "author": "Morpho",
-      "url": "https://legacy.docs.morpho.org/morpho/overview",
+      "url": "https://morpho.org/blog/morpho-blue-and-how-it-enables-our-vision-for-defi-lending/",
       "readStatus": "unread"
     },
     {
       "id": "morpho-liquidation",
       "subjectId": "protocol-risk",
-      "type": "post",
-      "title": "Morpho liquidation",
+      "type": "paper",
+      "title": "Morpho Blue whitepaper",
       "author": "Morpho",
-      "url": "https://legacy.docs.morpho.org/morpho/concepts/liquidation/",
+      "url": "https://github.com/morpho-org/morpho-blue/blob/main/morpho-blue-whitepaper.pdf",
       "readStatus": "unread"
     },
     {
       "id": "morpho-oracle-agnostic-pricing",
       "subjectId": "protocol-risk",
       "type": "post",
-      "title": "Morpho oracle-agnostic pricing",
-      "author": "Morpho",
-      "url": "https://legacy.docs.morpho.org/morpho/concepts/oracle-agnostic-pricing/",
+      "title": "OEV recapture on Morpho Blue markets by Oval",
+      "author": "Oval",
+      "url": "https://forum.morpho.org/t/oev-recapture-on-morpho-blue-markets-by-oval/612",
       "readStatus": "unread"
     },
     {

@@ -33,4 +33,4 @@ Analyze Morpho as the first practitioner-grade lending protocol case study. The 
 
 ## Project
 
-Write a short mechanism note with these headings: primitive, market structure, risk parameters, oracle path, liquidation path, bad-debt path, external dependencies, stress scenario, and comparison questions. End with what Morpho reduces relative to pooled lending and what risk it pushes onto market or vault selection.
+Use the resources as enrichment, not documentation chores. Write a short mechanism note with these headings: primitive, market structure, risk parameters, oracle path, liquidation path, bad-debt path, external dependencies, stress scenario, and comparison questions. End with what Morpho reduces relative to pooled lending and what risk it pushes onto market or vault selection.
