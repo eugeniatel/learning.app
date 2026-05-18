@@ -1,18 +1,18 @@
 import { Shell } from "@/components/shell";
 import { StudyCockpit } from "@/components/study-cockpit";
-import { TodayList } from "@/components/today-list";
+import { WeekPlanList } from "@/components/week-plan-list";
 import { WeekView } from "@/components/week-view";
 import { getArtifacts, getCurrentWeek, getModules, getProgress, getSubjects } from "@/lib/data";
-import { getTodayItems } from "@/lib/today";
+import { getWeekPlanItems } from "@/lib/week-plan";
 
 export default async function Home() {
-  const [{ progress, week, module }, artifacts, subjects, modules, fullProgress, todayItems] = await Promise.all([
+  const [{ progress, week, module }, artifacts, subjects, modules, fullProgress, weekPlanItems] = await Promise.all([
     getCurrentWeek(),
     getArtifacts(),
     getSubjects(),
     getModules(),
     getProgress(),
-    getTodayItems(),
+    getWeekPlanItems(),
   ]);
   const moduleMap = new Map(modules.map((item) => [item.id, item]));
   const enabledSubjects = subjects.filter((subject) => fullProgress.subjects[subject.id]?.enabled !== false);
@@ -40,9 +40,9 @@ export default async function Home() {
       <StudyCockpit subjects={enabledSubjects} progress={fullProgress} snapshots={snapshots} />
       <section className="mt-8">
         <p className="mb-3 text-[13px] font-medium uppercase tracking-[0.04em] text-muted-foreground">
-          Today
+          This week across subjects
         </p>
-        <TodayList items={todayItems} compact />
+        <WeekPlanList items={weekPlanItems} compact />
       </section>
       <div className="mt-10 border-t border-border pt-10">
         <p className="mb-4 text-[13px] font-medium uppercase tracking-[0.04em] text-muted-foreground">

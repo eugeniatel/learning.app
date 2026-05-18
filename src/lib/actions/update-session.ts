@@ -12,6 +12,6 @@ export async function updateSessionAction(formData: FormData): Promise<void> {
     notes: String(formData.get("notes") ?? ""),
   });
   revalidatePath("/");
-  revalidatePath("/today");
+  revalidatePath("/week");
   revalidatePath(`/weeks/${weekId}`);
 }

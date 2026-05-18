@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { BookOpen, Calendar, GitBranch, Inbox, Layers, HelpCircle, Rewind, Home, NotebookPen, Search, Wand2 } from "lucide-react";
+import { BookOpen, GitBranch, Inbox, Layers, HelpCircle, Rewind, Home, NotebookPen, Search, Wand2 } from "lucide-react";
 import { PhaseIndicator } from "./phase-indicator";
 import type { Phase } from "@/lib/types";
 
 const items = [
   { href: "/", label: "This week", icon: Home },
-  { href: "/today", label: "Today", icon: Calendar },
   { href: "/subjects", label: "Subjects", icon: BookOpen },
   { href: "/weeks", label: "All weeks", icon: Layers },
   { href: "/concepts", label: "Concepts", icon: Layers },

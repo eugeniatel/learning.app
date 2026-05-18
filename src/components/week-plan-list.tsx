@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { TodayItem } from "@/lib/today";
+import type { WeekPlanItem } from "@/lib/week-plan";
 
-export function TodayList({ items, compact = false }: { items: TodayItem[]; compact?: boolean }) {
+export function WeekPlanList({ items, compact = false }: { items: WeekPlanItem[]; compact?: boolean }) {
   if (items.length === 0) {
     return <p className="text-[15px] text-muted-foreground">No enabled subjects yet.</p>;
   }

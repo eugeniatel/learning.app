@@ -64,7 +64,7 @@ export async function getRebalanceSuggestions(): Promise<RebalanceSuggestion[]> 
     suggestions.push({
       title: "No rebalance needed",
       detail: "Current subjects look light enough to continue as planned.",
-      href: "/today",
+      href: "/week",
     });
   }
 

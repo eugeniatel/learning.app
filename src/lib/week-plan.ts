@@ -1,14 +1,14 @@
 import { getModules, getProgress, getSubjects } from "./data";
 import type { Module, Session, Subject, Week } from "./types";
 
-export type TodayItem = {
+export type WeekPlanItem = {
   subject: Subject;
   week: Week;
   module: Module;
   session: Session;
 };
 
-export async function getTodayItems(): Promise<TodayItem[]> {
+export async function getWeekPlanItems(): Promise<WeekPlanItem[]> {
   const [subjects, modules, progress] = await Promise.all([getSubjects(), getModules(), getProgress()]);
   const subjectMap = new Map(subjects.map((subject) => [subject.id, subject]));
   const moduleMap = new Map(modules.map((module) => [module.id, module]));
@@ -23,5 +23,5 @@ export async function getTodayItems(): Promise<TodayItem[]> {
       if (!subject || !week || !weekModule || !session) return null;
       return { subject, week, module: weekModule, session };
     })
-    .filter((item): item is TodayItem => item !== null);
+    .filter((item): item is WeekPlanItem => item !== null);
 }

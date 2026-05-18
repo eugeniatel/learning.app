@@ -6,7 +6,7 @@ import { createSubject, parseImportedSubject, parseSessions } from "@/lib/subjec
 
 function refresh() {
   revalidatePath("/");
-  revalidatePath("/today");
+  revalidatePath("/week");
   revalidatePath("/subjects");
   revalidatePath("/setup-subject");
   revalidatePath("/weeks");
