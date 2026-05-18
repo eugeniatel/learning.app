@@ -2,35 +2,35 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-writeback-actions-03-session-cycle-PLAN.md
-last_updated: "2026-04-20T22:17:23.792Z"
-last_activity: 2026-04-20
+status: complete
+stopped_at: Phase 4 complete and v1 requirements reconciled
+last_updated: "2026-05-16T00:00:00.000Z"
+last_activity: 2026-05-16
 progress:
   total_phases: 4
-  completed_phases: 2
-  total_plans: 12
-  completed_plans: 11
-  percent: 92
+  completed_phases: 4
+  total_plans: 13
+  completed_plans: 13
+  percent: 100
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-20)
+See: .planning/PROJECT.md (updated 2026-05-16)
 
 Core value: One place to see what to work on this week, keep notes against concepts, and park questions for later. Readiness over speed.
-Current focus: Phase 1 - Concept Detail and Notes
+Current focus: v1 complete; next work is post-v1 polish or real-use curriculum adjustment.
 
 ## Current Position
 
-Phase: 3 (Writeback Actions) — EXECUTING
-Plan: 4 of 4
-Status: Ready to execute
-Last activity: 2026-04-20
+Phase: 4 (Flexible Track Map) — COMPLETE
+Plan: 1 of 1
+Status: Complete
+Last activity: 2026-05-16
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -70,7 +70,7 @@ Recent decisions affecting current work:
 
 - Session 1: Next.js 16 App Router + shadcn (base-nova preset) confirmed good
 - Session 1: progress.json as single mutable state source, no DB
-- Roadmap: Phase 4 (flexible track map) blocked until checkpoint 3 trigger is decided after week 1 of real use
+- Phase 4: Checkpoint 3 is manual, one-click, bidirectional, and exposed on This Week
 - [Phase 01-concept-detail-and-notes]: ConceptIndex is the sole client component; ConceptCard stays a Server Component
 - [Phase 01-concept-detail-and-notes]: Shell max-w-3xl accepted as-is; two-column layout fits without escape hatch
 - [Phase 01]: Server action split: saveNote in notes.ts (no directive), saveNoteAction in actions/save-note.ts (use server)
@@ -94,17 +94,18 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 4 blocked on checkpoint 3 decision (time-based, milestone-based, manual toggle, or hybrid). Deferred until after week 1 of actual use.
+None.
 
 ## Deferred Items
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| Feature | Flexible phase track map (FLEX-01 to FLEX-03) | Blocked on checkpoint 3 | Roadmap init |
-| Feature | Checkpoint 3 trigger logic | Deferred to post-week-1 | Brief |
+| Feature | Claude API integration | Deferred post-v1 | Brief |
+| Feature | Full-text note search | Deferred post-v1 | Requirements |
+| Feature | Reflection aggregation view | Deferred post-v1 | Requirements |
 
 ## Session Continuity
 
-Last session: 2026-04-20T22:17:23.790Z
-Stopped at: Completed 03-writeback-actions-03-session-cycle-PLAN.md
+Last session: 2026-05-16T00:00:00.000Z
+Stopped at: Phase 4 complete and v1 requirements reconciled
 Resume file: None

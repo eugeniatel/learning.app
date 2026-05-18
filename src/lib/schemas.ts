@@ -1,8 +1,23 @@
 import { z } from "zod";
 
+export const DEFAULT_SUBJECT_ID = "ai-systems";
+
+export const subjectSchema = z.object({
+  id: z.string(),
+  slug: z.string(),
+  title: z.string(),
+  description: z.string(),
+  cadence: z.string(),
+});
+
+export const subjectsFileSchema = z.object({
+  subjects: z.array(subjectSchema),
+});
+
 export const moduleFrontmatterSchema = z.object({
   id: z.string(),
-  track: z.enum(["main", "interpretability"]),
+  subjectId: z.string().default(DEFAULT_SUBJECT_ID),
+  track: z.enum(["main", "interpretability", "branch"]),
   number: z.number().int().nonnegative(),
   title: z.string(),
   slug: z.string(),
@@ -10,10 +25,12 @@ export const moduleFrontmatterSchema = z.object({
   hoursMax: z.number().nonnegative(),
   prereqs: z.array(z.string()).default([]),
   phase: z.enum(["foundational", "flexible"]),
+  branchOf: z.string().optional(),
 });
 
 export const artifactSchema = z.object({
   id: z.string(),
+  subjectId: z.string().default(DEFAULT_SUBJECT_ID),
   type: z.enum(["video", "paper", "repo", "post", "podcast"]),
   title: z.string(),
   url: z.string(),
@@ -27,6 +44,7 @@ export const artifactsFileSchema = z.object({
 
 export const conceptSchema = z.object({
   id: z.string(),
+  subjectId: z.string().default(DEFAULT_SUBJECT_ID),
   slug: z.string(),
   title: z.string(),
   oneLiner: z.string(),
@@ -65,6 +83,7 @@ export const sessionSchema = z.object({
 
 export const weekSchema = z.object({
   id: z.string(),
+  subjectId: z.string().default(DEFAULT_SUBJECT_ID),
   moduleId: z.string(),
   number: z.number().int().positive(),
   startDate: z.string(),
@@ -73,6 +92,17 @@ export const weekSchema = z.object({
 });
 
 export const progressSchema = z.object({
+  currentSubjectId: z.string().default(DEFAULT_SUBJECT_ID),
+  subjects: z
+    .record(
+      z.string(),
+      z.object({
+        phase: z.enum(["foundational", "flexible"]),
+        currentWeekId: z.string(),
+        enabled: z.boolean().default(true),
+      })
+    )
+    .default({}),
   phase: z.enum(["foundational", "flexible"]),
   currentWeek: z.object({ id: z.string(), moduleId: z.string(), number: z.number().int().positive() }),
   weeks: z.array(weekSchema),
@@ -80,6 +110,7 @@ export const progressSchema = z.object({
     .array(
       z.object({
         id: z.string(),
+        subjectId: z.string().default(DEFAULT_SUBJECT_ID),
         conceptId: z.string(),
         text: z.string(),
         status: z.enum(["open", "parked", "answered"]),
@@ -90,10 +121,23 @@ export const progressSchema = z.object({
   reviews: z
     .array(
       z.object({
+        subjectId: z.string().default(DEFAULT_SUBJECT_ID),
         conceptId: z.string(),
         lastReviewed: z.string(),
         nextSuggested: z.string(),
         status: z.enum(["ready", "not_yet", "mastered"]),
+      })
+    )
+    .default([]),
+  backlog: z
+    .array(
+      z.object({
+        id: z.string(),
+        subjectId: z.string().default(DEFAULT_SUBJECT_ID),
+        text: z.string(),
+        kind: z.enum(["resource", "question", "topic"]),
+        status: z.enum(["open", "parked", "done"]),
+        createdAt: z.string(),
       })
     )
     .default([]),

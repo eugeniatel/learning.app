@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A single-user, self-paced desktop-browser app that helps Eugenia execute a 9 to 14 month AI research curriculum in a homeschooling rhythm. Built as a tracker and a notebook, not a tutor: markdown on disk, a single `progress.json`, Next.js 16 + Tailwind + shadcn, visual language matching claude.ai. v1 is a passive tracker, no Claude API.
+A single-user, self-paced desktop-browser app that helps Eugenia study multiple deep subjects in parallel. Built as a tracker and a notebook, not a tutor: markdown on disk, a single `progress.json`, Next.js 16 + Tailwind + shadcn, visual language matching claude.ai. The first subject is LLM and AI systems; protocol risk and research writing are now first-class subjects too.
 
 ## Core Value
 
@@ -16,22 +16,17 @@ One place to see what Eugenia should work on this week, keep notes against conce
 - ✓ REQ-CONTENT-01 Curriculum split into per-module markdown files (mod-0 to mod-10, int-1 to int-4) with zod-validated frontmatter. Shipped in session 1.
 - ✓ REQ-CONTENT-02 `spine.json`, `concepts.json` (76 concepts), `artifacts.json` (~140 resources), `progress.json` with week 1 seeded. Shipped in session 1.
 - ✓ REQ-DATA-01 Data layer in `src/lib/` (types, zod schemas, paths, phase seam, fs/gray-matter reads). No direct `fs` in components. Shipped in session 1.
+- ✓ REQ-CONCEPT-01 to REQ-CONCEPT-02 Concept detail and index pages. Shipped in Phase 1.
+- ✓ REQ-NOTES-01 Concept notes write to local markdown. Shipped in Phase 1.
+- ✓ REQ-WEEKS-01 to REQ-WEEKS-02 All weeks and week switching. Shipped in Phase 2.
+- ✓ REQ-REVIEW-01 Review queue. Shipped in Phase 2.
+- ✓ REQ-QUESTION-01 to REQ-QUESTION-02 Question capture and queue actions. Shipped in Phases 1 and 3.
+- ✓ REQ-SESSION-01, REQ-REFLECT-01, REQ-ARTIFACT-01 Writeback actions. Shipped in Phase 3.
+- ✓ REQ-FLEX-01 Flexible map, ready-to-pull branches, and manual phase toggle. Shipped in Phase 4.
 
 ### Active
 
-v1 is foundational-phase only. Flexible phase is deferred to session 5+ once checkpoint 3 lands.
-
-- [ ] REQ-CONCEPT-01 Concept detail page at `/concepts/[slug]` with linked artifacts, notes section, open-questions list, related concepts sidebar.
-- [ ] REQ-CONCEPT-02 Concept index page at `/concepts` grouped by module.
-- [ ] REQ-NOTES-01 Markdown note editor per concept, saved to `notes/<slug>.md` with frontmatter (conceptId, updatedAt).
-- [ ] REQ-WEEKS-01 All weeks list at `/weeks`, grouped by module, with nav to each week.
-- [ ] REQ-REVIEW-01 Review surface at `/review`, one card at a time, yes/not-quite binary, free-text capture.
-- [ ] REQ-QUESTION-01 Open questions queue at `/questions` reading `progress.json.openQuestions`.
-- [ ] REQ-QUESTION-02 Add/park/answer actions on questions, writing back to `progress.json`.
-- [ ] REQ-SESSION-01 Mark session as in-progress or done from the This Week view; write back to `progress.json`.
-- [ ] REQ-REFLECT-01 Reflection prompt on This Week view saves to `notes/reflections/week-<id>.md`.
-- [ ] REQ-ARTIFACT-01 Read-status toggle on artifact chips writes back to `artifacts.json`.
-- [ ] REQ-FLEX-01 Flexible-phase track map at `/flexible-map` (horizontal spine diagram, branch nodes). Blocked on checkpoint 3.
+No active v1 requirements remain after Phase 4. Next work should be post-v1 polish or real-use curriculum adjustments.
 
 ### Out of Scope
 
@@ -43,7 +38,6 @@ v1 is foundational-phase only. Flexible phase is deferred to session 5+ once che
 - Animations beyond 250ms ease-out transitions. Visual rule.
 - More than two font weights (400, 500). Visual rule.
 - Emoji-based icon system. Use Lucide.
-- Checkpoint 3 logic (foundational to flexible trigger). Deferred until after week 1 of real use.
 
 ## Context
 
@@ -73,7 +67,7 @@ v1 is foundational-phase only. Flexible phase is deferred to session 5+ once che
 | Coarse GSD granularity | Brief explicitly maps sessions 2 to 5+ as phase units; coarse aligns | — Pending |
 | Skip GSD research step | PROJECT_BRIEF.md is thorough; single-user Next.js tracker has no domain to research | — Pending |
 | Skip codebase map | Session 1 codebase is under 30 files and fully known | — Pending |
-| Defer checkpoint 3 (foundational to flexible trigger) | Brief mandates deferral until after week 1 of real use | — Pending |
+| Manual checkpoint 3 trigger | User accepted manual toggle, on This Week, one-click, bidirectional | ✓ Shipped Phase 4 |
 | No Claude API in v1 | Brief mandates passive tracker; integration seam marked in `src/lib/phase.ts` | — Pending |
 | progress.json as single state source | Survives app breakage, opens in Obsidian, no DB required | — Pending |
 
@@ -95,4 +89,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-20 after initialization*
+*Last updated: 2026-05-16 after Phase 4 completion*

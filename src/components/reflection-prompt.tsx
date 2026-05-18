@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { saveReflectionAction } from "@/lib/actions/save-reflection";
+import { getReflection, setReflection } from "@/lib/local-store";
 
 type Status = "idle" | "saving" | "saved" | "error";
 
@@ -19,16 +19,20 @@ export function ReflectionPrompt({
 
   const dirty = body !== savedBody;
 
-  async function handleSave() {
+  useEffect(() => {
+    queueMicrotask(() => {
+      const localBody = getReflection(weekId, initialValue);
+      setBody(localBody);
+      setSavedBody(localBody);
+    });
+  }, [weekId, initialValue]);
+
+  function handleSave() {
     setStatus("saving");
-    try {
-      await saveReflectionAction(weekId, body);
-      setSavedBody(body);
-      setStatus("saved");
-      setTimeout(() => setStatus("idle"), 2000);
-    } catch {
-      setStatus("error");
-    }
+    setReflection(weekId, body);
+    setSavedBody(body);
+    setStatus("saved");
+    setTimeout(() => setStatus("idle"), 2000);
   }
 
   return (

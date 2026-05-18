@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookOpen, CheckCircle2, Circle, CircleDot, Code2, FileText, Mic, PlaySquare } from "lucide-react";
-import { toggleArtifactStatusAction } from "@/lib/actions/toggle-artifact-status";
+import { getArtifactStatus, setArtifactStatus } from "@/lib/local-store";
 import type { Artifact, ArtifactType, ReadStatus } from "@/lib/types";
 
 const iconFor: Record<ArtifactType, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
@@ -46,12 +46,16 @@ export function ArtifactChip({ artifact }: { artifact: Artifact }) {
   const [readStatus, setReadStatus] = useState<ReadStatus>(artifact.readStatus);
   const Icon = iconFor[artifact.type];
 
+  useEffect(() => {
+    queueMicrotask(() => setReadStatus(getArtifactStatus(artifact.id, artifact.readStatus)));
+  }, [artifact.id, artifact.readStatus]);
+
   function handleToggle(e: React.MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
     const next = nextStatus(readStatus);
     setReadStatus(next);
-    void toggleArtifactStatusAction(artifact.id, next);
+    setArtifactStatus(artifact.id, next);
   }
 
   return (

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { submitReviewAction } from "@/lib/actions/submit-review";
+import { upsertReview } from "@/lib/local-store";
 import type { ReviewQueueItem } from "@/lib/review";
 
 interface ReviewCardProps {
@@ -19,16 +19,24 @@ export function ReviewCard({ item, onAdvance }: ReviewCardProps) {
   const [note, setNote] = useState("");
   const [status, setStatus] = useState<"idle" | "saving" | "error">("idle");
 
-  async function handleSubmit(action: "known" | "needs_review") {
+  function handleSubmit(action: "known" | "needs_review" | "mastered" | "skip_week") {
     setStatus("saving");
-    try {
-      await submitReviewAction(item.concept.id, action, note.trim() || undefined);
-      // Parent passes key={item.concept.id} so React remounts this component on advance,
-      // resetting note and status automatically.
-      onAdvance();
-    } catch {
-      setStatus("error");
-    }
+    const now = new Date();
+    const next = new Date(now);
+    if (action === "needs_review") next.setDate(next.getDate() + 2);
+    if (action === "known") next.setDate(next.getDate() + 7);
+    if (action === "skip_week") next.setDate(next.getDate() + 7);
+    if (action === "mastered") next.setFullYear(next.getFullYear() + 10);
+
+    upsertReview({
+      subjectId: item.concept.subjectId,
+      conceptId: item.concept.id,
+      lastReviewed: now.toISOString(),
+      nextSuggested: next.toISOString(),
+      status: action === "mastered" ? "mastered" : action === "needs_review" ? "not_yet" : "ready",
+    });
+    void note;
+    onAdvance();
   }
 
   return (
@@ -41,6 +49,7 @@ export function ReviewCard({ item, onAdvance }: ReviewCardProps) {
         {item.lastReviewed
           ? "Last reviewed " + formatDate(item.lastReviewed)
           : "Not yet reviewed"}
+        {item.nextSuggested ? `, due ${formatDate(item.nextSuggested)}` : ""}
       </p>
       {item.moduleTitle && (
         <span className="text-[12px] bg-muted text-muted-foreground rounded-sm px-1.5 py-0.5 mt-1 inline-block">
@@ -64,6 +73,24 @@ export function ReviewCard({ item, onAdvance }: ReviewCardProps) {
           onClick={() => handleSubmit("needs_review")}
         >
           Not yet
+        </Button>
+      </div>
+      <div className="mt-3 flex gap-3">
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={status === "saving"}
+          onClick={() => handleSubmit("skip_week")}
+        >
+          Skip 7 days
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          disabled={status === "saving"}
+          onClick={() => handleSubmit("mastered")}
+        >
+          Mastered
         </Button>
       </div>
       <div className="mt-4">

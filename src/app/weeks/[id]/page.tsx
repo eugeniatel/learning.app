@@ -5,6 +5,13 @@ import { SessionCard } from "@/components/session-card";
 import { WeekSwitchConfirm } from "@/components/week-switch-confirm";
 import { getProgress, getArtifacts, getModule } from "@/lib/data";
 
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const progress = await getProgress();
+  return progress.weeks.map((week) => ({ id: week.id }));
+}
+
 export default async function WeekDetailPage(props: {
   params: Promise<{ id: string }>;
 }) {
@@ -12,13 +19,14 @@ export default async function WeekDetailPage(props: {
   const [progress, artifacts] = await Promise.all([getProgress(), getArtifacts()]);
   const week = progress.weeks.find((w) => w.id === id);
   if (!week) notFound();
-  const module = await getModule(week.moduleId);
-  if (!module) notFound();
+  const weekModule = await getModule(week.moduleId);
+  if (!weekModule) notFound();
   const isCurrent = progress.currentWeek.id === id;
+  const phase = progress.subjects[week.subjectId]?.phase ?? progress.phase;
 
   return (
-    <Shell phase={progress.phase}>
-      <WeekHeader week={week} module={module} />
+    <Shell phase={phase}>
+      <WeekHeader week={week} module={weekModule} />
       <div className="flex flex-col gap-3">
         {week.sessions.map((session) => {
           const sessionArtifacts = session.artifactIds

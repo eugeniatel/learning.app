@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { saveNoteAction } from "@/lib/actions/save-note";
+import { getNote, setNote } from "@/lib/local-store";
 
 type Status = "idle" | "saving" | "saved" | "error";
 
@@ -21,16 +21,20 @@ export function NoteEditor({
 
   const dirty = body !== savedBody;
 
-  async function handleSave() {
+  useEffect(() => {
+    queueMicrotask(() => {
+      const localBody = getNote(slug, initialBody);
+      setBody(localBody);
+      setSavedBody(localBody);
+    });
+  }, [slug, initialBody]);
+
+  function handleSave() {
     setStatus("saving");
-    try {
-      await saveNoteAction(slug, conceptId, body);
-      setSavedBody(body);
-      setStatus("saved");
-      setTimeout(() => setStatus("idle"), 2000);
-    } catch {
-      setStatus("error");
-    }
+    setNote(slug, body);
+    setSavedBody(body);
+    setStatus("saved");
+    setTimeout(() => setStatus("idle"), 2000);
   }
 
   return (
@@ -42,6 +46,7 @@ export function NoteEditor({
         value={body}
         onChange={(e) => {
           setBody(e.target.value);
+          void conceptId;
           if (status === "error") setStatus("idle");
         }}
         placeholder="Write notes about this concept..."

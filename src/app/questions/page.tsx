@@ -9,11 +9,16 @@ export default async function QuestionsPage() {
     getModules(),
   ]);
 
-  const conceptMap = new Map(concepts.map((c) => [c.id, c]));
-  const moduleMap = new Map(modules.map((m) => [m.id, m]));
+  const scopedConcepts = concepts.filter((concept) => concept.subjectId === progress.currentSubjectId);
+  const scopedModules = modules.filter((module) => module.subjectId === progress.currentSubjectId);
+  const scopedQuestions = progress.openQuestions.filter(
+    (question) => question.subjectId === progress.currentSubjectId
+  );
+  const conceptMap = new Map(scopedConcepts.map((c) => [c.id, c]));
+  const moduleMap = new Map(scopedModules.map((m) => [m.id, m]));
 
   const questionsByConceptId = new Map<string, typeof progress.openQuestions>();
-  for (const q of progress.openQuestions) {
+  for (const q of scopedQuestions) {
     if (!questionsByConceptId.has(q.conceptId)) {
       questionsByConceptId.set(q.conceptId, []);
     }

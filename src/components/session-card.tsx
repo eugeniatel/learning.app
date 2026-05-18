@@ -1,8 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Circle, CircleDot } from "lucide-react";
 import { ArtifactChip } from "./artifact-chip";
-import { cycleSessionStatusAction } from "@/lib/actions/cycle-session-status";
+import { SessionEditForm } from "./session-edit-form";
+import { getSessionOverride, setSessionStatus } from "@/lib/local-store";
 import type { Artifact, Session, SessionStatus } from "@/lib/types";
 
 function StatusIcon({ status }: { status: SessionStatus }) {
@@ -42,20 +43,19 @@ export function SessionCard({
   upNext: boolean;
   weekId: string;
 }) {
-  const [status, setStatus] = useState<SessionStatus>(session.status);
+  const [localSession, setLocalSession] = useState<Session>(session);
 
-  const dim = status === "done";
-  const stronger = status === "in_progress" || upNext;
+  useEffect(() => {
+    queueMicrotask(() => setLocalSession((current) => ({ ...current, ...getSessionOverride(session.id) })));
+  }, [session.id]);
 
-  async function handleStatusClick() {
-    const prev = status;
-    const next = cycleNext(status);
-    setStatus(next);
-    try {
-      await cycleSessionStatusAction(weekId, session.id, next);
-    } catch {
-      setStatus(prev);
-    }
+  const dim = localSession.status === "done";
+  const stronger = localSession.status === "in_progress" || upNext;
+
+  function handleStatusClick() {
+    const next = cycleNext(localSession.status);
+    setLocalSession((current) => ({ ...current, status: next }));
+    setSessionStatus(session.id, next);
   }
 
   return (
@@ -70,23 +70,29 @@ export function SessionCard({
         <div className="mt-0.5">
           <button
             type="button"
-            aria-label={ariaLabel[status]}
+            aria-label={ariaLabel[localSession.status]}
             onClick={handleStatusClick}
             className="cursor-pointer"
           >
-            <StatusIcon status={status} />
+            <StatusIcon status={localSession.status} />
           </button>
         </div>
         <div className="flex-1">
           <div className="flex items-baseline justify-between gap-3">
-            <h3 className="text-[15px] font-medium text-foreground">{session.title}</h3>
-            <span className="shrink-0 text-[12px] text-muted-foreground">
-              {session.estimatedMinutes} min
-            </span>
+            <h3 className="text-[15px] font-medium text-foreground">{localSession.title}</h3>
+            <div className="flex shrink-0 items-center gap-2">
+              <span className="text-[12px] text-muted-foreground">{localSession.estimatedMinutes} min</span>
+              <SessionEditForm
+                weekId={weekId}
+                session={localSession}
+                onSave={(patch) => setLocalSession((current) => ({ ...current, ...patch }))}
+              />
+            </div>
           </div>
           {upNext ? (
             <p className="mt-0.5 text-[12px] text-[var(--ring)]">Up next</p>
           ) : null}
+          {localSession.notes ? <p className="mt-2 text-[13px] text-muted-foreground">{localSession.notes}</p> : null}
         </div>
       </div>
       {artifacts.length > 0 ? (

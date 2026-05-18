@@ -1,0 +1,32 @@
+{
+  "subjects": [
+    {
+      "id": "ai-systems",
+      "slug": "ai-systems",
+      "title": "LLM and AI systems",
+      "description": "Architecture, post-training, and interpretability, studied one concept at a time.",
+      "cadence": "2 hours per week"
+    },
+    {
+      "id": "protocol-risk",
+      "slug": "protocol-risk",
+      "title": "DeFi and protocol risk",
+      "description": "Stablecoins, lending, liquidations, and protocol-specific dynamics across Morpho, Euler, Silo, and related systems.",
+      "cadence": "2 hours per week"
+    },
+    {
+      "id": "research-writing",
+      "slug": "research-writing",
+      "title": "Research and writing craft",
+      "description": "Source work, argument structure, data-backed claims, editing, and publishing.",
+      "cadence": "paused"
+    },
+    {
+      "id": "dr-zhivago",
+      "slug": "dr-zhivago",
+      "title": "Dr. Zhivago",
+      "description": "A flexible deep read of the novel, one part at a time, enriched by historical, literary, and perspective notes.",
+      "cadence": "1 part per week, flexible"
+    }
+  ]
+}

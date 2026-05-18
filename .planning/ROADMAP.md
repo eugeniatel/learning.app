@@ -6,10 +6,10 @@ Session 1 shipped the foundation (This Week view, data layer, content files). Se
 
 ## Phases
 
-- [ ] **Phase 1: Concept Detail and Notes** - Concept index, detail pages, note editor, and question capture
-- [ ] **Phase 2: All Weeks and Review** - Weeks list with week-switching and the review surface
-- [ ] **Phase 3: Writeback Actions** - Session status, reflections, artifact read-status, questions queue
-- [ ] **Phase 4: Flexible Track Map** - Horizontal spine diagram and branch cards (blocked on checkpoint 3)
+- [x] **Phase 1: Concept Detail and Notes** - Concept index, detail pages, note editor, and question capture
+- [x] **Phase 2: All Weeks and Review** - Weeks list with week-switching and the review surface
+- [x] **Phase 3: Writeback Actions** - Session status, reflections, artifact read-status, questions queue
+- [x] **Phase 4: Flexible Track Map** - Horizontal spine diagram, branch cards, and manual phase toggle
 
 ## Phase Details
 
@@ -60,27 +60,29 @@ Plans:
 - [x] 03-01-PLAN.md — Reflection save: reflections.ts, save-reflection server action, ReflectionPrompt client island
 - [x] 03-02-PLAN.md — Artifact toggle: artifacts.ts write helper, toggle-artifact-status server action, ArtifactChip client component
 - [x] 03-03-PLAN.md — Session cycle: cycleSessionStatus in progress.ts, cycle-session-status server action, SessionCard client component
-- [ ] 03-04-PLAN.md — Questions queue: updateQuestionStatus in progress.ts, update-question-status server action, /questions page with ConceptQuestionGroup
+- [x] 03-04-PLAN.md — Questions queue: updateQuestionStatus in progress.ts, update-question-status server action, /questions page with ConceptQuestionGroup
 **UI hint**: yes
 
-### Phase 4: Flexible Track Map (BLOCKED)
+### Phase 4: Flexible Track Map
 **Goal**: Eugenia can see the full flexible-phase curriculum as a visual spine diagram and know which branches she is ready to pull
 **Depends on**: Phase 3
-**Status**: BLOCKED on checkpoint 3 decision (foundational-to-flexible trigger logic must be decided after week 1 of real use)
+**Status**: Complete. Checkpoint 3 is a manual, bidirectional toggle on This Week.
 **Requirements**: FLEX-01, FLEX-02, FLEX-03
 **Success Criteria** (what must be TRUE):
   1. Eugenia can open `/flexible-map` and see main modules on the top rail and interpretability modules on the bottom rail as pill nodes, with dashed branch connectors
   2. The current active node is visually emphasized; completed nodes are visually distinct
   3. "Ready to pull" cards at the bottom of the map show next branches based on prereqs
   4. Phase transition logic in `src/lib/phase.ts` implements whichever checkpoint-3 option is chosen with no wider refactor required
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [x] 04-01-PLAN.md — Flexible map route, branch modules, ready-to-pull logic, manual phase toggle
 **UI hint**: yes
 
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Concept Detail and Notes | 4/4 | Complete |  |
-| 2. All Weeks and Review | 1/3 | In Progress|  |
-| 3. Writeback Actions | 3/4 | In Progress|  |
-| 4. Flexible Track Map | 0/TBD | Blocked | - |
+| 1. Concept Detail and Notes | 4/4 | Complete | 2026-04-20 |
+| 2. All Weeks and Review | 4/4 | Complete | 2026-04-20 |
+| 3. Writeback Actions | 4/4 | Complete | 2026-04-20 |
+| 4. Flexible Track Map | 1/1 | Complete | 2026-05-16 |

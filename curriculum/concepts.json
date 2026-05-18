@@ -1,78 +1,1212 @@
 {
   "concepts": [
-    { "id": "three-pass-paper-reading", "slug": "three-pass-paper-reading", "title": "Three-pass paper reading", "oneLiner": "Keshav's ritual for reading a paper in three escalating passes.", "moduleIds": ["mod-0"], "artifactIds": ["keshav-how-to-read"] },
-    { "id": "scholarly-practice", "slug": "scholarly-practice", "title": "Scholarly practice", "oneLiner": "The operating system of note-taking, rhythm, and primary-source reading.", "moduleIds": ["mod-0"], "artifactIds": ["nanda-concrete-steps"] },
-    { "id": "attention", "slug": "attention", "title": "Attention", "oneLiner": "The core mechanism of the transformer: tokens attending to each other.", "moduleIds": ["mod-1"], "artifactIds": ["attention-is-all-you-need", "3b1b-attention"] },
-    { "id": "residual-stream", "slug": "residual-stream", "title": "Residual stream", "oneLiner": "The additive pathway that runs through every transformer block.", "moduleIds": ["mod-1", "int-1", "int-2"], "artifactIds": ["anthropic-math-framework"] },
-    { "id": "mlp-block", "slug": "mlp-block", "title": "MLP block", "oneLiner": "The feedforward portion of the transformer, often 2/3 of parameters.", "moduleIds": ["mod-1"], "artifactIds": [] },
-    { "id": "rope", "slug": "rope", "title": "Rotary position embeddings", "oneLiner": "Relative position encoding that rotates query and key vectors.", "moduleIds": ["mod-1"], "artifactIds": ["rope-paper"] },
-    { "id": "gqa", "slug": "gqa", "title": "Grouped-query attention", "oneLiner": "Share key and value heads across groups of query heads to cut KV cache cost.", "moduleIds": ["mod-1"], "artifactIds": ["gqa-paper"] },
-    { "id": "layer-norm-placement", "slug": "layer-norm-placement", "title": "Layer norm placement", "oneLiner": "Pre-norm vs post-norm and why modern models converged on pre-norm.", "moduleIds": ["mod-1"], "artifactIds": [] },
-    { "id": "byte-pair-encoding", "slug": "byte-pair-encoding", "title": "Byte-pair encoding", "oneLiner": "The subword tokenization algorithm that underpins most modern LLMs.", "moduleIds": ["mod-2"], "artifactIds": ["bpe-paper", "karpathy-tokenizer"] },
-    { "id": "sentencepiece", "slug": "sentencepiece", "title": "SentencePiece", "oneLiner": "Google's language-agnostic tokenizer toolkit.", "moduleIds": ["mod-2"], "artifactIds": ["sentencepiece-paper"] },
-    { "id": "pretraining-data-quality", "slug": "pretraining-data-quality", "title": "Pretraining data quality", "oneLiner": "How data curation choices propagate into model behavior.", "moduleIds": ["mod-2"], "artifactIds": ["fineweb-paper", "dolma-paper"] },
-    { "id": "deduplication", "slug": "deduplication", "title": "Deduplication", "oneLiner": "Why duplicated training data hurts and how to detect it.", "moduleIds": ["mod-2"], "artifactIds": ["dedup-paper"] },
-    { "id": "contamination", "slug": "contamination", "title": "Contamination", "oneLiner": "Evaluation data leaking into training data.", "moduleIds": ["mod-2", "mod-6"], "artifactIds": ["contamination-paper"] },
-    { "id": "scaling-laws", "slug": "scaling-laws", "title": "Scaling laws", "oneLiner": "Empirical relationships between compute, data, and model loss.", "moduleIds": ["mod-3"], "artifactIds": ["kaplan-scaling", "chinchilla-paper"] },
-    { "id": "chinchilla", "slug": "chinchilla", "title": "Chinchilla", "oneLiner": "The 2022 correction to scaling laws: train longer on more tokens.", "moduleIds": ["mod-3"], "artifactIds": ["chinchilla-paper"] },
-    { "id": "mup", "slug": "mup", "title": "muP", "oneLiner": "Maximal update parametrization for zero-shot hyperparameter transfer.", "moduleIds": ["mod-3"], "artifactIds": ["mup-paper"] },
-    { "id": "adamw", "slug": "adamw", "title": "AdamW", "oneLiner": "The de facto optimizer for transformer training.", "moduleIds": ["mod-3"], "artifactIds": [] },
-    { "id": "lr-schedule", "slug": "lr-schedule", "title": "Learning-rate schedule", "oneLiner": "Warmup, decay, and the shape of a real pretraining LR curve.", "moduleIds": ["mod-3"], "artifactIds": [] },
-    { "id": "precision-scaling", "slug": "precision-scaling", "title": "Precision scaling", "oneLiner": "How lower-precision training changes the scaling picture.", "moduleIds": ["mod-3"], "artifactIds": ["precision-scaling-paper"] },
-    { "id": "rlhf", "slug": "rlhf", "title": "RLHF", "oneLiner": "Reinforcement learning from human feedback, the InstructGPT recipe.", "moduleIds": ["mod-4"], "artifactIds": ["instructgpt-paper", "rlhf-book"] },
-    { "id": "dpo", "slug": "dpo", "title": "DPO", "oneLiner": "Direct preference optimization, the closed-form alternative to PPO.", "moduleIds": ["mod-4"], "artifactIds": ["dpo-paper"] },
-    { "id": "kto", "slug": "kto", "title": "KTO", "oneLiner": "Kahneman-Tversky Optimization, preference learning without pairs.", "moduleIds": ["mod-4"], "artifactIds": ["kto-paper"] },
-    { "id": "orpo", "slug": "orpo", "title": "ORPO", "oneLiner": "Odds Ratio Preference Optimization, single-stage preference tuning.", "moduleIds": ["mod-4"], "artifactIds": ["orpo-paper"] },
-    { "id": "simpo", "slug": "simpo", "title": "SimPO", "oneLiner": "Simple Preference Optimization without a reference model.", "moduleIds": ["mod-4"], "artifactIds": ["simpo-paper"] },
-    { "id": "instruction-tuning", "slug": "instruction-tuning", "title": "Instruction tuning", "oneLiner": "Supervised fine-tuning on instruction-response pairs.", "moduleIds": ["mod-4"], "artifactIds": [] },
-    { "id": "rlvr", "slug": "rlvr", "title": "RLVR", "oneLiner": "Reinforcement learning with verifiable rewards.", "moduleIds": ["mod-5"], "artifactIds": ["deepseek-r1-paper", "limit-of-rlvr"] },
-    { "id": "grpo", "slug": "grpo", "title": "GRPO", "oneLiner": "Group relative policy optimization, used in DeepSeek-R1.", "moduleIds": ["mod-5"], "artifactIds": ["deepseekmath-paper"] },
-    { "id": "ppo", "slug": "ppo", "title": "PPO", "oneLiner": "Proximal policy optimization, the foundational policy-gradient method.", "moduleIds": ["mod-5"], "artifactIds": ["ppo-paper"] },
-    { "id": "process-reward-models", "slug": "process-reward-models", "title": "Process reward models", "oneLiner": "Step-level rewards instead of outcome-only rewards.", "moduleIds": ["mod-5"], "artifactIds": ["verify-step-by-step"] },
-    { "id": "reasoning-models", "slug": "reasoning-models", "title": "Reasoning models", "oneLiner": "o1-class models trained to spend compute at inference.", "moduleIds": ["mod-5"], "artifactIds": ["o1-system-card", "deepseek-r1-paper"] },
-    { "id": "sampling-compression", "slug": "sampling-compression", "title": "Sampling compression", "oneLiner": "The claim that RLVR narrows distribution rather than expanding capability.", "moduleIds": ["mod-5"], "artifactIds": ["rlvr-beyond-base", "limit-of-rlvr"] },
-    { "id": "eval-design", "slug": "eval-design", "title": "Eval design", "oneLiner": "Building evaluations that measure what you actually care about.", "moduleIds": ["mod-6"], "artifactIds": ["anthropic-demystifying-evals"] },
-    { "id": "benchmark-contamination", "slug": "benchmark-contamination", "title": "Benchmark contamination", "oneLiner": "Training on eval answers, accidentally or otherwise.", "moduleIds": ["mod-6"], "artifactIds": ["contamination-paper"] },
-    { "id": "chatbot-arena", "slug": "chatbot-arena", "title": "Chatbot Arena", "oneLiner": "Human preference-based evaluation via head-to-head battles.", "moduleIds": ["mod-6"], "artifactIds": ["chatbot-arena-paper"] },
-    { "id": "emergent-abilities", "slug": "emergent-abilities", "title": "Emergent abilities", "oneLiner": "Capabilities that only appear past a certain scale, or metric artifacts.", "moduleIds": ["mod-6"], "artifactIds": ["emergence-mirage-paper"] },
-    { "id": "agent-evals", "slug": "agent-evals", "title": "Agent evals", "oneLiner": "Distinct eval challenges for tool-using agentic systems.", "moduleIds": ["mod-6", "mod-8"], "artifactIds": ["metr-agent-evals"] },
-    { "id": "kv-cache", "slug": "kv-cache", "title": "KV cache", "oneLiner": "The per-request memory that makes decoding tractable.", "moduleIds": ["mod-7"], "artifactIds": [] },
-    { "id": "paged-attention", "slug": "paged-attention", "title": "Paged attention", "oneLiner": "vLLM's virtual memory trick for the KV cache.", "moduleIds": ["mod-7"], "artifactIds": ["vllm-paper"] },
-    { "id": "speculative-decoding", "slug": "speculative-decoding", "title": "Speculative decoding", "oneLiner": "Use a draft model to propose, main model to verify.", "moduleIds": ["mod-7"], "artifactIds": ["speculative-decoding-paper"] },
-    { "id": "quantization", "slug": "quantization", "title": "Quantization", "oneLiner": "Shrinking weights to int8, int4, and smaller.", "moduleIds": ["mod-7"], "artifactIds": ["gptq-paper", "awq-paper", "qlora-paper"] },
-    { "id": "flash-attention", "slug": "flash-attention", "title": "Flash attention", "oneLiner": "IO-aware attention that fuses kernels and skips materializing the attention matrix.", "moduleIds": ["mod-7"], "artifactIds": ["flash-attention-3"] },
-    { "id": "batching", "slug": "batching", "title": "Batching", "oneLiner": "Continuous and static batching strategies for throughput.", "moduleIds": ["mod-7"], "artifactIds": [] },
-    { "id": "react-pattern", "slug": "react-pattern", "title": "ReAct pattern", "oneLiner": "Interleave reasoning and acting through tool calls.", "moduleIds": ["mod-8"], "artifactIds": ["react-paper"] },
-    { "id": "tool-use", "slug": "tool-use", "title": "Tool use", "oneLiner": "How models call external functions to extend their capabilities.", "moduleIds": ["mod-8"], "artifactIds": ["toolformer-paper"] },
-    { "id": "context-engineering", "slug": "context-engineering", "title": "Context engineering", "oneLiner": "Managing sustained context as the new prompt engineering.", "moduleIds": ["mod-8"], "artifactIds": ["anthropic-context-engineering"] },
-    { "id": "agent-eval", "slug": "agent-eval", "title": "Agent evaluation", "oneLiner": "Evaluating a trajectory, not just a final answer.", "moduleIds": ["mod-8"], "artifactIds": ["anthropic-demystifying-evals"] },
-    { "id": "mcp", "slug": "mcp", "title": "Model Context Protocol", "oneLiner": "Anthropic's standard for hooking tools and data into LLM contexts.", "moduleIds": ["mod-8"], "artifactIds": [] },
-    { "id": "clip", "slug": "clip", "title": "CLIP", "oneLiner": "Image-text contrastive pretraining.", "moduleIds": ["mod-9"], "artifactIds": ["clip-paper"] },
-    { "id": "vlm", "slug": "vlm", "title": "Vision-language models", "oneLiner": "LLMs with a vision encoder glued in.", "moduleIds": ["mod-9"], "artifactIds": ["llava-paper", "qwen2-vl-paper"] },
-    { "id": "vision-encoder", "slug": "vision-encoder", "title": "Vision encoder", "oneLiner": "The image-side module feeding features into the LLM.", "moduleIds": ["mod-9"], "artifactIds": ["flamingo-paper"] },
-    { "id": "multimodal-fine-tune", "slug": "multimodal-fine-tune", "title": "Multimodal fine-tune", "oneLiner": "Adapting VLMs to domain-specific visual tasks.", "moduleIds": ["mod-9"], "artifactIds": [] },
-    { "id": "constitutional-ai", "slug": "constitutional-ai", "title": "Constitutional AI", "oneLiner": "Training a model to follow a written set of principles.", "moduleIds": ["mod-10"], "artifactIds": ["cai-paper"] },
-    { "id": "red-teaming", "slug": "red-teaming", "title": "Red teaming", "oneLiner": "Adversarial testing to find failure modes before deployment.", "moduleIds": ["mod-10"], "artifactIds": ["red-team-paper"] },
-    { "id": "sycophancy", "slug": "sycophancy", "title": "Sycophancy", "oneLiner": "Models telling users what they want to hear.", "moduleIds": ["mod-10"], "artifactIds": ["sycophancy-paper"] },
-    { "id": "sleeper-agents", "slug": "sleeper-agents", "title": "Sleeper agents", "oneLiner": "Backdoored models that behave normally until a trigger.", "moduleIds": ["mod-10"], "artifactIds": ["sleeper-agents-paper"] },
-    { "id": "responsible-scaling", "slug": "responsible-scaling", "title": "Responsible scaling", "oneLiner": "Frontier-lab safety commitments tied to capability thresholds.", "moduleIds": ["mod-10"], "artifactIds": ["anthropic-rsp"] },
-    { "id": "probing", "slug": "probing", "title": "Probing", "oneLiner": "Training linear classifiers on intermediate activations to test what's encoded.", "moduleIds": ["int-1"], "artifactIds": ["alain-bengio-probes"] },
-    { "id": "logit-lens", "slug": "logit-lens", "title": "Logit lens", "oneLiner": "Read the output distribution from intermediate layers.", "moduleIds": ["int-1"], "artifactIds": ["logit-lens-post"] },
-    { "id": "feature-visualization", "slug": "feature-visualization", "title": "Feature visualization", "oneLiner": "Optimization-based visualizations of what a neuron responds to.", "moduleIds": ["int-1"], "artifactIds": ["distill-pub"] },
-    { "id": "transformer-lens", "slug": "transformer-lens", "title": "TransformerLens", "oneLiner": "Neel Nanda's library for mechanistic interpretability.", "moduleIds": ["int-1"], "artifactIds": ["nanda-concrete-steps"] },
-    { "id": "induction-heads", "slug": "induction-heads", "title": "Induction heads", "oneLiner": "The attention heads that copy-paste patterns across context.", "moduleIds": ["int-2"], "artifactIds": ["induction-heads-paper"] },
-    { "id": "circuit-discovery", "slug": "circuit-discovery", "title": "Circuit discovery", "oneLiner": "Identifying the minimal subgraph responsible for a behavior.", "moduleIds": ["int-2"], "artifactIds": ["ioi-paper", "acdc-paper"] },
-    { "id": "superposition", "slug": "superposition", "title": "Superposition", "oneLiner": "Models representing more features than they have dimensions.", "moduleIds": ["int-2"], "artifactIds": ["transformer-circuits-thread"] },
-    { "id": "activation-patching", "slug": "activation-patching", "title": "Activation patching", "oneLiner": "Swapping activations between forward passes to localize computation.", "moduleIds": ["int-2"], "artifactIds": ["rome-paper"] },
-    { "id": "sparse-autoencoders", "slug": "sparse-autoencoders", "title": "Sparse autoencoders", "oneLiner": "Decompose activations into sparse, interpretable features.", "moduleIds": ["int-3"], "artifactIds": ["towards-monosemanticity", "scaling-monosemanticity"] },
-    { "id": "monosemanticity", "slug": "monosemanticity", "title": "Monosemanticity", "oneLiner": "Features that each correspond to a single concept.", "moduleIds": ["int-3"], "artifactIds": ["towards-monosemanticity"] },
-    { "id": "transcoders", "slug": "transcoders", "title": "Transcoders", "oneLiner": "Sparse interpretable approximations to MLP blocks.", "moduleIds": ["int-3"], "artifactIds": ["transcoders-paper"] },
-    { "id": "crosscoders", "slug": "crosscoders", "title": "Crosscoders", "oneLiner": "Shared feature spaces across layers or models.", "moduleIds": ["int-3"], "artifactIds": ["crosscoders-paper"] },
-    { "id": "attribution-graphs", "slug": "attribution-graphs", "title": "Attribution graphs", "oneLiner": "Tracing the internal steps a model takes to reach an output.", "moduleIds": ["int-3"], "artifactIds": ["anthropic-attribution-graphs"] },
-    { "id": "jumprelu", "slug": "jumprelu", "title": "JumpReLU SAEs", "oneLiner": "A non-linearity that improves SAE reconstruction at the same sparsity.", "moduleIds": ["int-3"], "artifactIds": ["jumprelu-saes"] },
-    { "id": "activation-addition", "slug": "activation-addition", "title": "Activation addition", "oneLiner": "Steer model behavior by adding vectors to intermediate activations.", "moduleIds": ["int-4"], "artifactIds": ["activation-addition-paper"] },
-    { "id": "representation-engineering", "slug": "representation-engineering", "title": "Representation engineering", "oneLiner": "Top-down approach to control via directions in activation space.", "moduleIds": ["int-4"], "artifactIds": ["rep-engineering-paper"] },
-    { "id": "feature-steering", "slug": "feature-steering", "title": "Feature steering", "oneLiner": "Using SAE features as levers on model behavior.", "moduleIds": ["int-4"], "artifactIds": ["scaling-monosemanticity"] },
-    { "id": "model-editing", "slug": "model-editing", "title": "Model editing", "oneLiner": "Surgically changing what a model knows, as in ROME.", "moduleIds": ["int-4"], "artifactIds": ["rome-paper"] }
+    {
+      "id": "three-pass-paper-reading",
+      "slug": "three-pass-paper-reading",
+      "title": "Three-pass paper reading",
+      "oneLiner": "Keshav's ritual for reading a paper in three escalating passes.",
+      "moduleIds": [
+        "mod-0"
+      ],
+      "artifactIds": [
+        "keshav-how-to-read"
+      ]
+    },
+    {
+      "id": "scholarly-practice",
+      "slug": "scholarly-practice",
+      "title": "Scholarly practice",
+      "oneLiner": "The operating system of note-taking, rhythm, and primary-source reading.",
+      "moduleIds": [
+        "mod-0"
+      ],
+      "artifactIds": [
+        "nanda-concrete-steps"
+      ]
+    },
+    {
+      "id": "attention",
+      "slug": "attention",
+      "title": "Attention",
+      "oneLiner": "The core mechanism of the transformer: tokens attending to each other.",
+      "moduleIds": [
+        "mod-1"
+      ],
+      "artifactIds": [
+        "attention-is-all-you-need",
+        "3b1b-attention"
+      ]
+    },
+    {
+      "id": "residual-stream",
+      "slug": "residual-stream",
+      "title": "Residual stream",
+      "oneLiner": "The additive pathway that runs through every transformer block.",
+      "moduleIds": [
+        "mod-1",
+        "int-1",
+        "int-2"
+      ],
+      "artifactIds": [
+        "anthropic-math-framework"
+      ]
+    },
+    {
+      "id": "mlp-block",
+      "slug": "mlp-block",
+      "title": "MLP block",
+      "oneLiner": "The feedforward portion of the transformer, often 2/3 of parameters.",
+      "moduleIds": [
+        "mod-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "rope",
+      "slug": "rope",
+      "title": "Rotary position embeddings",
+      "oneLiner": "Relative position encoding that rotates query and key vectors.",
+      "moduleIds": [
+        "mod-1"
+      ],
+      "artifactIds": [
+        "rope-paper"
+      ]
+    },
+    {
+      "id": "gqa",
+      "slug": "gqa",
+      "title": "Grouped-query attention",
+      "oneLiner": "Share key and value heads across groups of query heads to cut KV cache cost.",
+      "moduleIds": [
+        "mod-1"
+      ],
+      "artifactIds": [
+        "gqa-paper"
+      ]
+    },
+    {
+      "id": "layer-norm-placement",
+      "slug": "layer-norm-placement",
+      "title": "Layer norm placement",
+      "oneLiner": "Pre-norm vs post-norm and why modern models converged on pre-norm.",
+      "moduleIds": [
+        "mod-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "byte-pair-encoding",
+      "slug": "byte-pair-encoding",
+      "title": "Byte-pair encoding",
+      "oneLiner": "The subword tokenization algorithm that underpins most modern LLMs.",
+      "moduleIds": [
+        "mod-2"
+      ],
+      "artifactIds": [
+        "bpe-paper",
+        "karpathy-tokenizer"
+      ]
+    },
+    {
+      "id": "sentencepiece",
+      "slug": "sentencepiece",
+      "title": "SentencePiece",
+      "oneLiner": "Google's language-agnostic tokenizer toolkit.",
+      "moduleIds": [
+        "mod-2"
+      ],
+      "artifactIds": [
+        "sentencepiece-paper"
+      ]
+    },
+    {
+      "id": "pretraining-data-quality",
+      "slug": "pretraining-data-quality",
+      "title": "Pretraining data quality",
+      "oneLiner": "How data curation choices propagate into model behavior.",
+      "moduleIds": [
+        "mod-2"
+      ],
+      "artifactIds": [
+        "fineweb-paper",
+        "dolma-paper"
+      ]
+    },
+    {
+      "id": "deduplication",
+      "slug": "deduplication",
+      "title": "Deduplication",
+      "oneLiner": "Why duplicated training data hurts and how to detect it.",
+      "moduleIds": [
+        "mod-2"
+      ],
+      "artifactIds": [
+        "dedup-paper"
+      ]
+    },
+    {
+      "id": "contamination",
+      "slug": "contamination",
+      "title": "Contamination",
+      "oneLiner": "Evaluation data leaking into training data.",
+      "moduleIds": [
+        "mod-2",
+        "mod-6"
+      ],
+      "artifactIds": [
+        "contamination-paper"
+      ]
+    },
+    {
+      "id": "scaling-laws",
+      "slug": "scaling-laws",
+      "title": "Scaling laws",
+      "oneLiner": "Empirical relationships between compute, data, and model loss.",
+      "moduleIds": [
+        "mod-3"
+      ],
+      "artifactIds": [
+        "kaplan-scaling",
+        "chinchilla-paper"
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "slug": "chinchilla",
+      "title": "Chinchilla",
+      "oneLiner": "The 2022 correction to scaling laws: train longer on more tokens.",
+      "moduleIds": [
+        "mod-3"
+      ],
+      "artifactIds": [
+        "chinchilla-paper"
+      ]
+    },
+    {
+      "id": "mup",
+      "slug": "mup",
+      "title": "muP",
+      "oneLiner": "Maximal update parametrization for zero-shot hyperparameter transfer.",
+      "moduleIds": [
+        "mod-3"
+      ],
+      "artifactIds": [
+        "mup-paper"
+      ]
+    },
+    {
+      "id": "adamw",
+      "slug": "adamw",
+      "title": "AdamW",
+      "oneLiner": "The de facto optimizer for transformer training.",
+      "moduleIds": [
+        "mod-3"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "lr-schedule",
+      "slug": "lr-schedule",
+      "title": "Learning-rate schedule",
+      "oneLiner": "Warmup, decay, and the shape of a real pretraining LR curve.",
+      "moduleIds": [
+        "mod-3"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "precision-scaling",
+      "slug": "precision-scaling",
+      "title": "Precision scaling",
+      "oneLiner": "How lower-precision training changes the scaling picture.",
+      "moduleIds": [
+        "mod-3"
+      ],
+      "artifactIds": [
+        "precision-scaling-paper"
+      ]
+    },
+    {
+      "id": "rlhf",
+      "slug": "rlhf",
+      "title": "RLHF",
+      "oneLiner": "Reinforcement learning from human feedback, the InstructGPT recipe.",
+      "moduleIds": [
+        "mod-4"
+      ],
+      "artifactIds": [
+        "instructgpt-paper",
+        "rlhf-book"
+      ]
+    },
+    {
+      "id": "dpo",
+      "slug": "dpo",
+      "title": "DPO",
+      "oneLiner": "Direct preference optimization, the closed-form alternative to PPO.",
+      "moduleIds": [
+        "mod-4"
+      ],
+      "artifactIds": [
+        "dpo-paper"
+      ]
+    },
+    {
+      "id": "kto",
+      "slug": "kto",
+      "title": "KTO",
+      "oneLiner": "Kahneman-Tversky Optimization, preference learning without pairs.",
+      "moduleIds": [
+        "mod-4"
+      ],
+      "artifactIds": [
+        "kto-paper"
+      ]
+    },
+    {
+      "id": "orpo",
+      "slug": "orpo",
+      "title": "ORPO",
+      "oneLiner": "Odds Ratio Preference Optimization, single-stage preference tuning.",
+      "moduleIds": [
+        "mod-4"
+      ],
+      "artifactIds": [
+        "orpo-paper"
+      ]
+    },
+    {
+      "id": "simpo",
+      "slug": "simpo",
+      "title": "SimPO",
+      "oneLiner": "Simple Preference Optimization without a reference model.",
+      "moduleIds": [
+        "mod-4"
+      ],
+      "artifactIds": [
+        "simpo-paper"
+      ]
+    },
+    {
+      "id": "instruction-tuning",
+      "slug": "instruction-tuning",
+      "title": "Instruction tuning",
+      "oneLiner": "Supervised fine-tuning on instruction-response pairs.",
+      "moduleIds": [
+        "mod-4"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "rlvr",
+      "slug": "rlvr",
+      "title": "RLVR",
+      "oneLiner": "Reinforcement learning with verifiable rewards.",
+      "moduleIds": [
+        "mod-5"
+      ],
+      "artifactIds": [
+        "deepseek-r1-paper",
+        "limit-of-rlvr"
+      ]
+    },
+    {
+      "id": "grpo",
+      "slug": "grpo",
+      "title": "GRPO",
+      "oneLiner": "Group relative policy optimization, used in DeepSeek-R1.",
+      "moduleIds": [
+        "mod-5"
+      ],
+      "artifactIds": [
+        "deepseekmath-paper"
+      ]
+    },
+    {
+      "id": "ppo",
+      "slug": "ppo",
+      "title": "PPO",
+      "oneLiner": "Proximal policy optimization, the foundational policy-gradient method.",
+      "moduleIds": [
+        "mod-5"
+      ],
+      "artifactIds": [
+        "ppo-paper"
+      ]
+    },
+    {
+      "id": "process-reward-models",
+      "slug": "process-reward-models",
+      "title": "Process reward models",
+      "oneLiner": "Step-level rewards instead of outcome-only rewards.",
+      "moduleIds": [
+        "mod-5"
+      ],
+      "artifactIds": [
+        "verify-step-by-step"
+      ]
+    },
+    {
+      "id": "reasoning-models",
+      "slug": "reasoning-models",
+      "title": "Reasoning models",
+      "oneLiner": "o1-class models trained to spend compute at inference.",
+      "moduleIds": [
+        "mod-5"
+      ],
+      "artifactIds": [
+        "o1-system-card",
+        "deepseek-r1-paper"
+      ]
+    },
+    {
+      "id": "sampling-compression",
+      "slug": "sampling-compression",
+      "title": "Sampling compression",
+      "oneLiner": "The claim that RLVR narrows distribution rather than expanding capability.",
+      "moduleIds": [
+        "mod-5"
+      ],
+      "artifactIds": [
+        "rlvr-beyond-base",
+        "limit-of-rlvr"
+      ]
+    },
+    {
+      "id": "eval-design",
+      "slug": "eval-design",
+      "title": "Eval design",
+      "oneLiner": "Building evaluations that measure what you actually care about.",
+      "moduleIds": [
+        "mod-6"
+      ],
+      "artifactIds": [
+        "anthropic-demystifying-evals"
+      ]
+    },
+    {
+      "id": "benchmark-contamination",
+      "slug": "benchmark-contamination",
+      "title": "Benchmark contamination",
+      "oneLiner": "Training on eval answers, accidentally or otherwise.",
+      "moduleIds": [
+        "mod-6"
+      ],
+      "artifactIds": [
+        "contamination-paper"
+      ]
+    },
+    {
+      "id": "chatbot-arena",
+      "slug": "chatbot-arena",
+      "title": "Chatbot Arena",
+      "oneLiner": "Human preference-based evaluation via head-to-head battles.",
+      "moduleIds": [
+        "mod-6"
+      ],
+      "artifactIds": [
+        "chatbot-arena-paper"
+      ]
+    },
+    {
+      "id": "emergent-abilities",
+      "slug": "emergent-abilities",
+      "title": "Emergent abilities",
+      "oneLiner": "Capabilities that only appear past a certain scale, or metric artifacts.",
+      "moduleIds": [
+        "mod-6"
+      ],
+      "artifactIds": [
+        "emergence-mirage-paper"
+      ]
+    },
+    {
+      "id": "agent-evals",
+      "slug": "agent-evals",
+      "title": "Agent evals",
+      "oneLiner": "Distinct eval challenges for tool-using agentic systems.",
+      "moduleIds": [
+        "mod-6",
+        "mod-8"
+      ],
+      "artifactIds": [
+        "metr-agent-evals"
+      ]
+    },
+    {
+      "id": "kv-cache",
+      "slug": "kv-cache",
+      "title": "KV cache",
+      "oneLiner": "The per-request memory that makes decoding tractable.",
+      "moduleIds": [
+        "mod-7"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "paged-attention",
+      "slug": "paged-attention",
+      "title": "Paged attention",
+      "oneLiner": "vLLM's virtual memory trick for the KV cache.",
+      "moduleIds": [
+        "mod-7"
+      ],
+      "artifactIds": [
+        "vllm-paper"
+      ]
+    },
+    {
+      "id": "speculative-decoding",
+      "slug": "speculative-decoding",
+      "title": "Speculative decoding",
+      "oneLiner": "Use a draft model to propose, main model to verify.",
+      "moduleIds": [
+        "mod-7"
+      ],
+      "artifactIds": [
+        "speculative-decoding-paper"
+      ]
+    },
+    {
+      "id": "quantization",
+      "slug": "quantization",
+      "title": "Quantization",
+      "oneLiner": "Shrinking weights to int8, int4, and smaller.",
+      "moduleIds": [
+        "mod-7"
+      ],
+      "artifactIds": [
+        "gptq-paper",
+        "awq-paper",
+        "qlora-paper"
+      ]
+    },
+    {
+      "id": "flash-attention",
+      "slug": "flash-attention",
+      "title": "Flash attention",
+      "oneLiner": "IO-aware attention that fuses kernels and skips materializing the attention matrix.",
+      "moduleIds": [
+        "mod-7"
+      ],
+      "artifactIds": [
+        "flash-attention-3"
+      ]
+    },
+    {
+      "id": "batching",
+      "slug": "batching",
+      "title": "Batching",
+      "oneLiner": "Continuous and static batching strategies for throughput.",
+      "moduleIds": [
+        "mod-7"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "react-pattern",
+      "slug": "react-pattern",
+      "title": "ReAct pattern",
+      "oneLiner": "Interleave reasoning and acting through tool calls.",
+      "moduleIds": [
+        "mod-8"
+      ],
+      "artifactIds": [
+        "react-paper"
+      ]
+    },
+    {
+      "id": "tool-use",
+      "slug": "tool-use",
+      "title": "Tool use",
+      "oneLiner": "How models call external functions to extend their capabilities.",
+      "moduleIds": [
+        "mod-8"
+      ],
+      "artifactIds": [
+        "toolformer-paper"
+      ]
+    },
+    {
+      "id": "context-engineering",
+      "slug": "context-engineering",
+      "title": "Context engineering",
+      "oneLiner": "Managing sustained context as the new prompt engineering.",
+      "moduleIds": [
+        "mod-8"
+      ],
+      "artifactIds": [
+        "anthropic-context-engineering"
+      ]
+    },
+    {
+      "id": "agent-eval",
+      "slug": "agent-eval",
+      "title": "Agent evaluation",
+      "oneLiner": "Evaluating a trajectory, not just a final answer.",
+      "moduleIds": [
+        "mod-8"
+      ],
+      "artifactIds": [
+        "anthropic-demystifying-evals"
+      ]
+    },
+    {
+      "id": "mcp",
+      "slug": "mcp",
+      "title": "Model Context Protocol",
+      "oneLiner": "Anthropic's standard for hooking tools and data into LLM contexts.",
+      "moduleIds": [
+        "mod-8"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "clip",
+      "slug": "clip",
+      "title": "CLIP",
+      "oneLiner": "Image-text contrastive pretraining.",
+      "moduleIds": [
+        "mod-9"
+      ],
+      "artifactIds": [
+        "clip-paper"
+      ]
+    },
+    {
+      "id": "vlm",
+      "slug": "vlm",
+      "title": "Vision-language models",
+      "oneLiner": "LLMs with a vision encoder glued in.",
+      "moduleIds": [
+        "mod-9"
+      ],
+      "artifactIds": [
+        "llava-paper",
+        "qwen2-vl-paper"
+      ]
+    },
+    {
+      "id": "vision-encoder",
+      "slug": "vision-encoder",
+      "title": "Vision encoder",
+      "oneLiner": "The image-side module feeding features into the LLM.",
+      "moduleIds": [
+        "mod-9"
+      ],
+      "artifactIds": [
+        "flamingo-paper"
+      ]
+    },
+    {
+      "id": "multimodal-fine-tune",
+      "slug": "multimodal-fine-tune",
+      "title": "Multimodal fine-tune",
+      "oneLiner": "Adapting VLMs to domain-specific visual tasks.",
+      "moduleIds": [
+        "mod-9"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "constitutional-ai",
+      "slug": "constitutional-ai",
+      "title": "Constitutional AI",
+      "oneLiner": "Training a model to follow a written set of principles.",
+      "moduleIds": [
+        "mod-10"
+      ],
+      "artifactIds": [
+        "cai-paper"
+      ]
+    },
+    {
+      "id": "red-teaming",
+      "slug": "red-teaming",
+      "title": "Red teaming",
+      "oneLiner": "Adversarial testing to find failure modes before deployment.",
+      "moduleIds": [
+        "mod-10"
+      ],
+      "artifactIds": [
+        "red-team-paper"
+      ]
+    },
+    {
+      "id": "sycophancy",
+      "slug": "sycophancy",
+      "title": "Sycophancy",
+      "oneLiner": "Models telling users what they want to hear.",
+      "moduleIds": [
+        "mod-10"
+      ],
+      "artifactIds": [
+        "sycophancy-paper"
+      ]
+    },
+    {
+      "id": "sleeper-agents",
+      "slug": "sleeper-agents",
+      "title": "Sleeper agents",
+      "oneLiner": "Backdoored models that behave normally until a trigger.",
+      "moduleIds": [
+        "mod-10"
+      ],
+      "artifactIds": [
+        "sleeper-agents-paper"
+      ]
+    },
+    {
+      "id": "responsible-scaling",
+      "slug": "responsible-scaling",
+      "title": "Responsible scaling",
+      "oneLiner": "Frontier-lab safety commitments tied to capability thresholds.",
+      "moduleIds": [
+        "mod-10"
+      ],
+      "artifactIds": [
+        "anthropic-rsp"
+      ]
+    },
+    {
+      "id": "probing",
+      "slug": "probing",
+      "title": "Probing",
+      "oneLiner": "Training linear classifiers on intermediate activations to test what's encoded.",
+      "moduleIds": [
+        "int-1"
+      ],
+      "artifactIds": [
+        "alain-bengio-probes"
+      ]
+    },
+    {
+      "id": "logit-lens",
+      "slug": "logit-lens",
+      "title": "Logit lens",
+      "oneLiner": "Read the output distribution from intermediate layers.",
+      "moduleIds": [
+        "int-1"
+      ],
+      "artifactIds": [
+        "logit-lens-post"
+      ]
+    },
+    {
+      "id": "feature-visualization",
+      "slug": "feature-visualization",
+      "title": "Feature visualization",
+      "oneLiner": "Optimization-based visualizations of what a neuron responds to.",
+      "moduleIds": [
+        "int-1"
+      ],
+      "artifactIds": [
+        "distill-pub"
+      ]
+    },
+    {
+      "id": "transformer-lens",
+      "slug": "transformer-lens",
+      "title": "TransformerLens",
+      "oneLiner": "Neel Nanda's library for mechanistic interpretability.",
+      "moduleIds": [
+        "int-1"
+      ],
+      "artifactIds": [
+        "nanda-concrete-steps"
+      ]
+    },
+    {
+      "id": "induction-heads",
+      "slug": "induction-heads",
+      "title": "Induction heads",
+      "oneLiner": "The attention heads that copy-paste patterns across context.",
+      "moduleIds": [
+        "int-2"
+      ],
+      "artifactIds": [
+        "induction-heads-paper"
+      ]
+    },
+    {
+      "id": "circuit-discovery",
+      "slug": "circuit-discovery",
+      "title": "Circuit discovery",
+      "oneLiner": "Identifying the minimal subgraph responsible for a behavior.",
+      "moduleIds": [
+        "int-2"
+      ],
+      "artifactIds": [
+        "ioi-paper",
+        "acdc-paper"
+      ]
+    },
+    {
+      "id": "superposition",
+      "slug": "superposition",
+      "title": "Superposition",
+      "oneLiner": "Models representing more features than they have dimensions.",
+      "moduleIds": [
+        "int-2"
+      ],
+      "artifactIds": [
+        "transformer-circuits-thread"
+      ]
+    },
+    {
+      "id": "activation-patching",
+      "slug": "activation-patching",
+      "title": "Activation patching",
+      "oneLiner": "Swapping activations between forward passes to localize computation.",
+      "moduleIds": [
+        "int-2"
+      ],
+      "artifactIds": [
+        "rome-paper"
+      ]
+    },
+    {
+      "id": "sparse-autoencoders",
+      "slug": "sparse-autoencoders",
+      "title": "Sparse autoencoders",
+      "oneLiner": "Decompose activations into sparse, interpretable features.",
+      "moduleIds": [
+        "int-3"
+      ],
+      "artifactIds": [
+        "towards-monosemanticity",
+        "scaling-monosemanticity"
+      ]
+    },
+    {
+      "id": "monosemanticity",
+      "slug": "monosemanticity",
+      "title": "Monosemanticity",
+      "oneLiner": "Features that each correspond to a single concept.",
+      "moduleIds": [
+        "int-3"
+      ],
+      "artifactIds": [
+        "towards-monosemanticity"
+      ]
+    },
+    {
+      "id": "transcoders",
+      "slug": "transcoders",
+      "title": "Transcoders",
+      "oneLiner": "Sparse interpretable approximations to MLP blocks.",
+      "moduleIds": [
+        "int-3"
+      ],
+      "artifactIds": [
+        "transcoders-paper"
+      ]
+    },
+    {
+      "id": "crosscoders",
+      "slug": "crosscoders",
+      "title": "Crosscoders",
+      "oneLiner": "Shared feature spaces across layers or models.",
+      "moduleIds": [
+        "int-3"
+      ],
+      "artifactIds": [
+        "crosscoders-paper"
+      ]
+    },
+    {
+      "id": "attribution-graphs",
+      "slug": "attribution-graphs",
+      "title": "Attribution graphs",
+      "oneLiner": "Tracing the internal steps a model takes to reach an output.",
+      "moduleIds": [
+        "int-3"
+      ],
+      "artifactIds": [
+        "anthropic-attribution-graphs"
+      ]
+    },
+    {
+      "id": "jumprelu",
+      "slug": "jumprelu",
+      "title": "JumpReLU SAEs",
+      "oneLiner": "A non-linearity that improves SAE reconstruction at the same sparsity.",
+      "moduleIds": [
+        "int-3"
+      ],
+      "artifactIds": [
+        "jumprelu-saes"
+      ]
+    },
+    {
+      "id": "activation-addition",
+      "slug": "activation-addition",
+      "title": "Activation addition",
+      "oneLiner": "Steer model behavior by adding vectors to intermediate activations.",
+      "moduleIds": [
+        "int-4"
+      ],
+      "artifactIds": [
+        "activation-addition-paper"
+      ]
+    },
+    {
+      "id": "representation-engineering",
+      "slug": "representation-engineering",
+      "title": "Representation engineering",
+      "oneLiner": "Top-down approach to control via directions in activation space.",
+      "moduleIds": [
+        "int-4"
+      ],
+      "artifactIds": [
+        "rep-engineering-paper"
+      ]
+    },
+    {
+      "id": "feature-steering",
+      "slug": "feature-steering",
+      "title": "Feature steering",
+      "oneLiner": "Using SAE features as levers on model behavior.",
+      "moduleIds": [
+        "int-4"
+      ],
+      "artifactIds": [
+        "scaling-monosemanticity"
+      ]
+    },
+    {
+      "id": "model-editing",
+      "slug": "model-editing",
+      "title": "Model editing",
+      "oneLiner": "Surgically changing what a model knows, as in ROME.",
+      "moduleIds": [
+        "int-4"
+      ],
+      "artifactIds": [
+        "rome-paper"
+      ]
+    },
+    {
+      "id": "collateralization",
+      "subjectId": "protocol-risk",
+      "slug": "collateralization",
+      "title": "Collateralization",
+      "oneLiner": "How assets back debt and absorb losses.",
+      "moduleIds": [
+        "defi-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "redemption-mechanics",
+      "subjectId": "protocol-risk",
+      "slug": "redemption-mechanics",
+      "title": "Redemption mechanics",
+      "oneLiner": "The path from token claim to underlying value.",
+      "moduleIds": [
+        "defi-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "peg-stability",
+      "subjectId": "protocol-risk",
+      "slug": "peg-stability",
+      "title": "Peg stability",
+      "oneLiner": "Market and protocol mechanisms that keep a stable asset near target price.",
+      "moduleIds": [
+        "defi-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "health-factor",
+      "subjectId": "protocol-risk",
+      "slug": "health-factor",
+      "title": "Health factor",
+      "oneLiner": "A borrower solvency measure used by lending protocols.",
+      "moduleIds": [
+        "defi-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "liquidation-threshold",
+      "subjectId": "protocol-risk",
+      "slug": "liquidation-threshold",
+      "title": "Liquidation threshold",
+      "oneLiner": "The collateralization boundary where a position can be liquidated.",
+      "moduleIds": [
+        "defi-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "oracle-latency",
+      "subjectId": "protocol-risk",
+      "slug": "oracle-latency",
+      "title": "Oracle latency",
+      "oneLiner": "The timing gap between market moves and protocol-visible prices.",
+      "moduleIds": [
+        "defi-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "keeper-capacity",
+      "subjectId": "protocol-risk",
+      "slug": "keeper-capacity",
+      "title": "Keeper capacity",
+      "oneLiner": "The ability of external liquidators to process protocol risk events.",
+      "moduleIds": [
+        "defi-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "claim-evidence-fit",
+      "subjectId": "research-writing",
+      "slug": "claim-evidence-fit",
+      "title": "Claim evidence fit",
+      "oneLiner": "Whether the evidence actually supports the claim being made.",
+      "moduleIds": [
+        "write-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "source-hierarchy",
+      "subjectId": "research-writing",
+      "slug": "source-hierarchy",
+      "title": "Source hierarchy",
+      "oneLiner": "Ranking primary, secondary, and interpretive sources by reliability.",
+      "moduleIds": [
+        "write-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "inference-ladder",
+      "subjectId": "research-writing",
+      "slug": "inference-ladder",
+      "title": "Inference ladder",
+      "oneLiner": "The steps between observed evidence and a broader argument.",
+      "moduleIds": [
+        "write-1"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "paragraph-job",
+      "subjectId": "research-writing",
+      "slug": "paragraph-job",
+      "title": "Paragraph job",
+      "oneLiner": "The single job a paragraph performs for the reader.",
+      "moduleIds": [
+        "write-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "transition-logic",
+      "subjectId": "research-writing",
+      "slug": "transition-logic",
+      "title": "Transition logic",
+      "oneLiner": "How one section earns the reader move into the next.",
+      "moduleIds": [
+        "write-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "concrete-stakes",
+      "subjectId": "research-writing",
+      "slug": "concrete-stakes",
+      "title": "Concrete stakes",
+      "oneLiner": "The practical reason a reader should care about the claim.",
+      "moduleIds": [
+        "write-2"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "morpho-market",
+      "subjectId": "protocol-risk",
+      "slug": "morpho-market",
+      "title": "Morpho market",
+      "oneLiner": "A lending-market unit to analyze by collateral, borrow asset, oracle, liquidation path, and curator or allocator assumptions.",
+      "moduleIds": [
+        "defi-morpho"
+      ],
+      "artifactIds": [
+        "morpho-overview"
+      ]
+    },
+    {
+      "id": "collateral-liquidation-path",
+      "subjectId": "protocol-risk",
+      "slug": "collateral-liquidation-path",
+      "title": "Collateral and liquidation path",
+      "oneLiner": "How collateral value moves from price signal to liquidation eligibility and execution.",
+      "moduleIds": [
+        "defi-morpho",
+        "defi-2"
+      ],
+      "artifactIds": [
+        "morpho-liquidation"
+      ]
+    },
+    {
+      "id": "oracle-dependence",
+      "subjectId": "protocol-risk",
+      "slug": "oracle-dependence",
+      "title": "Oracle dependence",
+      "oneLiner": "The external price assumption that turns market conditions into protocol accounting.",
+      "moduleIds": [
+        "defi-morpho",
+        "defi-2"
+      ],
+      "artifactIds": [
+        "morpho-oracle-agnostic-pricing",
+        "euler-price-oracles"
+      ]
+    },
+    {
+      "id": "liquidation-flow",
+      "subjectId": "protocol-risk",
+      "slug": "liquidation-flow",
+      "title": "Liquidation flow",
+      "oneLiner": "The sequence from unhealthy position to liquidator action and market impact.",
+      "moduleIds": [
+        "defi-morpho",
+        "defi-2"
+      ],
+      "artifactIds": [
+        "morpho-liquidation",
+        "euler-dutch-liquidation-analysis"
+      ]
+    },
+    {
+      "id": "protocol-comparison-lens",
+      "subjectId": "protocol-risk",
+      "slug": "protocol-comparison-lens",
+      "title": "Protocol comparison lens",
+      "oneLiner": "A reusable set of questions for comparing Morpho, Euler, Silo, and other lending systems.",
+      "moduleIds": [
+        "defi-morpho",
+        "defi-euler"
+      ],
+      "artifactIds": []
+    },
+    {
+      "id": "euler-vault-kit",
+      "subjectId": "protocol-risk",
+      "slug": "euler-vault-kit",
+      "title": "Euler Vault Kit",
+      "oneLiner": "Euler V2 lending as modular vault infrastructure rather than one monolithic market.",
+      "moduleIds": [
+        "defi-euler"
+      ],
+      "artifactIds": [
+        "euler-v2-introduction",
+        "euler-lite-paper"
+      ]
+    },
+    {
+      "id": "evc-accounting",
+      "subjectId": "protocol-risk",
+      "slug": "evc-accounting",
+      "title": "Ethereum Vault Connector",
+      "oneLiner": "The connector layer that lets vaults interact for collateral, borrowing, and account-level risk.",
+      "moduleIds": [
+        "defi-euler"
+      ],
+      "artifactIds": [
+        "euler-v2-introduction",
+        "euler-lite-paper"
+      ]
+    },
+    {
+      "id": "risk-curator-discretion",
+      "subjectId": "protocol-risk",
+      "slug": "risk-curator-discretion",
+      "title": "Risk curator discretion",
+      "oneLiner": "The choices vault creators or curators make around collateral, LTV, oracle, caps, and emergency controls.",
+      "moduleIds": [
+        "defi-euler"
+      ],
+      "artifactIds": [
+        "euler-risk-curators"
+      ]
+    },
+    {
+      "id": "dutch-liquidation",
+      "subjectId": "protocol-risk",
+      "slug": "dutch-liquidation",
+      "title": "Dutch liquidation",
+      "oneLiner": "Euler's liquidation pricing design, where discount dynamics affect borrower loss, liquidator incentives, and bad-debt resolution.",
+      "moduleIds": [
+        "defi-euler"
+      ],
+      "artifactIds": [
+        "euler-dutch-liquidation-analysis"
+      ]
+    },
+    {
+      "id": "zhivago-part-one",
+      "subjectId": "dr-zhivago",
+      "slug": "zhivago-part-one",
+      "title": "Part 1, The Five OClock Express",
+      "oneLiner": "The opening movement of the novel, setting loss, movement, family fracture, and historical pressure in motion.",
+      "moduleIds": [
+        "zhivago-1"
+      ],
+      "artifactIds": [
+        "doctor-zhivago-vintage-classic-russians",
+        "zhivago-easter-narrative"
+      ]
+    },
+    {
+      "id": "late-imperial-russia",
+      "subjectId": "dr-zhivago",
+      "slug": "late-imperial-russia",
+      "title": "Late Imperial Russia",
+      "oneLiner": "The social and political world before the revolutions that shapes the novel background.",
+      "moduleIds": [
+        "zhivago-1"
+      ],
+      "artifactIds": [
+        "doctor-zhivago-vintage-classic-russians",
+        "zhivago-easter-narrative"
+      ]
+    },
+    {
+      "id": "pasternak-perspective",
+      "subjectId": "dr-zhivago",
+      "slug": "pasternak-perspective",
+      "title": "Pasternak perspective",
+      "oneLiner": "The novel literary angle: individual conscience, spiritual life, and private perception under historical force.",
+      "moduleIds": [
+        "zhivago-1"
+      ],
+      "artifactIds": [
+        "doctor-zhivago-vintage-classic-russians",
+        "zhivago-easter-narrative"
+      ]
+    },
+    {
+      "id": "zhivago-secondary-source-brief",
+      "subjectId": "dr-zhivago",
+      "slug": "zhivago-secondary-source-brief",
+      "title": "Weekly secondary source brief",
+      "oneLiner": "One article, paper, or essay each week, used as context supplied by the companion rather than as self-directed research.",
+      "moduleIds": [
+        "zhivago-1"
+      ],
+      "artifactIds": [
+        "zhivago-easter-narrative"
+      ]
+    }
   ]
 }

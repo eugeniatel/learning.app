@@ -4,11 +4,13 @@ import { upsertReview } from "@/lib/progress";
 
 export async function submitReviewAction(
   conceptId: string,
-  status: "known" | "needs_review",
+  status: "known" | "needs_review" | "mastered" | "skip_week",
   note?: string
 ): Promise<void> {
-  const mappedStatus = status === "known" ? "ready" : "not_yet";
-  await upsertReview(conceptId, mappedStatus, note);
+  const mappedStatus =
+    status === "mastered" ? "mastered" : status === "needs_review" ? "not_yet" : "ready";
+  const delayDays = status === "skip_week" ? 7 : undefined;
+  await upsertReview(conceptId, mappedStatus, note, delayDays);
   revalidatePath("/review");
   revalidatePath("/");
 }

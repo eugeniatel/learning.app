@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { z } from "zod";
 import { paths } from "./paths";
 import { progressSchema } from "./schemas";
-import type { Question, Review } from "./types";
+import type { BacklogItem, Phase, Question, Review } from "./types";
 
 type ProgressData = z.infer<typeof progressSchema>;
 
@@ -31,6 +31,52 @@ export async function appendQuestion(question: Question): Promise<void> {
   await writeProgress(progress);
 }
 
+export async function setCurrentSubject(subjectId: string): Promise<void> {
+  const progress = await readProgress();
+  const subjectState = progress.subjects[subjectId];
+  if (!subjectState) {
+    throw new Error(`Subject ${subjectId} not found in progress.subjects`);
+  }
+  if (subjectState.enabled === false) {
+    throw new Error(`Subject ${subjectId} is not enabled`);
+  }
+  progress.currentSubjectId = subjectId;
+  const week = progress.weeks.find((item) => item.id === subjectState.currentWeekId);
+  if (week) {
+    progress.currentWeek = { id: week.id, moduleId: week.moduleId, number: week.number };
+    progress.phase = subjectState.phase;
+  }
+  await writeProgress(progress);
+}
+
+export async function setSubjectEnabled(subjectId: string, enabled: boolean): Promise<void> {
+  const progress = await readProgress();
+  const subjectState = progress.subjects[subjectId];
+  if (!subjectState) {
+    throw new Error(`Subject ${subjectId} not found in progress.subjects`);
+  }
+  const enabledCount = Object.values(progress.subjects).filter((state) => state.enabled !== false).length;
+  if (!enabled && subjectState.enabled !== false && enabledCount <= 1) {
+    throw new Error("At least one subject must stay enabled");
+  }
+  subjectState.enabled = enabled;
+  if (!enabled && progress.currentSubjectId === subjectId) {
+    const fallback = Object.entries(progress.subjects).find(
+      ([id, state]) => id !== subjectId && state.enabled !== false
+    );
+    if (fallback) {
+      const [fallbackId, fallbackState] = fallback;
+      const week = progress.weeks.find((item) => item.id === fallbackState.currentWeekId);
+      progress.currentSubjectId = fallbackId;
+      progress.phase = fallbackState.phase;
+      if (week) {
+        progress.currentWeek = { id: week.id, moduleId: week.moduleId, number: week.number };
+      }
+    }
+  }
+  await writeProgress(progress);
+}
+
 /**
  * Updates progress.json.currentWeek to the given week.
  * Throws if weekId is not found in progress.weeks.
@@ -40,6 +86,27 @@ export async function switchCurrentWeek(weekId: string): Promise<void> {
   const week = progress.weeks.find((w) => w.id === weekId);
   if (!week) throw new Error(`Week ${weekId} not found in progress.weeks`);
   progress.currentWeek = { id: week.id, moduleId: week.moduleId, number: week.number };
+  progress.currentSubjectId = week.subjectId;
+  const existingSubjectState = progress.subjects[week.subjectId];
+  progress.subjects[week.subjectId] = {
+    phase: existingSubjectState?.phase ?? progress.phase,
+    currentWeekId: week.id,
+    enabled: existingSubjectState?.enabled ?? true,
+  };
+  progress.phase = progress.subjects[week.subjectId].phase;
+  await writeProgress(progress);
+}
+
+/**
+ * Updates progress.json.phase directly. The v1 phase trigger is manual.
+ */
+export async function setPhase(phase: Phase): Promise<void> {
+  const progress = await readProgress();
+  progress.phase = phase;
+  const subjectId = progress.currentSubjectId;
+  if (progress.subjects[subjectId]) {
+    progress.subjects[subjectId].phase = phase;
+  }
   await writeProgress(progress);
 }
 
@@ -68,6 +135,29 @@ export async function cycleSessionStatus(
   await writeProgress(progress);
 }
 
+export async function updateSessionDetails(
+  weekId: string,
+  sessionId: string,
+  input: { title: string; estimatedMinutes: number; notes?: string }
+): Promise<void> {
+  const progress = await readProgress();
+  const week = progress.weeks.find((w) => w.id === weekId);
+  if (!week) throw new Error(`Week ${weekId} not found in progress.weeks`);
+  const session = week.sessions.find((s) => s.id === sessionId);
+  if (!session) throw new Error(`Session ${sessionId} not found in week ${weekId}`);
+  session.title = input.title.trim() || session.title;
+  session.estimatedMinutes = Number.isFinite(input.estimatedMinutes)
+    ? Math.max(5, input.estimatedMinutes)
+    : session.estimatedMinutes;
+  const notes = input.notes?.trim();
+  if (notes) {
+    session.notes = notes;
+  } else {
+    delete session.notes;
+  }
+  await writeProgress(progress);
+}
+
 /**
  * Updates the status of a question in progress.json openQuestions.
  * Throws if questionId is not found.
@@ -83,27 +173,50 @@ export async function updateQuestionStatus(
   await writeProgress(progress);
 }
 
-/**
- * Creates or updates the review entry for a concept.
- * Sets lastReviewed to now, nextSuggested to now + 24h, status as provided.
- * Note: _note is accepted for API symmetry but not persisted in v1;
- * the progressSchema reviews array does not include a note field.
- */
-export async function upsertReview(
-  conceptId: string,
-  status: "ready" | "not_yet",
-  _note?: string
+export async function appendBacklogItem(item: BacklogItem): Promise<void> {
+  const progress = await readProgress();
+  progress.backlog.push(item);
+  await writeProgress(progress);
+}
+
+export async function updateBacklogStatus(
+  itemId: string,
+  status: "open" | "parked" | "done"
 ): Promise<void> {
   const progress = await readProgress();
+  const item = progress.backlog.find((entry) => entry.id === itemId);
+  if (!item) throw new Error(`Backlog item ${itemId} not found`);
+  item.status = status;
+  await writeProgress(progress);
+}
+
+const reviewDelayDays: Record<"ready" | "not_yet" | "mastered", number> = {
+  ready: 3,
+  not_yet: 1,
+  mastered: 90,
+};
+
+export async function upsertReview(
+  conceptId: string,
+  status: "ready" | "not_yet" | "mastered",
+  _note?: string,
+  nextDelayDays?: number
+): Promise<void> {
+  void _note;
+  const progress = await readProgress();
   const now = new Date();
-  const next = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  const delayDays = nextDelayDays ?? reviewDelayDays[status];
+  const next = new Date(now.getTime() + delayDays * 24 * 60 * 60 * 1000);
   const entry: Review = {
+    subjectId: progress.currentSubjectId,
     conceptId,
     lastReviewed: now.toISOString(),
     nextSuggested: next.toISOString(),
     status,
   };
-  const existing = progress.reviews.findIndex((r) => r.conceptId === conceptId);
+  const existing = progress.reviews.findIndex(
+    (r) => r.subjectId === progress.currentSubjectId && r.conceptId === conceptId
+  );
   if (existing >= 0) {
     progress.reviews[existing] = entry;
   } else {

@@ -8,8 +8,9 @@ import {
   moduleFrontmatterSchema,
   progressSchema,
   spineSchema,
+  subjectsFileSchema,
 } from "./schemas";
-import type { Artifact, Concept, Module, Progress, Spine, Week } from "./types";
+import type { Artifact, Concept, Module, Progress, Spine, Subject, Week } from "./types";
 
 async function readJson<T>(file: string): Promise<T> {
   const raw = await fs.readFile(file, "utf8");
@@ -21,14 +22,34 @@ export async function getSpine(): Promise<Spine> {
   return spineSchema.parse(raw);
 }
 
+export async function getSubjects(): Promise<Subject[]> {
+  const raw = await readJson<unknown>(paths.subjectsFile);
+  return subjectsFileSchema.parse(raw).subjects;
+}
+
+export async function getActiveSubject(): Promise<Subject> {
+  const [subjects, progress] = await Promise.all([getSubjects(), getProgress()]);
+  return subjects.find((subject) => subject.id === progress.currentSubjectId) ?? subjects[0];
+}
+
 export async function getConcepts(): Promise<Concept[]> {
   const raw = await readJson<unknown>(paths.conceptsFile);
   return conceptsFileSchema.parse(raw).concepts;
 }
 
+export async function getConceptsForSubject(subjectId: string): Promise<Concept[]> {
+  const concepts = await getConcepts();
+  return concepts.filter((concept) => concept.subjectId === subjectId);
+}
+
 export async function getArtifacts(): Promise<Artifact[]> {
   const raw = await readJson<unknown>(paths.artifactsFile);
   return artifactsFileSchema.parse(raw).artifacts;
+}
+
+export async function getArtifactsForSubject(subjectId: string): Promise<Artifact[]> {
+  const artifacts = await getArtifacts();
+  return artifacts.filter((artifact) => artifact.subjectId === subjectId);
 }
 
 export async function getProgress(): Promise<Progress> {
@@ -78,7 +99,7 @@ function collectListItems(section: string | undefined): string[] {
 
 export async function getModules(): Promise<Module[]> {
   const files = await fs.readdir(paths.curriculumDir);
-  const mdFiles = files.filter((f) => /^(mod|int)-\d+\.md$/.test(f));
+  const mdFiles = files.filter((f) => f.endsWith(".md"));
   const modules = await Promise.all(
     mdFiles.map(async (file) => {
       const full = path.join(paths.curriculumDir, file);
@@ -98,10 +119,20 @@ export async function getModules(): Promise<Module[]> {
       } satisfies Module;
     })
   );
+  const trackOrder: Record<Module["track"], number> = {
+    main: 0,
+    interpretability: 1,
+    branch: 2,
+  };
   return modules.sort((a, b) => {
-    if (a.track !== b.track) return a.track === "main" ? -1 : 1;
+    if (a.track !== b.track) return trackOrder[a.track] - trackOrder[b.track];
     return a.number - b.number;
   });
+}
+
+export async function getModulesForSubject(subjectId: string): Promise<Module[]> {
+  const modules = await getModules();
+  return modules.filter((module) => module.subjectId === subjectId);
 }
 
 export async function getModule(id: string): Promise<Module | undefined> {
@@ -111,23 +142,33 @@ export async function getModule(id: string): Promise<Module | undefined> {
 
 export async function getCurrentWeek(): Promise<{
   progress: Progress;
+  subject: Subject;
   week: Week;
   module: Module;
 }> {
-  const progress = await getProgress();
-  const week = progress.weeks.find((w) => w.id === progress.currentWeek.id);
-  if (!week) throw new Error(`Current week ${progress.currentWeek.id} not found in progress.json`);
-  const module = await getModule(week.moduleId);
-  if (!module) throw new Error(`Module ${week.moduleId} not found for current week`);
-  return { progress, week, module };
+  const [progress, subjects] = await Promise.all([getProgress(), getSubjects()]);
+  const subject = subjects.find((item) => item.id === progress.currentSubjectId) ?? subjects[0];
+  const subjectState = progress.subjects[subject.id];
+  const currentWeekId = subjectState?.currentWeekId ?? progress.currentWeek.id;
+  const week = progress.weeks.find((w) => w.id === currentWeekId);
+  if (!week) throw new Error(`Current week ${currentWeekId} not found in progress.json`);
+  const currentModule = await getModule(week.moduleId);
+  if (!currentModule) throw new Error(`Module ${week.moduleId} not found for current week`);
+  return { progress, subject, week, module: currentModule };
 }
 
-export async function getConceptsGroupedByModule(): Promise<{ module: Module; concepts: Concept[] }[]> {
+export async function getConceptsGroupedByModule(subjectId?: string): Promise<{ module: Module; concepts: Concept[] }[]> {
   const [concepts, modules] = await Promise.all([getConcepts(), getModules()]);
-  return modules
+  const scopedConcepts = subjectId
+    ? concepts.filter((concept) => concept.subjectId === subjectId)
+    : concepts;
+  const scopedModules = subjectId
+    ? modules.filter((module) => module.subjectId === subjectId)
+    : modules;
+  return scopedModules
     .map((mod) => ({
       module: mod,
-      concepts: concepts.filter((c) => c.moduleIds.includes(mod.id)),
+      concepts: scopedConcepts.filter((c) => c.moduleIds.includes(mod.id)),
     }))
     .filter((group) => group.concepts.length > 0);
 }
@@ -137,12 +178,18 @@ export async function getConceptBySlug(slug: string): Promise<Concept | undefine
   return concepts.find((c) => c.slug === slug);
 }
 
-export async function getAllWeeksWithModules(): Promise<{ module: Module; weeks: Week[] }[]> {
+export async function getAllWeeksWithModules(subjectId?: string): Promise<{ module: Module; weeks: Week[] }[]> {
   const [progress, modules] = await Promise.all([getProgress(), getModules()]);
-  return modules
+  const scopedModules = subjectId
+    ? modules.filter((module) => module.subjectId === subjectId)
+    : modules;
+  const scopedWeeks = subjectId
+    ? progress.weeks.filter((week) => week.subjectId === subjectId)
+    : progress.weeks;
+  return scopedModules
     .map((mod) => ({
       module: mod,
-      weeks: progress.weeks
+      weeks: scopedWeeks
         .filter((w) => w.moduleId === mod.id)
         .sort((a, b) => b.startDate.localeCompare(a.startDate)),
     }))

@@ -1,13 +1,11 @@
 import { Shell } from "@/components/shell";
 import { ReviewQueue } from "@/components/review-queue";
-import { getReviewQueue } from "@/lib/review";
+import { getReviewQueueForSubject } from "@/lib/review";
 import { getProgress } from "@/lib/data";
 
 export default async function ReviewPage() {
-  const [{ queue, emptyState }, progress] = await Promise.all([
-    getReviewQueue(),
-    getProgress(),
-  ]);
+  const progress = await getProgress();
+  const { queue, emptyState } = await getReviewQueueForSubject(progress.currentSubjectId);
 
   return (
     <Shell phase={progress.phase}>

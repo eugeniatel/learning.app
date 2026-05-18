@@ -34,14 +34,14 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 
 ### All weeks and review
 - [x] **WEEKS-01**: `/weeks` renders every week from `progress.json.weeks`, grouped by module, most-recent first. Each row links to a detail route.
-- [ ] **WEEKS-02**: Selecting a week on `/weeks` updates `progress.json.currentWeek` if the user confirms.
+- [x] **WEEKS-02**: Selecting a week detail updates `progress.json.currentWeek` if the user confirms.
 - [x] **REVIEW-01**: `/review` presents one concept card at a time, with yes / not-quite buttons and a free-text field.
 - [x] **REVIEW-02**: Review answers update `progress.json.reviews[]` with `lastReviewed`, `nextSuggested`, and `status`.
 - [x] **REVIEW-03**: Review surface picks the next due concept based on simple recency ordering (no spaced repetition in v1).
 
 ### Questions queue
-- [ ] **QUESTION-02**: `/questions` renders all open questions grouped by concept, with status badges.
-- [ ] **QUESTION-03**: Actions park (open to parked) or answer (open to answered) a question; writes back to `progress.json`.
+- [x] **QUESTION-02**: `/questions` renders all open questions grouped by concept, with status badges.
+- [x] **QUESTION-03**: Actions park (open to parked) or answer (open to answered) a question; writes back to `progress.json`.
 
 ### Session and reflection writebacks
 - [x] **SESSION-01**: Clicking a session card on This Week cycles status (todo to in-progress to done).
@@ -49,10 +49,10 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 - [x] **REFLECT-01**: Reflection textarea on This Week saves to `notes/reflections/week-<id>.md`; linked from the week header.
 - [x] **ARTIFACT-01**: Artifact chips expose a read-status toggle that writes back to `artifacts.json`.
 
-### Flexible phase (blocked on checkpoint 3)
-- [ ] **FLEX-01**: `/flexible-map` renders the horizontal spine: main modules top rail, interpretability modules bottom rail, branches above with dashed connectors. Current node emphasized.
-- [ ] **FLEX-02**: "Ready to pull" cards at the bottom suggest next branches based on prereqs.
-- [ ] **FLEX-03**: Phase transition logic in `src/lib/phase.ts` implements the chosen checkpoint-3 trigger (time, milestone, manual toggle, or hybrid). Decided after week 1 of real use.
+### Flexible phase
+- [x] **FLEX-01**: `/flexible-map` renders the horizontal spine: main modules top rail, interpretability modules bottom rail, branches below with dashed separation. Current node emphasized.
+- [x] **FLEX-02**: "Ready to pull" cards at the bottom suggest next branches based on prereqs.
+- [x] **FLEX-03**: Phase transition logic implements the chosen manual checkpoint-3 trigger through a bidirectional toggle on This Week.
 
 ## Out of Scope
 
@@ -79,16 +79,16 @@ Scope: v1 of the curriculum companion app. Foundational phase only. Desktop brow
 | NOTE-02 | Phase 1 | Complete |
 | QUESTION-01 | Phase 1 | Complete |
 | WEEKS-01 | Phase 2 | Complete |
-| WEEKS-02 | Phase 2 | Pending |
+| WEEKS-02 | Phase 2 | Complete |
 | REVIEW-01 | Phase 2 | Complete |
 | REVIEW-02 | Phase 2 | Complete |
 | REVIEW-03 | Phase 2 | Complete |
-| QUESTION-02 | Phase 3 | Pending |
-| QUESTION-03 | Phase 3 | Pending |
+| QUESTION-02 | Phase 3 | Complete |
+| QUESTION-03 | Phase 3 | Complete |
 | SESSION-01 | Phase 3 | Complete |
 | SESSION-02 | Phase 3 | Complete |
 | REFLECT-01 | Phase 3 | Complete |
 | ARTIFACT-01 | Phase 3 | Complete |
-| FLEX-01 | Phase 4 | Blocked |
-| FLEX-02 | Phase 4 | Blocked |
-| FLEX-03 | Phase 4 | Blocked |
+| FLEX-01 | Phase 4 | Complete |
+| FLEX-02 | Phase 4 | Complete |
+| FLEX-03 | Phase 4 | Complete |

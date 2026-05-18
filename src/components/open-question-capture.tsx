@@ -1,33 +1,41 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { addQuestionAction } from "@/lib/actions/add-question";
+import { getQuestions, setQuestions as saveQuestions } from "@/lib/local-store";
 import type { Question } from "@/lib/types";
 
 export function OpenQuestionCapture({
   conceptId,
+  subjectId,
   initialQuestions,
 }: {
   conceptId: string;
+  subjectId: string;
   initialQuestions: Question[];
 }) {
   const [questions, setQuestions] = useState<Question[]>(initialQuestions);
   const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    queueMicrotask(() => setQuestions(getQuestions(conceptId, initialQuestions)));
+  }, [conceptId, initialQuestions]);
 
   function handleSubmit() {
     const text = inputValue.trim();
     if (!text) return;
     const newQuestion: Question = {
       id: crypto.randomUUID(),
+      subjectId,
       conceptId,
       text,
       status: "open",
       createdAt: new Date().toISOString(),
     };
-    setQuestions((prev) => [...prev, newQuestion]);
+    const next = [...questions, newQuestion];
+    setQuestions(next);
+    saveQuestions(conceptId, next);
     setInputValue("");
-    void addQuestionAction(newQuestion);
   }
 
   return (

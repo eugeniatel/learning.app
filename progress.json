@@ -1,6 +1,10 @@
 {
   "phase": "foundational",
-  "currentWeek": { "id": "w1", "moduleId": "mod-0", "number": 1 },
+  "currentWeek": {
+    "id": "w2",
+    "moduleId": "mod-1",
+    "number": 2
+  },
   "weeks": [
     {
       "id": "w1",
@@ -11,8 +15,12 @@
         {
           "id": "s1-1",
           "title": "Keshav's three-pass method",
-          "conceptIds": ["three-pass-paper-reading"],
-          "artifactIds": ["keshav-how-to-read"],
+          "conceptIds": [
+            "three-pass-paper-reading"
+          ],
+          "artifactIds": [
+            "keshav-how-to-read"
+          ],
           "estimatedMinutes": 45,
           "status": "done",
           "completedAt": "2026-04-20T10:00:00Z"
@@ -20,30 +28,1371 @@
         {
           "id": "s1-2",
           "title": "Karpathy deep dive, sections 1 and 2",
-          "conceptIds": ["scholarly-practice"],
-          "artifactIds": ["karpathy-deep-dive"],
+          "conceptIds": [
+            "scholarly-practice"
+          ],
+          "artifactIds": [
+            "karpathy-deep-dive"
+          ],
           "estimatedMinutes": 90,
           "status": "in_progress"
         },
         {
           "id": "s1-3",
           "title": "First read of Attention Is All You Need",
-          "conceptIds": ["attention"],
-          "artifactIds": ["attention-is-all-you-need"],
+          "conceptIds": [
+            "attention"
+          ],
+          "artifactIds": [
+            "attention-is-all-you-need"
+          ],
           "estimatedMinutes": 60,
           "status": "todo"
         },
         {
           "id": "s1-4",
           "title": "Nanda, concrete steps, how to build a practice",
-          "conceptIds": ["scholarly-practice"],
-          "artifactIds": ["nanda-concrete-steps"],
+          "conceptIds": [
+            "scholarly-practice"
+          ],
+          "artifactIds": [
+            "nanda-concrete-steps"
+          ],
           "estimatedMinutes": 45,
           "status": "todo"
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w2",
+      "moduleId": "mod-1",
+      "number": 2,
+      "startDate": "2026-05-18",
+      "sessions": [
+        {
+          "id": "s2-1",
+          "title": "Attention: visual intuition and notation",
+          "conceptIds": [
+            "attention"
+          ],
+          "artifactIds": [
+            "3b1b-attention",
+            "attention-is-all-you-need"
+          ],
+          "estimatedMinutes": 60,
+          "status": "todo",
+          "notes": "Read/watch for intuition, not mastery. Capture what queries, keys, values, and attention weights are doing."
+        },
+        {
+          "id": "s2-2",
+          "title": "Attention notes: Q, K, V, heads, and residual stream",
+          "conceptIds": [
+            "attention",
+            "residual-stream"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 45,
+          "status": "todo",
+          "notes": "Write notes in your own words. Stop when the mechanism feels explainable, not complete."
+        },
+        {
+          "id": "s2-3",
+          "title": "One-page synthesis: where attention sits in the architecture",
+          "conceptIds": [
+            "attention"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 15,
+          "status": "todo",
+          "notes": "One paragraph plus a sketch or bullet map is enough."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w3",
+      "moduleId": "mod-2",
+      "number": 3,
+      "startDate": "2026-05-04",
+      "sessions": [
+        {
+          "id": "s3-1",
+          "title": "Concept pass: Tokenization and pretraining data",
+          "conceptIds": [
+            "byte-pair-encoding",
+            "sentencepiece",
+            "pretraining-data-quality",
+            "deduplication",
+            "contamination"
+          ],
+          "artifactIds": [
+            "karpathy-tokenizer",
+            "hf-tokenizers-course",
+            "bpe-paper",
+            "sentencepiece-paper"
+          ],
+          "estimatedMinutes": 195,
+          "status": "todo"
+        },
+        {
+          "id": "s3-2",
+          "title": "Second pass resources: Tokenization and pretraining data",
+          "conceptIds": [
+            "byte-pair-encoding",
+            "sentencepiece",
+            "pretraining-data-quality",
+            "deduplication",
+            "contamination"
+          ],
+          "artifactIds": [
+            "fineweb-paper",
+            "dolma-paper",
+            "dedup-paper",
+            "latent-space-fineweb",
+            "dwarkesh-gwern"
+          ],
+          "estimatedMinutes": 195,
+          "status": "todo"
+        },
+        {
+          "id": "s3-3",
+          "title": "Synthesis notes: Tokenization and pretraining data",
+          "conceptIds": [
+            "byte-pair-encoding",
+            "sentencepiece",
+            "pretraining-data-quality",
+            "deduplication",
+            "contamination"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 195,
+          "status": "todo"
+        },
+        {
+          "id": "s3-4",
+          "title": "Project work: Tokenization and pretraining data",
+          "conceptIds": [
+            "byte-pair-encoding",
+            "sentencepiece",
+            "pretraining-data-quality",
+            "deduplication",
+            "contamination"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 195,
+          "status": "todo",
+          "notes": "Build a BPE tokenizer from scratch (Karpathy's minbpe or your own). Then point it at a 1 GB slice of FineWeb, measure token efficiency, find ten of the strangest tokens, and write up why they exist."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w4",
+      "moduleId": "mod-3",
+      "number": 4,
+      "startDate": "2026-05-11",
+      "sessions": [
+        {
+          "id": "s4-1",
+          "title": "Concept pass: Pretraining scaling, optimization, loss dynamics",
+          "conceptIds": [
+            "scaling-laws",
+            "chinchilla",
+            "mup",
+            "adamw",
+            "lr-schedule",
+            "precision-scaling"
+          ],
+          "artifactIds": [
+            "cs336-liang-hashimoto",
+            "raschka-ahead-of-ai",
+            "kaplan-scaling",
+            "chinchilla-paper"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s4-2",
+          "title": "Second pass resources: Pretraining scaling, optimization, loss dynamics",
+          "conceptIds": [
+            "scaling-laws",
+            "chinchilla",
+            "mup",
+            "adamw",
+            "lr-schedule",
+            "precision-scaling"
+          ],
+          "artifactIds": [
+            "mup-paper",
+            "precision-scaling-paper",
+            "8bit-optimizers-paper",
+            "dwarkesh-dario-feb-2026",
+            "dwarkesh-jensen-apr-2026",
+            "dwarkesh-dylan-patel"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s4-3",
+          "title": "Synthesis notes: Pretraining scaling, optimization, loss dynamics",
+          "conceptIds": [
+            "scaling-laws",
+            "chinchilla",
+            "mup",
+            "adamw",
+            "lr-schedule",
+            "precision-scaling"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s4-4",
+          "title": "Project work: Pretraining scaling, optimization, loss dynamics",
+          "conceptIds": [
+            "scaling-laws",
+            "chinchilla",
+            "mup",
+            "adamw",
+            "lr-schedule",
+            "precision-scaling"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo",
+          "notes": "Run a tiny, honest scaling sweep: 4 model sizes by 3 token counts at 1 to 20M params. Plot loss vs. compute; see whether your tiny data points respect Chinchilla's slopes."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w5",
+      "moduleId": "int-1",
+      "number": 5,
+      "startDate": "2026-05-18",
+      "sessions": [
+        {
+          "id": "s5-1",
+          "title": "Concept pass: Interpretability foundations, probing, logit lens, feature viz",
+          "conceptIds": [
+            "probing",
+            "logit-lens",
+            "feature-visualization",
+            "transformer-lens"
+          ],
+          "artifactIds": [
+            "nanda-concrete-steps",
+            "arena-mech-interp",
+            "distill-pub"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s5-2",
+          "title": "Second pass resources: Interpretability foundations, probing, logit lens, feature viz",
+          "conceptIds": [
+            "probing",
+            "logit-lens",
+            "feature-visualization",
+            "transformer-lens"
+          ],
+          "artifactIds": [
+            "alain-bengio-probes",
+            "logit-lens-post",
+            "anthropic-math-framework",
+            "80k-neel-nanda-oct-2025",
+            "mlst-neel-dec-2024",
+            "axrp-chris-olah"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s5-3",
+          "title": "Synthesis notes: Interpretability foundations, probing, logit lens, feature viz",
+          "conceptIds": [
+            "probing",
+            "logit-lens",
+            "feature-visualization",
+            "transformer-lens"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s5-4",
+          "title": "Project work: Interpretability foundations, probing, logit lens, feature viz",
+          "conceptIds": [
+            "probing",
+            "logit-lens",
+            "feature-visualization",
+            "transformer-lens"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo",
+          "notes": "Using TransformerLens on GPT-2 small: train a simple probe for part-of-speech on intermediate layers, plot accuracy by layer. Separately, run the logit lens on a handful of sentences and write up what you see."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w6",
+      "moduleId": "mod-4",
+      "number": 6,
+      "startDate": "2026-05-25",
+      "sessions": [
+        {
+          "id": "s6-1",
+          "title": "Concept pass: Post-training I, SFT and preference learning",
+          "conceptIds": [
+            "rlhf",
+            "dpo",
+            "kto",
+            "orpo",
+            "simpo",
+            "instruction-tuning"
+          ],
+          "artifactIds": [
+            "dlai-rlhf",
+            "rush-rl-for-llms",
+            "rlhf-book",
+            "trl-repo",
+            "alignment-handbook",
+            "christiano-preferences"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s6-2",
+          "title": "Second pass resources: Post-training I, SFT and preference learning",
+          "conceptIds": [
+            "rlhf",
+            "dpo",
+            "kto",
+            "orpo",
+            "simpo",
+            "instruction-tuning"
+          ],
+          "artifactIds": [
+            "instructgpt-paper",
+            "dpo-paper",
+            "kto-paper",
+            "orpo-paper",
+            "simpo-paper",
+            "latent-space-nathan-lambert",
+            "latent-space-hf-alignment"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s6-3",
+          "title": "Synthesis notes: Post-training I, SFT and preference learning",
+          "conceptIds": [
+            "rlhf",
+            "dpo",
+            "kto",
+            "orpo",
+            "simpo",
+            "instruction-tuning"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s6-4",
+          "title": "Project work: Post-training I, SFT and preference learning",
+          "conceptIds": [
+            "rlhf",
+            "dpo",
+            "kto",
+            "orpo",
+            "simpo",
+            "instruction-tuning"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo",
+          "notes": "Take a 0.5B to 1B open model (Qwen2.5-0.5B or Llama-3.2-1B). SFT it on a small instruction set. Then DPO it on UltraFeedback-style pairs. Measure the difference on a 50-prompt eval you write yourself. Write up where DPO helped, where it hurt, and where it did nothing."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w7",
+      "moduleId": "mod-5",
+      "number": 7,
+      "startDate": "2026-06-01",
+      "sessions": [
+        {
+          "id": "s7-1",
+          "title": "Concept pass: Post-training II, RLVR and reasoning models",
+          "conceptIds": [
+            "rlvr",
+            "grpo",
+            "ppo",
+            "process-reward-models",
+            "reasoning-models",
+            "sampling-compression"
+          ],
+          "artifactIds": [
+            "rush-rl-for-llms",
+            "open-r1",
+            "ppo-paper",
+            "deepseekmath-paper",
+            "deepseek-r1-paper",
+            "o1-system-card"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s7-2",
+          "title": "Second pass resources: Post-training II, RLVR and reasoning models",
+          "conceptIds": [
+            "rlvr",
+            "grpo",
+            "ppo",
+            "process-reward-models",
+            "reasoning-models",
+            "sampling-compression"
+          ],
+          "artifactIds": [
+            "verify-step-by-step",
+            "rlvr-beyond-base",
+            "rlvr-incentivize-reasoning",
+            "limit-of-rlvr",
+            "promptfoo-rlvr",
+            "dwarkesh-dario-feb-2026",
+            "latent-space-deepseek-r1",
+            "mlst-reasoning"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s7-3",
+          "title": "Synthesis notes: Post-training II, RLVR and reasoning models",
+          "conceptIds": [
+            "rlvr",
+            "grpo",
+            "ppo",
+            "process-reward-models",
+            "reasoning-models",
+            "sampling-compression"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s7-4",
+          "title": "Project work: Post-training II, RLVR and reasoning models",
+          "conceptIds": [
+            "rlvr",
+            "grpo",
+            "ppo",
+            "process-reward-models",
+            "reasoning-models",
+            "sampling-compression"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo",
+          "notes": "Run a tiny GRPO loop on GSM8K or MATH using a 0.5B base. You won't match o1; you'll feel the shape of the training dynamics. Compare pass@1 to pass@16 before and after RL to see the sampling-compression effect directly. Write up the reward hacking you observe and where your numbers land in the debate above."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w8",
+      "moduleId": "mod-6",
+      "number": 8,
+      "startDate": "2026-06-08",
+      "sessions": [
+        {
+          "id": "s8-1",
+          "title": "Concept pass: Evals and measurement",
+          "conceptIds": [
+            "eval-design",
+            "benchmark-contamination",
+            "chatbot-arena",
+            "emergent-abilities",
+            "agent-evals"
+          ],
+          "artifactIds": [
+            "cs336-eval-lectures",
+            "aisi-inspect",
+            "anthropic-demystifying-evals",
+            "mmlu-paper",
+            "bigbench-paper"
+          ],
+          "estimatedMinutes": 210,
+          "status": "todo"
+        },
+        {
+          "id": "s8-2",
+          "title": "Second pass resources: Evals and measurement",
+          "conceptIds": [
+            "eval-design",
+            "benchmark-contamination",
+            "chatbot-arena",
+            "emergent-abilities",
+            "agent-evals"
+          ],
+          "artifactIds": [
+            "helm-paper",
+            "emergence-mirage-paper",
+            "chatbot-arena-paper",
+            "contamination-paper",
+            "metr-agent-evals",
+            "latent-space-lmsys",
+            "cogrev-metr"
+          ],
+          "estimatedMinutes": 210,
+          "status": "todo"
+        },
+        {
+          "id": "s8-3",
+          "title": "Synthesis notes: Evals and measurement",
+          "conceptIds": [
+            "eval-design",
+            "benchmark-contamination",
+            "chatbot-arena",
+            "emergent-abilities",
+            "agent-evals"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 210,
+          "status": "todo"
+        },
+        {
+          "id": "s8-4",
+          "title": "Project work: Evals and measurement",
+          "conceptIds": [
+            "eval-design",
+            "benchmark-contamination",
+            "chatbot-arena",
+            "emergent-abilities",
+            "agent-evals"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 210,
+          "status": "todo",
+          "notes": "Build a 100-prompt eval for something you actually care about: DeFi-specific reasoning, stablecoin mechanics, or CDP accounting correctness. Run it on 4 models (one API, one open, one small, one frontier reasoning model). Write a report on what the eval measures and what it doesn't."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w9",
+      "moduleId": "mod-7",
+      "number": 9,
+      "startDate": "2026-06-15",
+      "sessions": [
+        {
+          "id": "s9-1",
+          "title": "Concept pass: Inference infrastructure",
+          "conceptIds": [
+            "kv-cache",
+            "paged-attention",
+            "speculative-decoding",
+            "quantization",
+            "flash-attention",
+            "batching"
+          ],
+          "artifactIds": [
+            "horace-he-brrr",
+            "lilian-inference",
+            "vllm-docs",
+            "llama-cpp-read",
+            "vllm-paper",
+            "speculative-decoding-paper"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s9-2",
+          "title": "Second pass resources: Inference infrastructure",
+          "conceptIds": [
+            "kv-cache",
+            "paged-attention",
+            "speculative-decoding",
+            "quantization",
+            "flash-attention",
+            "batching"
+          ],
+          "artifactIds": [
+            "spec-sampling-paper",
+            "gptq-paper",
+            "awq-paper",
+            "qlora-paper",
+            "flash-attention-3",
+            "latent-space-lattner-hotz-frankle",
+            "dwarkesh-jensen-apr-2026"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s9-3",
+          "title": "Synthesis notes: Inference infrastructure",
+          "conceptIds": [
+            "kv-cache",
+            "paged-attention",
+            "speculative-decoding",
+            "quantization",
+            "flash-attention",
+            "batching"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s9-4",
+          "title": "Project work: Inference infrastructure",
+          "conceptIds": [
+            "kv-cache",
+            "paged-attention",
+            "speculative-decoding",
+            "quantization",
+            "flash-attention",
+            "batching"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo",
+          "notes": "Take a 3B to 7B open model. Serve it with vLLM on a single rented GPU. Measure tokens/sec at batch sizes 1, 4, 16, 64. Quantize with AWQ. Re-measure. Enable speculative decoding with a 0.5B draft model. Re-measure. Write up the numbers and which optimization mattered when."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w10",
+      "moduleId": "mod-8",
+      "number": 10,
+      "startDate": "2026-06-22",
+      "sessions": [
+        {
+          "id": "s10-1",
+          "title": "Concept pass: Agents and tool use",
+          "conceptIds": [
+            "react-pattern",
+            "tool-use",
+            "context-engineering",
+            "agent-eval",
+            "mcp"
+          ],
+          "artifactIds": [
+            "anthropic-building-agents",
+            "anthropic-context-engineering",
+            "anthropic-demystifying-evals",
+            "anthropic-state-of-agents",
+            "anthropic-agents-deep-dive-video",
+            "react-paper"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s10-2",
+          "title": "Second pass resources: Agents and tool use",
+          "conceptIds": [
+            "react-pattern",
+            "tool-use",
+            "context-engineering",
+            "agent-eval",
+            "mcp"
+          ],
+          "artifactIds": [
+            "toolformer-paper",
+            "gaia-paper",
+            "swe-bench-paper",
+            "smolagents-repo",
+            "openai-agents-sdk",
+            "claude-code-docs",
+            "latent-space-agents-series",
+            "no-priors-agents",
+            "dwarkesh-dario-feb-2026"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s10-3",
+          "title": "Synthesis notes: Agents and tool use",
+          "conceptIds": [
+            "react-pattern",
+            "tool-use",
+            "context-engineering",
+            "agent-eval",
+            "mcp"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s10-4",
+          "title": "Project work: Agents and tool use",
+          "conceptIds": [
+            "react-pattern",
+            "tool-use",
+            "context-engineering",
+            "agent-eval",
+            "mcp"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo",
+          "notes": "Build a small DeFi-domain agent. Concrete spec: give it read-only access to one Dune client and one RPC endpoint; task it with \"for protocol X on chain Y, compute TVL, number of active troves, and average effective borrow rate, and explain any anomaly against the last 30 days.\" Evaluate it against a hand-written rubric of 20 queries, following the pattern in Anthropic's *Demystifying Evals* post."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w11",
+      "moduleId": "mod-9",
+      "number": 11,
+      "startDate": "2026-06-29",
+      "sessions": [
+        {
+          "id": "s11-1",
+          "title": "Concept pass: Multimodal, compressed",
+          "conceptIds": [
+            "clip",
+            "vlm",
+            "vision-encoder",
+            "multimodal-fine-tune"
+          ],
+          "artifactIds": [
+            "hf-multimodal-course",
+            "cs25-multimodal",
+            "clip-paper"
+          ],
+          "estimatedMinutes": 165,
+          "status": "todo"
+        },
+        {
+          "id": "s11-2",
+          "title": "Second pass resources: Multimodal, compressed",
+          "conceptIds": [
+            "clip",
+            "vlm",
+            "vision-encoder",
+            "multimodal-fine-tune"
+          ],
+          "artifactIds": [
+            "flamingo-paper",
+            "llava-paper",
+            "qwen2-vl-paper",
+            "latent-space-vlm"
+          ],
+          "estimatedMinutes": 165,
+          "status": "todo"
+        },
+        {
+          "id": "s11-3",
+          "title": "Synthesis notes: Multimodal, compressed",
+          "conceptIds": [
+            "clip",
+            "vlm",
+            "vision-encoder",
+            "multimodal-fine-tune"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 165,
+          "status": "todo"
+        },
+        {
+          "id": "s11-4",
+          "title": "Project work: Multimodal, compressed",
+          "conceptIds": [
+            "clip",
+            "vlm",
+            "vision-encoder",
+            "multimodal-fine-tune"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 165,
+          "status": "todo",
+          "notes": "Fine-tune a small VLM (Qwen2-VL-2B) on a domain task: classify Dune dashboard screenshots by what they measure. Measure accuracy against CLIP baseline."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w12",
+      "moduleId": "mod-10",
+      "number": 12,
+      "startDate": "2026-07-06",
+      "sessions": [
+        {
+          "id": "s12-1",
+          "title": "Concept pass: Safety, alignment, deployment",
+          "conceptIds": [
+            "constitutional-ai",
+            "red-teaming",
+            "sycophancy",
+            "sleeper-agents",
+            "responsible-scaling"
+          ],
+          "artifactIds": [
+            "anthropic-core-views",
+            "anthropic-rsp",
+            "alignment-anthropic-blog",
+            "hendrycks-catastrophic-risks"
+          ],
+          "estimatedMinutes": 210,
+          "status": "todo"
+        },
+        {
+          "id": "s12-2",
+          "title": "Second pass resources: Safety, alignment, deployment",
+          "conceptIds": [
+            "constitutional-ai",
+            "red-teaming",
+            "sycophancy",
+            "sleeper-agents",
+            "responsible-scaling"
+          ],
+          "artifactIds": [
+            "cai-paper",
+            "red-team-paper",
+            "sycophancy-paper",
+            "sleeper-agents-paper",
+            "dwarkesh-dario-feb-2026",
+            "80k-neel-nanda-oct-2025",
+            "axrp-deception",
+            "mlst-neel-dec-2024"
+          ],
+          "estimatedMinutes": 210,
+          "status": "todo"
+        },
+        {
+          "id": "s12-3",
+          "title": "Synthesis notes: Safety, alignment, deployment",
+          "conceptIds": [
+            "constitutional-ai",
+            "red-teaming",
+            "sycophancy",
+            "sleeper-agents",
+            "responsible-scaling"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 210,
+          "status": "todo"
+        },
+        {
+          "id": "s12-4",
+          "title": "Project work: Safety, alignment, deployment",
+          "conceptIds": [
+            "constitutional-ai",
+            "red-teaming",
+            "sycophancy",
+            "sleeper-agents",
+            "responsible-scaling"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 210,
+          "status": "todo",
+          "notes": "Pick one failure mode (sycophancy, jailbreak robustness, or prompt injection). Build a 50-case probe set against 3 models. Write up how each fails differently and what that implies about their training."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w13",
+      "moduleId": "int-2",
+      "number": 13,
+      "startDate": "2026-07-13",
+      "sessions": [
+        {
+          "id": "s13-1",
+          "title": "Concept pass: Mechanistic interpretability, circuits",
+          "conceptIds": [
+            "induction-heads",
+            "circuit-discovery",
+            "superposition",
+            "activation-patching"
+          ],
+          "artifactIds": [
+            "transformer-circuits-thread",
+            "anthropic-circuits-updates",
+            "nanda-youtube-mech-interp",
+            "arena-mech-interp",
+            "induction-heads-paper"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s13-2",
+          "title": "Second pass resources: Mechanistic interpretability, circuits",
+          "conceptIds": [
+            "induction-heads",
+            "circuit-discovery",
+            "superposition",
+            "activation-patching"
+          ],
+          "artifactIds": [
+            "ioi-paper",
+            "acdc-paper",
+            "rome-paper",
+            "query-circuits-paper",
+            "mlst-neel-dec-2024",
+            "axrp-neel"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s13-3",
+          "title": "Synthesis notes: Mechanistic interpretability, circuits",
+          "conceptIds": [
+            "induction-heads",
+            "circuit-discovery",
+            "superposition",
+            "activation-patching"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s13-4",
+          "title": "Project work: Mechanistic interpretability, circuits",
+          "conceptIds": [
+            "induction-heads",
+            "circuit-discovery",
+            "superposition",
+            "activation-patching"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo",
+          "notes": "Reproduce the induction head finding on a 2-layer attention-only model (as in the paper). Then pick one attention head in GPT-2 small and characterize what it does."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w14",
+      "moduleId": "int-3",
+      "number": 14,
+      "startDate": "2026-07-20",
+      "sessions": [
+        {
+          "id": "s14-1",
+          "title": "Concept pass: Sparse autoencoders and feature-level interpretability",
+          "conceptIds": [
+            "sparse-autoencoders",
+            "monosemanticity",
+            "transcoders",
+            "crosscoders",
+            "attribution-graphs",
+            "jumprelu"
+          ],
+          "artifactIds": [
+            "towards-monosemanticity",
+            "scaling-monosemanticity",
+            "gemma-scope",
+            "neuronpedia",
+            "saelens-repo"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s14-2",
+          "title": "Second pass resources: Sparse autoencoders and feature-level interpretability",
+          "conceptIds": [
+            "sparse-autoencoders",
+            "monosemanticity",
+            "transcoders",
+            "crosscoders",
+            "attribution-graphs",
+            "jumprelu"
+          ],
+          "artifactIds": [
+            "anthropic-attribution-graphs",
+            "transcoders-paper",
+            "crosscoders-paper",
+            "jumprelu-saes",
+            "mech-interp-2026-status",
+            "mlst-neel-dec-2024",
+            "80k-neel-nanda-oct-2025"
+          ],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s14-3",
+          "title": "Synthesis notes: Sparse autoencoders and feature-level interpretability",
+          "conceptIds": [
+            "sparse-autoencoders",
+            "monosemanticity",
+            "transcoders",
+            "crosscoders",
+            "attribution-graphs",
+            "jumprelu"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo"
+        },
+        {
+          "id": "s14-4",
+          "title": "Project work: Sparse autoencoders and feature-level interpretability",
+          "conceptIds": [
+            "sparse-autoencoders",
+            "monosemanticity",
+            "transcoders",
+            "crosscoders",
+            "attribution-graphs",
+            "jumprelu"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 345,
+          "status": "todo",
+          "notes": "Train a small SAE on one MLP layer of GPT-2 small using SAELens. Browse features. Pick 5, write a short characterization of each, and confirm (or refute) the characterization by running targeted prompts."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "w15",
+      "moduleId": "int-4",
+      "number": 15,
+      "startDate": "2026-07-27",
+      "sessions": [
+        {
+          "id": "s15-1",
+          "title": "Concept pass: Applied interpretability, steering and safety",
+          "conceptIds": [
+            "activation-addition",
+            "representation-engineering",
+            "feature-steering",
+            "model-editing"
+          ],
+          "artifactIds": [
+            "goodfire-blog",
+            "transformer-circuits-updates",
+            "oxford-aigi-agenda",
+            "activation-addition-paper"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s15-2",
+          "title": "Second pass resources: Applied interpretability, steering and safety",
+          "conceptIds": [
+            "activation-addition",
+            "representation-engineering",
+            "feature-steering",
+            "model-editing"
+          ],
+          "artifactIds": [
+            "rep-engineering-paper",
+            "scaling-monosemanticity",
+            "rome-paper",
+            "axrp-scalable-oversight",
+            "80k-neel-nanda-oct-2025"
+          ],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s15-3",
+          "title": "Synthesis notes: Applied interpretability, steering and safety",
+          "conceptIds": [
+            "activation-addition",
+            "representation-engineering",
+            "feature-steering",
+            "model-editing"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo"
+        },
+        {
+          "id": "s15-4",
+          "title": "Project work: Applied interpretability, steering and safety",
+          "conceptIds": [
+            "activation-addition",
+            "representation-engineering",
+            "feature-steering",
+            "model-editing"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 270,
+          "status": "todo",
+          "notes": "Use your SAE from I-3 to steer model behavior on 3 targeted prompts. Alternatively, use activation patching to localize where a specific factual answer is encoded. Write up what the steering can and cannot do."
+        }
+      ],
+      "subjectId": "ai-systems"
+    },
+    {
+      "id": "defi-w1",
+      "subjectId": "protocol-risk",
+      "moduleId": "defi-morpho",
+      "number": 1,
+      "startDate": "2026-05-18",
+      "sessions": [
+        {
+          "id": "defi-s1-1",
+          "title": "Morpho: primitive and market structure",
+          "conceptIds": [
+            "morpho-market",
+            "collateral-liquidation-path"
+          ],
+          "artifactIds": [
+            "morpho-overview"
+          ],
+          "estimatedMinutes": 40,
+          "status": "todo",
+          "notes": "Map the primitive, market unit, collateral asset, loan asset, LLTV, oracle, IRM, who lends, who borrows, and what is immutable."
+        },
+        {
+          "id": "defi-s1-2",
+          "title": "Morpho: risk parameters, oracle, and liquidation path",
+          "conceptIds": [
+            "oracle-dependence",
+            "liquidation-flow"
+          ],
+          "artifactIds": [
+            "morpho-liquidation",
+            "morpho-oracle-agnostic-pricing"
+          ],
+          "estimatedMinutes": 50,
+          "status": "todo",
+          "notes": "Trace how a price move becomes unhealthy LTV, what the liquidator repays/seizes, and where bad debt could appear if price, liquidity, or keeper execution fails."
+        },
+        {
+          "id": "defi-s1-3",
+          "title": "Morpho mechanism note and comparison hooks",
+          "conceptIds": [
+            "protocol-comparison-lens"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 30,
+          "status": "todo",
+          "notes": "Use the approved headings: primitive, market structure, risk parameters, oracle path, liquidation path, bad-debt path, external dependencies, stress scenario, comparison questions."
+        }
+      ]
+    },
+    {
+      "id": "defi-w2",
+      "subjectId": "protocol-risk",
+      "moduleId": "defi-euler",
+      "number": 2,
+      "startDate": "2026-05-25",
+      "sessions": [
+        {
+          "id": "defi-s2-1",
+          "title": "Euler V2: vault architecture and EVC",
+          "conceptIds": [
+            "euler-vault-kit",
+            "evc-accounting"
+          ],
+          "artifactIds": [
+            "euler-v2-introduction",
+            "euler-lite-paper"
+          ],
+          "estimatedMinutes": 45,
+          "status": "todo",
+          "notes": "Map how vaults, collateral, borrowing, and the connector layer replace the simpler single-market mental model."
+        },
+        {
+          "id": "defi-s2-2",
+          "title": "Euler risk controls: curators, oracles, LTV, caps",
+          "conceptIds": [
+            "risk-curator-discretion",
+            "oracle-dependence"
+          ],
+          "artifactIds": [
+            "euler-price-oracles",
+            "euler-risk-curators"
+          ],
+          "estimatedMinutes": 45,
+          "status": "todo",
+          "notes": "Identify who has discretion, what risk parameters they choose, and how oracle selection shifts lender, borrower, and vault risk."
+        },
+        {
+          "id": "defi-s2-3",
+          "title": "Euler liquidation and Morpho comparison note",
+          "conceptIds": [
+            "dutch-liquidation",
+            "protocol-comparison-lens"
+          ],
+          "artifactIds": [
+            "euler-dutch-liquidation-analysis"
+          ],
+          "estimatedMinutes": 30,
+          "status": "todo",
+          "notes": "Compare Euler's modularity and liquidation design against Morpho's isolated-market structure. End with what could fail under a fast collateral drawdown."
+        }
+      ]
+    },
+    {
+      "id": "write-w1",
+      "subjectId": "research-writing",
+      "moduleId": "write-1",
+      "number": 1,
+      "startDate": "2026-04-20",
+      "sessions": [
+        {
+          "id": "write-s1-1",
+          "title": "Claim and evidence markup",
+          "conceptIds": [],
+          "artifactIds": [],
+          "estimatedMinutes": 60,
+          "status": "todo"
+        },
+        {
+          "id": "write-s1-2",
+          "title": "Rewrite opening from source stack",
+          "conceptIds": [],
+          "artifactIds": [],
+          "estimatedMinutes": 90,
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "id": "write-w2",
+      "subjectId": "research-writing",
+      "moduleId": "write-2",
+      "number": 2,
+      "startDate": "2026-04-27",
+      "sessions": [
+        {
+          "id": "write-s2-1",
+          "title": "Paragraph job pass",
+          "conceptIds": [],
+          "artifactIds": [],
+          "estimatedMinutes": 60,
+          "status": "todo"
+        },
+        {
+          "id": "write-s2-2",
+          "title": "Reader-facing edit pass",
+          "conceptIds": [],
+          "artifactIds": [],
+          "estimatedMinutes": 90,
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "id": "zhivago-w1",
+      "subjectId": "dr-zhivago",
+      "moduleId": "zhivago-1",
+      "number": 1,
+      "startDate": "2026-05-18",
+      "sessions": [
+        {
+          "id": "zhivago-s1-1",
+          "title": "Part 1 companion brief: history, mood, and social world",
+          "conceptIds": [
+            "zhivago-part-one",
+            "late-imperial-russia"
+          ],
+          "artifactIds": [
+            "doctor-zhivago-vintage-classic-russians"
+          ],
+          "estimatedMinutes": 30,
+          "status": "todo",
+          "notes": "Reading Part 1 is assumed. This task is the taught companion: what matters in the opening, what historical pressure is in the background, and what not to overinterpret yet."
+        },
+        {
+          "id": "zhivago-s1-2",
+          "title": "Reference and character orientation",
+          "conceptIds": [
+            "late-imperial-russia",
+            "pasternak-perspective"
+          ],
+          "artifactIds": [
+            "doctor-zhivago-vintage-classic-russians"
+          ],
+          "estimatedMinutes": 30,
+          "status": "todo",
+          "notes": "Review who appears, how they are connected, and which names, places, religious cues, or class markers are worth knowing before moving on."
+        },
+        {
+          "id": "zhivago-s1-3",
+          "title": "Required secondary source: Pasternak's Christian historical lens",
+          "conceptIds": [
+            "zhivago-secondary-source-brief",
+            "pasternak-perspective"
+          ],
+          "artifactIds": [
+            "zhivago-easter-narrative"
+          ],
+          "estimatedMinutes": 40,
+          "status": "todo",
+          "notes": "Use the article as a guided context source, not as a paper to master. Extract only one idea that changes how you read Part 1."
+        },
+        {
+          "id": "zhivago-s1-4",
+          "title": "One scene, one clarified reference, one question",
+          "conceptIds": [
+            "zhivago-part-one",
+            "zhivago-secondary-source-brief"
+          ],
+          "artifactIds": [],
+          "estimatedMinutes": 20,
+          "status": "todo",
+          "notes": "Save a small note: scene, reference, unclear character or relationship, and one question for Part 2."
         }
       ]
     }
   ],
-  "openQuestions": [],
-  "reviews": []
+  "openQuestions": [
+    {
+      "id": "c2d5e191-3fbc-4b57-a992-0db05d8538d0",
+      "conceptId": "attention",
+      "text": "this is a question",
+      "status": "open",
+      "createdAt": "2026-04-20T11:53:31.348Z",
+      "subjectId": "ai-systems"
+    }
+  ],
+  "reviews": [],
+  "backlog": [],
+  "currentSubjectId": "ai-systems",
+  "subjects": {
+    "ai-systems": {
+      "phase": "foundational",
+      "currentWeekId": "w2",
+      "enabled": true
+    },
+    "protocol-risk": {
+      "phase": "foundational",
+      "currentWeekId": "defi-w1",
+      "enabled": true
+    },
+    "research-writing": {
+      "phase": "foundational",
+      "currentWeekId": "write-w1",
+      "enabled": false
+    },
+    "dr-zhivago": {
+      "phase": "foundational",
+      "currentWeekId": "zhivago-w1",
+      "enabled": true
+    }
+  }
 }

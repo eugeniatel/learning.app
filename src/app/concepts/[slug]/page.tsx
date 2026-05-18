@@ -10,6 +10,13 @@ import { getConceptBySlug, getArtifacts, getConcepts, getProgress } from "@/lib/
 import { readNote } from "@/lib/notes";
 import { readOpenQuestionsForConcept } from "@/lib/progress";
 
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const concepts = await getConcepts();
+  return concepts.map((concept) => ({ slug: concept.slug }));
+}
+
 export default async function ConceptDetailPage(props: PageProps<"/concepts/[slug]">) {
   const { slug } = await props.params;
 
@@ -24,11 +31,12 @@ export default async function ConceptDetailPage(props: PageProps<"/concepts/[slu
   if (!concept) notFound();
 
   const [conceptArtifacts, relatedConcepts, conceptQuestions] = await Promise.all([
-    Promise.resolve(allArtifacts.filter((a) => concept.artifactIds.includes(a.id))),
+    Promise.resolve(allArtifacts.filter((a) => a.subjectId === concept.subjectId && concept.artifactIds.includes(a.id))),
     Promise.resolve(
       allConcepts
         .filter(
           (c) =>
+            c.subjectId === concept.subjectId &&
             c.id !== concept.id &&
             c.moduleIds.some((mid) => concept.moduleIds.includes(mid))
         )
@@ -36,18 +44,24 @@ export default async function ConceptDetailPage(props: PageProps<"/concepts/[slu
     ),
     readOpenQuestionsForConcept(concept.id),
   ]);
+  const conceptReview = progress.reviews.find((r) => r.subjectId === concept.subjectId && r.conceptId === concept.id);
+  const phase = progress.subjects[concept.subjectId]?.phase ?? progress.phase;
 
   return (
-    <Shell phase={progress.phase}>
+    <Shell phase={phase}>
       <ConceptHeader concept={concept} />
       <div className="flex gap-8">
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <ArtifactList artifacts={conceptArtifacts} />
           <NoteEditor slug={concept.slug} conceptId={concept.id} initialBody={noteBody} />
-          <OpenQuestionCapture conceptId={concept.id} initialQuestions={conceptQuestions} />
+          <OpenQuestionCapture
+            conceptId={concept.id}
+            subjectId={concept.subjectId}
+            initialQuestions={conceptQuestions.filter((question) => question.subjectId === concept.subjectId)}
+          />
         </div>
         <div className="flex w-56 shrink-0 flex-col gap-6">
-          <ReviewStub />
+          <ReviewStub review={conceptReview} />
           <RelatedConceptsList concepts={relatedConcepts} />
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { switchWeekAction } from "@/lib/actions/switch-week";
+import { setCurrentWeek } from "@/lib/local-store";
 
 interface WeekSwitchConfirmProps {
   weekId: string;
@@ -16,18 +16,13 @@ export function WeekSwitchConfirm({ weekId, onCancel, onSuccess }: WeekSwitchCon
   const [status, setStatus] = useState<"idle" | "saving" | "error">("idle");
   const router = useRouter();
 
-  async function handleConfirm() {
+  function handleConfirm() {
     setStatus("saving");
-    try {
-      await switchWeekAction(weekId);
-      if (onSuccess) {
-        onSuccess();
-      } else {
-        router.push("/weeks");
-        router.refresh();
-      }
-    } catch {
-      setStatus("error");
+    setCurrentWeek(weekId);
+    if (onSuccess) {
+      onSuccess();
+    } else {
+      router.push("/weeks");
     }
   }
 

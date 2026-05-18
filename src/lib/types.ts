@@ -1,12 +1,21 @@
 export type Phase = "foundational" | "flexible";
-export type Track = "main" | "interpretability";
+export type Track = "main" | "interpretability" | "branch";
 export type SessionStatus = "todo" | "in_progress" | "done";
 export type ReadStatus = "unread" | "in_progress" | "read";
 export type ArtifactType = "video" | "paper" | "repo" | "post" | "podcast";
 export type QuestionStatus = "open" | "parked" | "answered";
 
+export type Subject = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  cadence: string;
+};
+
 export type Module = {
   id: string;
+  subjectId: string;
   track: Track;
   number: number;
   title: string;
@@ -15,6 +24,7 @@ export type Module = {
   hoursMax: number;
   prereqs: string[];
   phase: Phase;
+  branchOf?: string;
   body: string;
   goal: string;
   conceptIds: string[];
@@ -34,6 +44,7 @@ export type Session = {
 
 export type Week = {
   id: string;
+  subjectId: string;
   moduleId: string;
   number: number;
   startDate: string;
@@ -43,6 +54,7 @@ export type Week = {
 
 export type Concept = {
   id: string;
+  subjectId: string;
   slug: string;
   title: string;
   oneLiner: string;
@@ -52,6 +64,7 @@ export type Concept = {
 
 export type Artifact = {
   id: string;
+  subjectId: string;
   type: ArtifactType;
   title: string;
   url: string;
@@ -61,6 +74,7 @@ export type Artifact = {
 
 export type Question = {
   id: string;
+  subjectId: string;
   conceptId: string;
   text: string;
   status: QuestionStatus;
@@ -68,18 +82,31 @@ export type Question = {
 };
 
 export type Review = {
+  subjectId: string;
   conceptId: string;
   lastReviewed: string;
   nextSuggested: string;
   status: "ready" | "not_yet" | "mastered";
 };
 
+export type BacklogItem = {
+  id: string;
+  subjectId: string;
+  text: string;
+  kind: "resource" | "question" | "topic";
+  status: "open" | "parked" | "done";
+  createdAt: string;
+};
+
 export type Progress = {
+  currentSubjectId: string;
+  subjects: Record<string, { phase: Phase; currentWeekId: string; enabled?: boolean }>;
   phase: Phase;
   currentWeek: { id: string; moduleId: string; number: number };
   weeks: Week[];
   openQuestions: Question[];
   reviews: Review[];
+  backlog: BacklogItem[];
 };
 
 export type Spine = {
