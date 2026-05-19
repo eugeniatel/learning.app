@@ -55,7 +55,7 @@ export function OpenQuestionCapture({
           ))}
         </div>
       )}
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         <Input
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
@@ -68,7 +68,7 @@ export function OpenQuestionCapture({
           placeholder="Park a question about this concept..."
           className="flex-1"
         />
-        <Button variant="outline" size="sm" onClick={handleSubmit}>
+        <Button variant="outline" size="sm" className="min-h-[44px]" onClick={handleSubmit}>
           Add question
         </Button>
       </div>

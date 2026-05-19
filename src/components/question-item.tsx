@@ -34,15 +34,15 @@ export function QuestionItem({
       <div className="shrink-0 flex gap-2">
         {status === "open" ? (
           <>
-            <Button variant="outline" size="sm" onClick={() => handleAction("parked")}>
+            <Button variant="outline" size="sm" className="min-h-[44px]" onClick={() => handleAction("parked")}>
               Park
             </Button>
-            <Button variant="outline" size="sm" onClick={() => handleAction("answered")}>
+            <Button variant="outline" size="sm" className="min-h-[44px]" onClick={() => handleAction("answered")}>
               Answer
             </Button>
           </>
         ) : (
-          <Button variant="outline" size="sm" onClick={() => handleAction("open")}>
+          <Button variant="outline" size="sm" className="min-h-[44px]" onClick={() => handleAction("open")}>
             Reopen
           </Button>
         )}

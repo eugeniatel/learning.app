@@ -24,7 +24,14 @@ export function SessionEditForm({
 
   if (!open) {
     return (
-      <Button type="button" variant="ghost" size="icon-xs" onClick={() => setOpen(true)} aria-label="Edit session">
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon-xs"
+        className="min-h-[44px] min-w-[44px]"
+        onClick={() => setOpen(true)}
+        aria-label="Edit session"
+      >
         <Pencil className="size-3.5" strokeWidth={1.5} />
       </Button>
     );

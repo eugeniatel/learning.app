@@ -29,7 +29,7 @@ export function SideNav({ phase }: { phase: Phase }) {
           <Link
             key={href}
             href={href}
-            className="flex items-center gap-3 rounded-md px-2.5 py-1.5 text-[13.5px] text-sidebar-foreground hover:bg-sidebar-accent"
+            className="flex items-center gap-3 rounded-md px-2.5 py-2.5 text-[13.5px] text-sidebar-foreground hover:bg-sidebar-accent"
           >
             <Icon className="size-4 text-muted-foreground" strokeWidth={1.5} />
             <span>{label}</span>

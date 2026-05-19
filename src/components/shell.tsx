@@ -15,7 +15,7 @@ export function Shell({
     <div className="flex min-h-screen w-full">
       <SideNav phase={phase} />
       <main className="flex-1 overflow-y-auto">
-        <div className={["mx-auto px-10 py-12", wide ? "max-w-6xl" : "max-w-3xl"].join(" ")}>
+        <div className={["mx-auto px-6 py-12 md:px-10", wide ? "max-w-6xl" : "max-w-3xl"].join(" ")}>
           {children}
         </div>
       </main>

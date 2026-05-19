@@ -67,12 +67,12 @@ export function SessionCard({
       ].join(" ")}
     >
       <div className="flex items-start gap-3">
-        <div className="mt-0.5">
+        <div>
           <button
             type="button"
             aria-label={ariaLabel[localSession.status]}
             onClick={handleStatusClick}
-            className="cursor-pointer"
+            className="flex min-h-[44px] min-w-[44px] cursor-pointer items-start justify-center pt-0.5"
           >
             <StatusIcon status={localSession.status} />
           </button>

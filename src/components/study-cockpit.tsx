@@ -37,7 +37,7 @@ export function StudyCockpit({
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {snapshots.map((snapshot) => (
           <Link
             key={snapshot.subject.id}

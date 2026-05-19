@@ -71,7 +71,7 @@ export function FlexibleMap({
           <p className="mb-3 text-[13px] font-medium uppercase tracking-[0.04em] text-muted-foreground">
             Branches
           </p>
-          <div className="grid grid-cols-3 gap-3 border-t border-dashed border-border pt-4">
+          <div className="grid grid-cols-1 gap-3 border-t border-dashed border-border pt-4 md:grid-cols-2 lg:grid-cols-3">
             {branches.map((node) => (
               <NodePill key={node.module.id} node={node} />
             ))}
@@ -83,7 +83,7 @@ export function FlexibleMap({
             Ready to pull
           </p>
           {readyBranches.length > 0 ? (
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
               {readyBranches.map((branch) => (
                 <div key={branch.id} className="rounded-lg border border-border bg-card px-4 py-3">
                   <p className="text-[13px] font-medium text-foreground">{branch.title}</p>

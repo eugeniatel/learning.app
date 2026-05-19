@@ -48,11 +48,11 @@ export function BacklogClient({
 
   return (
     <>
-      <div className="mb-8 flex gap-2">
+      <div className="mb-8 flex items-center gap-2">
         <select
           value={kind}
           onChange={(event) => setKind(event.target.value as BacklogItem["kind"])}
-          className="h-8 rounded-lg border border-input bg-background px-2 text-[13px]"
+          className="min-h-[44px] rounded-lg border border-input bg-background px-2 text-[13px]"
         >
           <option value="topic">Topic</option>
           <option value="resource">Resource</option>
@@ -97,7 +97,7 @@ export function BacklogClient({
                       )
                     );
                   }}
-                  className="h-7 rounded-md border border-input bg-background px-2 text-[12px]"
+                  className="min-h-[44px] rounded-md border border-input bg-background px-2 text-[12px]"
                 >
                   <option value="open">Open</option>
                   <option value="parked">Parked</option>
