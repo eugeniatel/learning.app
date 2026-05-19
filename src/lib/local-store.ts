@@ -1,12 +1,10 @@
 "use client";
 
 import type {
-  BacklogItem,
   Phase,
   Question,
   QuestionStatus,
   ReadStatus,
-  Review,
   Session,
   SessionStatus,
 } from "@/lib/types";
@@ -68,24 +66,42 @@ export function setReflection(weekId: string, body: string) {
   writeJson("reflections", reflections);
 }
 
-export function getQuestions(conceptId: string, fallback: Question[]): Question[] {
-  return readJson<Record<string, Question[]>>("questions", {})[conceptId] ?? fallback;
+/**
+ * Returns all questions for a subject from the consolidated store.
+ * On first access, migrates legacy concept-keyed questions and statuses
+ * into the subject-keyed store so nothing captured earlier is lost.
+ */
+export function getSubjectQuestions(subjectId: string, seed: Question[]): Question[] {
+  const store = readJson<Record<string, Question[]>>("questions-by-subject", {});
+  const existing = store[subjectId];
+  if (existing) return existing;
+  const migrated = migrateSubjectQuestions(subjectId, seed);
+  store[subjectId] = migrated;
+  writeJson("questions-by-subject", store);
+  return migrated;
 }
 
-export function setQuestions(conceptId: string, questions: Question[]) {
-  const byConcept = readJson<Record<string, Question[]>>("questions", {});
-  byConcept[conceptId] = questions;
-  writeJson("questions", byConcept);
+export function setSubjectQuestions(subjectId: string, questions: Question[]) {
+  const store = readJson<Record<string, Question[]>>("questions-by-subject", {});
+  store[subjectId] = questions;
+  writeJson("questions-by-subject", store);
 }
 
-export function setQuestionStatus(questionId: string, status: QuestionStatus) {
-  const statuses = readJson<Record<string, QuestionStatus>>("question-statuses", {});
-  statuses[questionId] = status;
-  writeJson("question-statuses", statuses);
-}
-
-export function getQuestionStatus(questionId: string, fallback: QuestionStatus): QuestionStatus {
-  return readJson<Record<string, QuestionStatus>>("question-statuses", {})[questionId] ?? fallback;
+function migrateSubjectQuestions(subjectId: string, seed: Question[]): Question[] {
+  const legacyByConcept = readJson<Record<string, Question[]>>("questions", {});
+  const legacyStatuses = readJson<Record<string, QuestionStatus>>("question-statuses", {});
+  const byId = new Map<string, Question>();
+  for (const question of seed) byId.set(question.id, question);
+  for (const list of Object.values(legacyByConcept)) {
+    for (const question of list) {
+      if (question.subjectId === subjectId && !byId.has(question.id)) {
+        byId.set(question.id, question);
+      }
+    }
+  }
+  return Array.from(byId.values())
+    .filter((question) => question.subjectId === subjectId)
+    .map((question) => ({ ...question, status: legacyStatuses[question.id] ?? question.status }));
 }
 
 export function getSubjectEnabled(subjectId: string, fallback: boolean): boolean {
@@ -120,27 +136,6 @@ export function getPhase(fallback: Phase): Phase {
 
 export function setPhase(phase: Phase) {
   writeJson("phase", phase);
-}
-
-export function getReviews(): Review[] {
-  return readJson<Review[]>("reviews", []);
-}
-
-export function upsertReview(review: Review) {
-  const reviews = getReviews().filter(
-    (item) => !(item.subjectId === review.subjectId && item.conceptId === review.conceptId)
-  );
-  writeJson("reviews", [...reviews, review]);
-}
-
-export function getBacklog(subjectId: string, fallback: BacklogItem[]): BacklogItem[] {
-  return readJson<Record<string, BacklogItem[]>>("backlog", {})[subjectId] ?? fallback;
-}
-
-export function setBacklog(subjectId: string, items: BacklogItem[]) {
-  const backlog = readJson<Record<string, BacklogItem[]>>("backlog", {});
-  backlog[subjectId] = items;
-  writeJson("backlog", backlog);
 }
 
 export function setSessionStatus(sessionId: string, status: SessionStatus) {

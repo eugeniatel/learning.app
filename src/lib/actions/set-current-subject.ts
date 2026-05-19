@@ -10,8 +10,6 @@ export async function setCurrentSubjectAction(subjectId: string): Promise<void> 
   revalidatePath("/weeks");
   revalidatePath("/concepts");
   revalidatePath("/questions");
-  revalidatePath("/review");
   revalidatePath("/search");
   revalidatePath("/reflections");
-  revalidatePath("/flexible-map");
 }

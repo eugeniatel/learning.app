@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { z } from "zod";
 import { paths } from "./paths";
 import { progressSchema } from "./schemas";
-import type { BacklogItem, Phase, Question, Review } from "./types";
+import type { Phase, Question } from "./types";
 
 type ProgressData = z.infer<typeof progressSchema>;
 
@@ -170,57 +170,5 @@ export async function updateQuestionStatus(
   const question = progress.openQuestions.find((q) => q.id === questionId);
   if (!question) throw new Error(`Question ${questionId} not found in openQuestions`);
   question.status = newStatus;
-  await writeProgress(progress);
-}
-
-export async function appendBacklogItem(item: BacklogItem): Promise<void> {
-  const progress = await readProgress();
-  progress.backlog.push(item);
-  await writeProgress(progress);
-}
-
-export async function updateBacklogStatus(
-  itemId: string,
-  status: "open" | "parked" | "done"
-): Promise<void> {
-  const progress = await readProgress();
-  const item = progress.backlog.find((entry) => entry.id === itemId);
-  if (!item) throw new Error(`Backlog item ${itemId} not found`);
-  item.status = status;
-  await writeProgress(progress);
-}
-
-const reviewDelayDays: Record<"ready" | "not_yet" | "mastered", number> = {
-  ready: 3,
-  not_yet: 1,
-  mastered: 90,
-};
-
-export async function upsertReview(
-  conceptId: string,
-  status: "ready" | "not_yet" | "mastered",
-  _note?: string,
-  nextDelayDays?: number
-): Promise<void> {
-  void _note;
-  const progress = await readProgress();
-  const now = new Date();
-  const delayDays = nextDelayDays ?? reviewDelayDays[status];
-  const next = new Date(now.getTime() + delayDays * 24 * 60 * 60 * 1000);
-  const entry: Review = {
-    subjectId: progress.currentSubjectId,
-    conceptId,
-    lastReviewed: now.toISOString(),
-    nextSuggested: next.toISOString(),
-    status,
-  };
-  const existing = progress.reviews.findIndex(
-    (r) => r.subjectId === progress.currentSubjectId && r.conceptId === conceptId
-  );
-  if (existing >= 0) {
-    progress.reviews[existing] = entry;
-  } else {
-    progress.reviews.push(entry);
-  }
   await writeProgress(progress);
 }

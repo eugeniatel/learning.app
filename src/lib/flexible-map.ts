@@ -1,7 +1,19 @@
-import { FlexibleMap } from "@/components/flexible-map";
-import { Shell } from "@/components/shell";
-import { getModules, getProgress, getSpine } from "@/lib/data";
-import type { Module, Phase, Week } from "@/lib/types";
+import { getModules, getProgress, getSpine } from "./data";
+import type { Module, Week } from "./types";
+
+type NodeState = "current" | "complete" | "ready" | "locked";
+
+export type MapNode = {
+  module: Module;
+  state: NodeState;
+};
+
+export type FlexibleMapData = {
+  main: MapNode[];
+  interpretability: MapNode[];
+  branches: MapNode[];
+  readyBranches: Module[];
+};
 
 function completedModuleIds(weeks: Week[]): Set<string> {
   return new Set(
@@ -11,23 +23,19 @@ function completedModuleIds(weeks: Week[]): Set<string> {
   );
 }
 
-function moduleState(module: Module, currentModuleId: string, completeIds: Set<string>): "current" | "complete" | "ready" | "locked" {
+function moduleState(module: Module, currentModuleId: string, completeIds: Set<string>): NodeState {
   if (module.id === currentModuleId) return "current";
   if (completeIds.has(module.id)) return "complete";
   if (module.prereqs.every((id) => completeIds.has(id))) return "ready";
   return "locked";
 }
 
-function orderedModules(ids: string[], modules: Map<string, Module>) {
+function orderedModules(ids: string[], modules: Map<string, Module>): Module[] {
   return ids.map((id) => modules.get(id)).filter((module): module is Module => Boolean(module));
 }
 
-export default async function FlexibleMapPage() {
-  const [progress, modules, spine] = await Promise.all([
-    getProgress(),
-    getModules(),
-    getSpine(),
-  ]);
+export async function getFlexibleMapData(): Promise<FlexibleMapData> {
+  const [progress, modules, spine] = await Promise.all([getProgress(), getModules(), getSpine()]);
   const scopedModules = modules.filter((module) => module.subjectId === progress.currentSubjectId);
   const moduleMap = new Map(scopedModules.map((module) => [module.id, module]));
   const scopedWeeks = progress.weeks.filter((week) => week.subjectId === progress.currentSubjectId);
@@ -36,33 +44,22 @@ export default async function FlexibleMapPage() {
   const currentWeek = progress.weeks.find((week) => week.id === currentWeekId);
   const currentModuleId = currentWeek?.moduleId ?? progress.currentWeek.moduleId;
 
-  const toNode = (module: Module) => ({
+  const toNode = (module: Module): MapNode => ({
     module,
     state: moduleState(module, currentModuleId, completeIds),
   });
 
-  const main = progress.currentSubjectId === "ai-systems"
+  const isAiSystems = progress.currentSubjectId === "ai-systems";
+  const main = isAiSystems
     ? orderedModules(spine.phases.flexible.spine, moduleMap).map(toNode)
     : scopedModules.filter((module) => module.track === "main").map(toNode);
-  const interpretability = progress.currentSubjectId === "ai-systems"
+  const interpretability = isAiSystems
     ? orderedModules(spine.phases.flexible.interpretability, moduleMap).map(toNode)
     : scopedModules.filter((module) => module.track === "interpretability").map(toNode);
-  const branches = progress.currentSubjectId === "ai-systems"
+  const branches = isAiSystems
     ? orderedModules(spine.phases.flexible.branches, moduleMap).map(toNode)
     : scopedModules.filter((module) => module.track === "branch").map(toNode);
-  const readyBranches = branches
-    .filter((node) => node.state === "ready")
-    .map((node) => node.module);
+  const readyBranches = branches.filter((node) => node.state === "ready").map((node) => node.module);
 
-  return (
-    <Shell phase={progress.phase as Phase} wide>
-      <FlexibleMap
-        phase={progress.phase}
-        main={main}
-        interpretability={interpretability}
-        branches={branches}
-        readyBranches={readyBranches}
-      />
-    </Shell>
-  );
+  return { main, interpretability, branches, readyBranches };
 }

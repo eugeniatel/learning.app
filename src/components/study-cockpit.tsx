@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { OpenQuestionCount } from "./open-question-count";
 import { SubjectSwitcher } from "./subject-switcher";
-import type { Module, Progress, Subject, Week } from "@/lib/types";
+import type { Module, Progress, Question, Subject, Week } from "@/lib/types";
 
 type SubjectSnapshot = {
   subject: Subject;
@@ -9,7 +10,7 @@ type SubjectSnapshot = {
   module?: Module;
   nextSessionTitle: string;
   weekId?: string;
-  openQuestions: number;
+  openQuestionsSeed: Question[];
 };
 
 function sessionProgress(week?: Week) {
@@ -52,7 +53,9 @@ export function StudyCockpit({
             <p className="mt-2 text-[15px] text-foreground">{snapshot.nextSessionTitle}</p>
             <div className="mt-4 flex items-center justify-between text-[12px] text-muted-foreground">
               <span>{sessionProgress(snapshot.week)}</span>
-              <span>{snapshot.openQuestions} questions</span>
+              <span>
+                <OpenQuestionCount subjectId={snapshot.subject.id} seed={snapshot.openQuestionsSeed} />
+              </span>
             </div>
           </Link>
         ))}

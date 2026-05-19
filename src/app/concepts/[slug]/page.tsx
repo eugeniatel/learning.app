@@ -5,10 +5,8 @@ import { ArtifactList } from "@/components/artifact-list";
 import { NoteEditor } from "@/components/note-editor";
 import { OpenQuestionCapture } from "@/components/open-question-capture";
 import { RelatedConceptsList } from "@/components/related-concepts-list";
-import { ReviewStub } from "@/components/review-stub";
 import { getConceptBySlug, getArtifacts, getConcepts, getProgress } from "@/lib/data";
 import { readNote } from "@/lib/notes";
-import { readOpenQuestionsForConcept } from "@/lib/progress";
 
 export const dynamicParams = false;
 
@@ -30,21 +28,20 @@ export default async function ConceptDetailPage(props: PageProps<"/concepts/[slu
 
   if (!concept) notFound();
 
-  const [conceptArtifacts, relatedConcepts, conceptQuestions] = await Promise.all([
-    Promise.resolve(allArtifacts.filter((a) => a.subjectId === concept.subjectId && concept.artifactIds.includes(a.id))),
-    Promise.resolve(
-      allConcepts
-        .filter(
-          (c) =>
-            c.subjectId === concept.subjectId &&
-            c.id !== concept.id &&
-            c.moduleIds.some((mid) => concept.moduleIds.includes(mid))
-        )
-        .slice(0, 10)
-    ),
-    readOpenQuestionsForConcept(concept.id),
-  ]);
-  const conceptReview = progress.reviews.find((r) => r.subjectId === concept.subjectId && r.conceptId === concept.id);
+  const conceptArtifacts = allArtifacts.filter(
+    (artifact) => artifact.subjectId === concept.subjectId && concept.artifactIds.includes(artifact.id)
+  );
+  const relatedConcepts = allConcepts
+    .filter(
+      (candidate) =>
+        candidate.subjectId === concept.subjectId &&
+        candidate.id !== concept.id &&
+        candidate.moduleIds.some((moduleId) => concept.moduleIds.includes(moduleId))
+    )
+    .slice(0, 10);
+  const subjectQuestions = progress.openQuestions.filter(
+    (question) => question.subjectId === concept.subjectId
+  );
   const phase = progress.subjects[concept.subjectId]?.phase ?? progress.phase;
 
   return (
@@ -57,11 +54,10 @@ export default async function ConceptDetailPage(props: PageProps<"/concepts/[slu
           <OpenQuestionCapture
             conceptId={concept.id}
             subjectId={concept.subjectId}
-            initialQuestions={conceptQuestions.filter((question) => question.subjectId === concept.subjectId)}
+            subjectQuestions={subjectQuestions}
           />
         </div>
         <div className="flex w-full shrink-0 flex-col gap-6 md:w-56">
-          <ReviewStub review={conceptReview} />
           <RelatedConceptsList concepts={relatedConcepts} />
         </div>
       </div>

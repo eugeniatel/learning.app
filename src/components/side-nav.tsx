@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, GitBranch, Inbox, Layers, HelpCircle, Rewind, Home, NotebookPen, Search, Wand2 } from "lucide-react";
+import { BookOpen, Layers, HelpCircle, Home, NotebookPen, Search } from "lucide-react";
 import { PhaseIndicator } from "./phase-indicator";
 import type { Phase } from "@/lib/types";
 
@@ -10,11 +10,7 @@ const items = [
   { href: "/concepts", label: "Concepts", icon: Layers },
   { href: "/search", label: "Search", icon: Search },
   { href: "/questions", label: "Open questions", icon: HelpCircle },
-  { href: "/backlog", label: "Backlog", icon: Inbox },
   { href: "/reflections", label: "Reflections", icon: NotebookPen },
-  { href: "/review", label: "Review", icon: Rewind },
-  { href: "/rebalance", label: "Rebalance", icon: Wand2 },
-  { href: "/flexible-map", label: "Flexible map", icon: GitBranch },
 ];
 
 export function SideNav({ phase }: { phase: Phase }) {

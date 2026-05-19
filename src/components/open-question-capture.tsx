@@ -1,25 +1,28 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { getQuestions, setQuestions as saveQuestions } from "@/lib/local-store";
+import { getSubjectQuestions, setSubjectQuestions } from "@/lib/local-store";
 import type { Question } from "@/lib/types";
 
 export function OpenQuestionCapture({
   conceptId,
   subjectId,
-  initialQuestions,
+  subjectQuestions,
 }: {
   conceptId: string;
   subjectId: string;
-  initialQuestions: Question[];
+  subjectQuestions: Question[];
 }) {
-  const [questions, setQuestions] = useState<Question[]>(initialQuestions);
+  const [all, setAll] = useState<Question[]>(subjectQuestions);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    queueMicrotask(() => setQuestions(getQuestions(conceptId, initialQuestions)));
-  }, [conceptId, initialQuestions]);
+    queueMicrotask(() => setAll(getSubjectQuestions(subjectId, subjectQuestions)));
+  }, [subjectId, subjectQuestions]);
+
+  const conceptQuestions = all.filter((question) => question.conceptId === conceptId);
 
   function handleSubmit() {
     const text = inputValue.trim();
@@ -32,9 +35,9 @@ export function OpenQuestionCapture({
       status: "open",
       createdAt: new Date().toISOString(),
     };
-    const next = [...questions, newQuestion];
-    setQuestions(next);
-    saveQuestions(conceptId, next);
+    const next = [...all, newQuestion];
+    setAll(next);
+    setSubjectQuestions(subjectId, next);
     setInputValue("");
   }
 
@@ -43,14 +46,14 @@ export function OpenQuestionCapture({
       <p className="mb-3 text-[13px] font-medium uppercase tracking-[0.04em] text-muted-foreground">
         Open questions
       </p>
-      {questions.length > 0 && (
+      {conceptQuestions.length > 0 && (
         <div className="mb-3 flex flex-col gap-1.5">
-          {questions.map((q) => (
+          {conceptQuestions.map((question) => (
             <div
-              key={q.id}
+              key={question.id}
               className="rounded-md bg-muted px-3 py-2 text-[14px] text-foreground"
             >
-              {q.text}
+              {question.text}
             </div>
           ))}
         </div>
@@ -58,10 +61,10 @@ export function OpenQuestionCapture({
       <div className="flex items-center gap-2">
         <Input
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
+          onChange={(event) => setInputValue(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
               handleSubmit();
             }
           }}

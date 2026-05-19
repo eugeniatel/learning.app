@@ -75,26 +75,9 @@ export type Artifact = {
 export type Question = {
   id: string;
   subjectId: string;
-  conceptId: string;
+  conceptId?: string;
   text: string;
   status: QuestionStatus;
-  createdAt: string;
-};
-
-export type Review = {
-  subjectId: string;
-  conceptId: string;
-  lastReviewed: string;
-  nextSuggested: string;
-  status: "ready" | "not_yet" | "mastered";
-};
-
-export type BacklogItem = {
-  id: string;
-  subjectId: string;
-  text: string;
-  kind: "resource" | "question" | "topic";
-  status: "open" | "parked" | "done";
   createdAt: string;
 };
 
@@ -105,8 +88,6 @@ export type Progress = {
   currentWeek: { id: string; moduleId: string; number: number };
   weeks: Week[];
   openQuestions: Question[];
-  reviews: Review[];
-  backlog: BacklogItem[];
 };
 
 export type Spine = {

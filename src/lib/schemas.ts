@@ -111,32 +111,9 @@ export const progressSchema = z.object({
       z.object({
         id: z.string(),
         subjectId: z.string().default(DEFAULT_SUBJECT_ID),
-        conceptId: z.string(),
+        conceptId: z.string().optional(),
         text: z.string(),
         status: z.enum(["open", "parked", "answered"]),
-        createdAt: z.string(),
-      })
-    )
-    .default([]),
-  reviews: z
-    .array(
-      z.object({
-        subjectId: z.string().default(DEFAULT_SUBJECT_ID),
-        conceptId: z.string(),
-        lastReviewed: z.string(),
-        nextSuggested: z.string(),
-        status: z.enum(["ready", "not_yet", "mastered"]),
-      })
-    )
-    .default([]),
-  backlog: z
-    .array(
-      z.object({
-        id: z.string(),
-        subjectId: z.string().default(DEFAULT_SUBJECT_ID),
-        text: z.string(),
-        kind: z.enum(["resource", "question", "topic"]),
-        status: z.enum(["open", "parked", "done"]),
         createdAt: z.string(),
       })
     )

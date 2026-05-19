@@ -7,5 +7,5 @@ import type { Phase } from "@/lib/types";
 export async function setPhaseAction(phase: Phase): Promise<void> {
   await setPhase(phase);
   revalidatePath("/");
-  revalidatePath("/flexible-map");
+  revalidatePath("/subjects");
 }
