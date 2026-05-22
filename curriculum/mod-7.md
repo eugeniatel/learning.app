@@ -36,6 +36,7 @@ Understand why serving LLMs is expensive and what every production optimization 
 - artifact: awq-paper
 - artifact: qlora-paper
 - artifact: flash-attention-3
+- artifact: cs153-frontier-systems
 
 ## Interviews
 

@@ -781,7 +781,7 @@
       "type": "podcast",
       "title": "No Priors on agent-first startups",
       "author": "Sarah Guo and Elad Gil",
-      "url": "https://www.no-priors.com/",
+      "url": "https://www.nopriors.com/",
       "readStatus": "unread"
     },
     {
@@ -1085,7 +1085,7 @@
       "type": "post",
       "title": "Anthropic attribution-graph work",
       "author": "Anthropic",
-      "url": "https://transformer-circuits.pub/",
+      "url": "https://transformer-circuits.pub/2025/attribution-graphs/biology.html",
       "readStatus": "unread"
     },
     {
@@ -1093,7 +1093,7 @@
       "type": "paper",
       "title": "Transcoders",
       "author": "Dunefsky et al.",
-      "url": "https://arxiv.org/",
+      "url": "https://arxiv.org/abs/2406.11944",
       "readStatus": "unread"
     },
     {
@@ -1101,7 +1101,7 @@
       "type": "paper",
       "title": "Sparse Crosscoders",
       "author": "Lindsey et al.",
-      "url": "https://arxiv.org/",
+      "url": "https://transformer-circuits.pub/2024/crosscoders/index.html",
       "readStatus": "unread"
     },
     {
@@ -1166,6 +1166,14 @@
       "title": "AXRP episodes on scalable oversight",
       "author": "Daniel Filan",
       "url": "https://axrp.net/",
+      "readStatus": "unread"
+    },
+    {
+      "id": "cs153-frontier-systems",
+      "type": "video",
+      "title": "Stanford CS153 Frontier Systems",
+      "author": "Stanford",
+      "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rN447WKQ5oz_YdYbS74M5IA",
       "readStatus": "unread"
     },
     {
